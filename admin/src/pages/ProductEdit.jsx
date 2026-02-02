@@ -352,7 +352,7 @@ export default function ProductEdit() {
             </div>
 
             <div className="card">
-              <h2>Tags</h2>
+              <h2 style={{ color: 'red' }}>Tags (v3)</h2>
               <p style={{ fontSize: '13px', color: 'var(--color-gray-text)', marginBottom: '12px' }}>
                 Add tags for filtering on the website (e.g., Brassica, Asian, Spicy)
               </p>

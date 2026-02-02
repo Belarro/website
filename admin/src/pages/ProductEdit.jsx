@@ -23,12 +23,15 @@ export default function ProductEdit() {
     flavor_profile: '',
     description_chef: '',
     photo_url: null,
+    tags: [],
     // German translations
     name_de: '',
     flavor_profile_de: '',
     description_chef_de: '',
     service_fit_de: ''
   })
+
+  const [newTag, setNewTag] = useState('')
 
   const [loading, setLoading] = useState(false)
   const [loadingProduct, setLoadingProduct] = useState(!isNew)
@@ -60,6 +63,7 @@ export default function ProductEdit() {
           flavor_profile: product.flavor_profile || '',
           description_chef: product.description_chef || '',
           photo_url: product.photo || null,
+          tags: product.tags || [],
           // German translations
           name_de: product.name_de || '',
           flavor_profile_de: product.flavor_profile_de || '',
@@ -87,6 +91,18 @@ export default function ProductEdit() {
     setForm(prev => ({ ...prev, photo_url: url }))
   }
 
+  const addTag = () => {
+    const tag = newTag.trim()
+    if (tag && !form.tags.includes(tag)) {
+      setForm(prev => ({ ...prev, tags: [...prev.tags, tag] }))
+      setNewTag('')
+    }
+  }
+
+  const removeTag = (tagToRemove) => {
+    setForm(prev => ({ ...prev, tags: prev.tags.filter(t => t !== tagToRemove) }))
+  }
+
   const handleSubmit = async (e) => {
     e.preventDefault()
     setLoading(true)
@@ -109,6 +125,7 @@ export default function ProductEdit() {
         flavor_profile: form.flavor_profile,
         description_chef: form.description_chef,
         photo: form.photo_url,
+        tags: form.tags,
         // German translations
         name_de: form.name_de,
         flavor_profile_de: form.flavor_profile_de,
@@ -328,6 +345,67 @@ export default function ProductEdit() {
               <div className="form-group">
                 <label className="form-label">Sort Order</label>
                 <input type="number" name="sort_order" className="form-input" value={form.sort_order} onChange={handleChange} />
+              </div>
+            </div>
+
+            <div className="card">
+              <h2>Tags</h2>
+              <p style={{ fontSize: '13px', color: 'var(--color-gray-text)', marginBottom: '12px' }}>
+                Add tags for filtering on the website (e.g., Brassica, Asian, Spicy)
+              </p>
+              <div style={{ display: 'flex', gap: '8px', marginBottom: '12px' }}>
+                <input
+                  type="text"
+                  className="form-input"
+                  value={newTag}
+                  onChange={(e) => setNewTag(e.target.value)}
+                  onKeyDown={(e) => e.key === 'Enter' && (e.preventDefault(), addTag())}
+                  placeholder="Add a tag..."
+                  style={{ flex: 1 }}
+                />
+                <button type="button" className="btn btn-secondary" onClick={addTag}>
+                  Add
+                </button>
+              </div>
+              <div style={{ display: 'flex', flexWrap: 'wrap', gap: '8px' }}>
+                {form.tags.map(tag => (
+                  <span
+                    key={tag}
+                    style={{
+                      display: 'inline-flex',
+                      alignItems: 'center',
+                      gap: '6px',
+                      padding: '4px 10px',
+                      background: 'var(--color-primary)',
+                      color: 'white',
+                      borderRadius: '16px',
+                      fontSize: '13px'
+                    }}
+                  >
+                    {tag}
+                    <button
+                      type="button"
+                      onClick={() => removeTag(tag)}
+                      style={{
+                        background: 'none',
+                        border: 'none',
+                        color: 'white',
+                        cursor: 'pointer',
+                        padding: '0',
+                        fontSize: '16px',
+                        lineHeight: 1,
+                        opacity: 0.8
+                      }}
+                    >
+                      ×
+                    </button>
+                  </span>
+                ))}
+                {form.tags.length === 0 && (
+                  <span style={{ fontSize: '13px', color: 'var(--color-gray-text)', fontStyle: 'italic' }}>
+                    No tags added
+                  </span>
+                )}
               </div>
             </div>
           </div>

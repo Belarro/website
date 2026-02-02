@@ -362,10 +362,46 @@ export default function ProductEdit() {
             </div>
 
             <div className="card">
-              <h2 style={{ color: 'red' }}>Tags (v3)</h2>
+              <h2 style={{ color: 'red' }}>Tags (v5)</h2>
               <p style={{ fontSize: '13px', color: 'var(--color-gray-text)', marginBottom: '12px' }}>
                 Add tags for filtering on the website (e.g., Brassica, Asian, Spicy)
               </p>
+              {!isNew && (
+                <button
+                  type="button"
+                  onClick={async () => {
+                    console.log('=== DIRECT TAG TEST ===')
+                    try {
+                      const { createClient } = await import('@supabase/supabase-js')
+                      const supabase = createClient(
+                        'https://gcgscmtjesyiziebutzw.supabase.co',
+                        'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImdjZ3NjbXRqZXN5aXppZWJ1dHp3Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzAwNDQwMjgsImV4cCI6MjA4NTYyMDAyOH0.Ikf7mpFUKPJx9wA827xHTxSV2u5JpWCPw7j6wiKbgN0'
+                      )
+                      const testTags = ['TestTag1', 'TestTag2']
+                      console.log('Attempting to save tags:', testTags)
+                      const { data, error } = await supabase
+                        .from('products')
+                        .update({ tags: testTags })
+                        .eq('id', id)
+                        .select('id, name, tags')
+                        .single()
+                      console.log('Direct test result - data:', data)
+                      console.log('Direct test result - error:', error)
+                      if (error) {
+                        alert('ERROR: ' + error.message)
+                      } else {
+                        alert('SUCCESS! Tags saved: ' + JSON.stringify(data.tags))
+                      }
+                    } catch (e) {
+                      console.error('Test error:', e)
+                      alert('Exception: ' + e.message)
+                    }
+                  }}
+                  style={{ marginBottom: '12px', background: 'orange', color: 'white', border: 'none', padding: '8px 16px', borderRadius: '4px', cursor: 'pointer' }}
+                >
+                  🧪 TEST: Save Tags Directly
+                </button>
+              )}
               <div style={{ display: 'flex', gap: '8px', marginBottom: '12px' }}>
                 <input
                   type="text"

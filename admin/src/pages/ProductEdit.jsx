@@ -390,8 +390,9 @@ export default function ProductEdit() {
                   <button
                     type="button"
                     onClick={async () => {
-                      alert('Testing direct save to product: ' + id)
+                      alert('Testing PostgreSQL array format...')
                       try {
+                        // Try PostgreSQL array literal format
                         const response = await fetch(`https://gcgscmtjesyiziebutzw.supabase.co/rest/v1/products?id=eq.${id}`, {
                           method: 'PATCH',
                           headers: {
@@ -400,18 +401,18 @@ export default function ProductEdit() {
                             'Content-Type': 'application/json',
                             'Prefer': 'return=representation'
                           },
-                          body: JSON.stringify({ tags: ['Test1', 'Test2'] })
+                          body: JSON.stringify({ tags: '{"TestA","TestB"}' })
                         })
                         const data = await response.json()
-                        alert('Save result (status ' + response.status + '): ' + JSON.stringify(data, null, 2))
-                        console.log('Save result:', data)
+                        alert('PG Format result (status ' + response.status + '): ' + JSON.stringify(data, null, 2))
+                        console.log('PG Format result:', data)
                       } catch (e) {
                         alert('Save error: ' + e.message)
                       }
                     }}
                     style={{ background: '#FF5722', color: 'white', border: 'none', padding: '8px 16px', borderRadius: '4px', cursor: 'pointer' }}
                   >
-                    2. TEST: Save tags via REST API
+                    2. TEST: PostgreSQL array format
                   </button>
                 </div>
               </div>

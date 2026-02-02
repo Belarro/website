@@ -362,46 +362,62 @@ export default function ProductEdit() {
             </div>
 
             <div className="card">
-              <h2 style={{ color: 'red' }}>Tags (v5)</h2>
+              <h2 style={{ color: 'red' }}>Tags (v6)</h2>
+              <div style={{ background: '#ffe066', padding: '12px', borderRadius: '8px', marginBottom: '16px' }}>
+                <p style={{ margin: '0 0 8px 0', fontWeight: 'bold' }}>DEBUG BUTTONS:</p>
+                <div style={{ display: 'flex', gap: '8px', flexWrap: 'wrap' }}>
+                  <button
+                    type="button"
+                    onClick={async () => {
+                      alert('Button clicked! Product ID: ' + id)
+                      try {
+                        const response = await fetch('https://gcgscmtjesyiziebutzw.supabase.co/rest/v1/products?select=id,name,tags&limit=1', {
+                          headers: {
+                            'apikey': 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImdjZ3NjbXRqZXN5aXppZWJ1dHp3Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzAwNDQwMjgsImV4cCI6MjA4NTYyMDAyOH0.Ikf7mpFUKPJx9wA827xHTxSV2u5JpWCPw7j6wiKbgN0'
+                          }
+                        })
+                        const data = await response.json()
+                        alert('Fetch result: ' + JSON.stringify(data, null, 2))
+                        console.log('Fetch result:', data)
+                      } catch (e) {
+                        alert('Fetch error: ' + e.message)
+                      }
+                    }}
+                    style={{ background: '#4CAF50', color: 'white', border: 'none', padding: '8px 16px', borderRadius: '4px', cursor: 'pointer' }}
+                  >
+                    1. CHECK: Does tags column exist?
+                  </button>
+                  <button
+                    type="button"
+                    onClick={async () => {
+                      alert('Testing direct save to product: ' + id)
+                      try {
+                        const response = await fetch(`https://gcgscmtjesyiziebutzw.supabase.co/rest/v1/products?id=eq.${id}`, {
+                          method: 'PATCH',
+                          headers: {
+                            'apikey': 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImdjZ3NjbXRqZXN5aXppZWJ1dHp3Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzAwNDQwMjgsImV4cCI6MjA4NTYyMDAyOH0.Ikf7mpFUKPJx9wA827xHTxSV2u5JpWCPw7j6wiKbgN0',
+                            'Authorization': 'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImdjZ3NjbXRqZXN5aXppZWJ1dHp3Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzAwNDQwMjgsImV4cCI6MjA4NTYyMDAyOH0.Ikf7mpFUKPJx9wA827xHTxSV2u5JpWCPw7j6wiKbgN0',
+                            'Content-Type': 'application/json',
+                            'Prefer': 'return=representation'
+                          },
+                          body: JSON.stringify({ tags: ['Test1', 'Test2'] })
+                        })
+                        const data = await response.json()
+                        alert('Save result (status ' + response.status + '): ' + JSON.stringify(data, null, 2))
+                        console.log('Save result:', data)
+                      } catch (e) {
+                        alert('Save error: ' + e.message)
+                      }
+                    }}
+                    style={{ background: '#FF5722', color: 'white', border: 'none', padding: '8px 16px', borderRadius: '4px', cursor: 'pointer' }}
+                  >
+                    2. TEST: Save tags via REST API
+                  </button>
+                </div>
+              </div>
               <p style={{ fontSize: '13px', color: 'var(--color-gray-text)', marginBottom: '12px' }}>
                 Add tags for filtering on the website (e.g., Brassica, Asian, Spicy)
               </p>
-              {!isNew && (
-                <button
-                  type="button"
-                  onClick={async () => {
-                    console.log('=== DIRECT TAG TEST ===')
-                    try {
-                      const { createClient } = await import('@supabase/supabase-js')
-                      const supabase = createClient(
-                        'https://gcgscmtjesyiziebutzw.supabase.co',
-                        'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImdjZ3NjbXRqZXN5aXppZWJ1dHp3Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzAwNDQwMjgsImV4cCI6MjA4NTYyMDAyOH0.Ikf7mpFUKPJx9wA827xHTxSV2u5JpWCPw7j6wiKbgN0'
-                      )
-                      const testTags = ['TestTag1', 'TestTag2']
-                      console.log('Attempting to save tags:', testTags)
-                      const { data, error } = await supabase
-                        .from('products')
-                        .update({ tags: testTags })
-                        .eq('id', id)
-                        .select('id, name, tags')
-                        .single()
-                      console.log('Direct test result - data:', data)
-                      console.log('Direct test result - error:', error)
-                      if (error) {
-                        alert('ERROR: ' + error.message)
-                      } else {
-                        alert('SUCCESS! Tags saved: ' + JSON.stringify(data.tags))
-                      }
-                    } catch (e) {
-                      console.error('Test error:', e)
-                      alert('Exception: ' + e.message)
-                    }
-                  }}
-                  style={{ marginBottom: '12px', background: 'orange', color: 'white', border: 'none', padding: '8px 16px', borderRadius: '4px', cursor: 'pointer' }}
-                >
-                  🧪 TEST: Save Tags Directly
-                </button>
-              )}
               <div style={{ display: 'flex', gap: '8px', marginBottom: '12px' }}>
                 <input
                   type="text"

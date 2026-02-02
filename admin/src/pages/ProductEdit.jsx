@@ -109,6 +109,8 @@ export default function ProductEdit() {
     setLoading(true)
     setError(null)
 
+    console.log('Saving with tags:', form.tags)
+
     try {
       const productData = {
         name: form.name,

@@ -362,7 +362,7 @@ export default function ProductEdit() {
             </div>
 
             <div className="card">
-              <h2 style={{ color: 'red' }}>Tags (v6)</h2>
+              <h2 style={{ color: 'red' }}>Tags (v7)</h2>
               <div style={{ background: '#ffe066', padding: '12px', borderRadius: '8px', marginBottom: '16px' }}>
                 <p style={{ margin: '0 0 8px 0', fontWeight: 'bold' }}>DEBUG BUTTONS:</p>
                 <div style={{ display: 'flex', gap: '8px', flexWrap: 'wrap' }}>
@@ -390,9 +390,9 @@ export default function ProductEdit() {
                   <button
                     type="button"
                     onClick={async () => {
-                      alert('Testing PostgreSQL array format...')
+                      alert('Testing JSON array format (correct way)...')
                       try {
-                        // Try PostgreSQL array literal format
+                        // Use proper JSON array - Supabase REST API expects this format
                         const response = await fetch(`https://gcgscmtjesyiziebutzw.supabase.co/rest/v1/products?id=eq.${id}`, {
                           method: 'PATCH',
                           headers: {
@@ -401,18 +401,35 @@ export default function ProductEdit() {
                             'Content-Type': 'application/json',
                             'Prefer': 'return=representation'
                           },
-                          body: JSON.stringify({ tags: '{"TestA","TestB"}' })
+                          body: JSON.stringify({ tags: ['TestA', 'TestB'] })
                         })
                         const data = await response.json()
-                        alert('PG Format result (status ' + response.status + '): ' + JSON.stringify(data, null, 2))
-                        console.log('PG Format result:', data)
+                        alert('JSON Array result (status ' + response.status + '): ' + JSON.stringify(data, null, 2))
+                        console.log('JSON Array result:', data)
                       } catch (e) {
                         alert('Save error: ' + e.message)
                       }
                     }}
                     style={{ background: '#FF5722', color: 'white', border: 'none', padding: '8px 16px', borderRadius: '4px', cursor: 'pointer' }}
                   >
-                    2. TEST: PostgreSQL array format
+                    2. TEST: JSON array format
+                  </button>
+                  <button
+                    type="button"
+                    onClick={async () => {
+                      alert('Testing via Supabase JS client...')
+                      try {
+                        // Test using the same Supabase client the app uses
+                        const result = await productsApi.update(id, { tags: ['ClientTest1', 'ClientTest2'] })
+                        alert('Supabase JS result: ' + JSON.stringify(result, null, 2))
+                        console.log('Supabase JS result:', result)
+                      } catch (e) {
+                        alert('Supabase JS error: ' + e.message)
+                      }
+                    }}
+                    style={{ background: '#9C27B0', color: 'white', border: 'none', padding: '8px 16px', borderRadius: '4px', cursor: 'pointer' }}
+                  >
+                    3. TEST: Supabase JS Client
                   </button>
                 </div>
               </div>

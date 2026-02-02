@@ -1,0 +1,10 @@
+# Robots.txt for belarro.com
+
+User-agent: *
+Allow: /
+
+# Sitemap
+Sitemap: https://belarro.com/sitemap.xml
+
+# Crawl delay (optional, helps with server load)
+Crawl-delay: 1

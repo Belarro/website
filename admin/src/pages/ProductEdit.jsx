@@ -109,7 +109,10 @@ export default function ProductEdit() {
     setLoading(true)
     setError(null)
 
-    console.log('Saving with tags:', form.tags)
+    console.log('=== SAVE DEBUG v4 ===')
+    console.log('Tags in form state:', form.tags)
+    console.log('Tags type:', typeof form.tags)
+    console.log('Tags is array:', Array.isArray(form.tags))
 
     try {
       const productData = {
@@ -136,14 +139,21 @@ export default function ProductEdit() {
         service_fit_de: form.service_fit_de
       }
 
+      console.log('Full productData being sent:', JSON.stringify(productData, null, 2))
+
+      let result
       if (isNew) {
-        await productsApi.create(productData)
+        result = await productsApi.create(productData)
       } else {
-        await productsApi.update(id, productData)
+        result = await productsApi.update(id, productData)
       }
+
+      console.log('API Response:', JSON.stringify(result, null, 2))
+      console.log('Tags in response:', result?.tags)
 
       navigate('/products')
     } catch (err) {
+      console.error('Save error:', err)
       setError(err.message)
       setLoading(false)
     }

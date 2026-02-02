@@ -3,6 +3,7 @@ import { useParams, useNavigate, Link } from 'react-router-dom'
 import { productsApi } from '../lib/supabase'
 import { categories, statusOptions } from '../data/mockData'
 import ImageUpload from '../components/ImageUpload'
+// v2 - Tags feature
 
 export default function ProductEdit() {
   const { id } = useParams()

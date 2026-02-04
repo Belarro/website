@@ -89,18 +89,10 @@ function createTagFilters(tags) {
     if (tags.length === 0) return ''
 
     return `
-        <div class="tag-filters" style="display: flex; gap: 8px; flex-wrap: wrap; margin-top: 16px;">
+        <div class="tag-filters">
+            <span>Filtern nach:</span>
             ${tags.map(tag => `
-                <button class="tag-filter-btn" data-tag="${tag}" style="
-                    padding: 6px 14px;
-                    border: 1px solid var(--accent);
-                    background: transparent;
-                    color: var(--accent);
-                    border-radius: 20px;
-                    cursor: pointer;
-                    font-size: 13px;
-                    transition: all 0.2s ease;
-                ">${tag}</button>
+                <button class="tag-filter-btn" data-tag="${tag}">${tag}</button>
             `).join('')}
         </div>
     `
@@ -175,10 +167,7 @@ function initFilters() {
             btn.classList.add('active')
 
             // Clear tag filter selection
-            tagBtns.forEach(t => {
-                t.style.background = 'transparent'
-                t.style.color = 'var(--accent)'
-            })
+            tagBtns.forEach(t => t.classList.remove('active-tag'))
 
             const filter = btn.getAttribute('data-filter')
 
@@ -205,17 +194,13 @@ function initFilters() {
     // Tag filters
     tagBtns.forEach(btn => {
         btn.addEventListener('click', () => {
-            const isActive = btn.style.background !== 'transparent' && btn.style.background !== ''
+            const isActive = btn.classList.contains('active-tag')
 
-            // Toggle tag button state
-            tagBtns.forEach(t => {
-                t.style.background = 'transparent'
-                t.style.color = 'var(--accent)'
-            })
+            // Toggle tag button state - reset all to default
+            tagBtns.forEach(t => t.classList.remove('active-tag'))
 
             if (!isActive) {
-                btn.style.background = 'var(--accent)'
-                btn.style.color = 'white'
+                btn.classList.add('active-tag')
             }
 
             const selectedTag = isActive ? null : btn.getAttribute('data-tag')

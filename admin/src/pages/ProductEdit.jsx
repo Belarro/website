@@ -26,6 +26,7 @@ export default function ProductEdit() {
     photo_url: null,
     photo_flip: 'none',
     tags: [],
+    featured_homepage: false,
     // German translations
     name_de: '',
     flavor_profile_de: '',
@@ -78,6 +79,7 @@ export default function ProductEdit() {
           photo_url: product.photo || null,
           photo_flip: product.photo_flip || 'none',
           tags: product.tags || [],
+          featured_homepage: product.featured_homepage || false,
           // German translations
           name_de: product.name_de || '',
           flavor_profile_de: product.flavor_profile_de || '',
@@ -141,6 +143,7 @@ export default function ProductEdit() {
         photo: form.photo_url,
         photo_flip: form.photo_flip,
         tags: form.tags,
+        featured_homepage: form.featured_homepage,
         // German translations
         name_de: form.name_de,
         flavor_profile_de: form.flavor_profile_de,
@@ -347,6 +350,24 @@ export default function ProductEdit() {
 
           {/* Right Column: Media & Specs */}
           <div style={{ display: 'flex', flexDirection: 'column', gap: '24px' }}>
+            {/* Featured on Homepage */}
+            <div className="card" style={{ background: form.featured_homepage ? '#e8f5e9' : 'white' }}>
+              <label style={{ display: 'flex', alignItems: 'center', gap: '12px', cursor: 'pointer' }}>
+                <input
+                  type="checkbox"
+                  checked={form.featured_homepage}
+                  onChange={(e) => setForm(prev => ({ ...prev, featured_homepage: e.target.checked }))}
+                  style={{ width: '20px', height: '20px', cursor: 'pointer' }}
+                />
+                <div>
+                  <h2 style={{ margin: 0 }}>Featured on Homepage</h2>
+                  <p style={{ margin: '4px 0 0 0', fontSize: '13px', color: 'var(--color-gray-text)' }}>
+                    Show this product on the main homepage (max 6)
+                  </p>
+                </div>
+              </label>
+            </div>
+
             <div className="card">
               <h2>Media</h2>
               <ImageUpload value={form.photo_url} onChange={handleImageChange} flip={form.photo_flip} />

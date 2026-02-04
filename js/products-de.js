@@ -88,14 +88,9 @@ function collectTags(products) {
 function createTagFilters(tags) {
     if (tags.length === 0) return ''
 
-    return `
-        <div class="tag-filters">
-            <span>Filtern nach:</span>
-            ${tags.map(tag => `
-                <button class="tag-filter-btn" data-tag="${tag}">${tag}</button>
-            `).join('')}
-        </div>
-    `
+    return tags.map(tag => `
+        <button class="tag-filter-btn" data-tag="${tag}">${tag}</button>
+    `).join('')
 }
 
 // Render all products
@@ -117,9 +112,10 @@ async function renderProducts() {
     const tags = collectTags(products)
     const filterBar = document.querySelector('.filter-bar')
     if (filterBar) {
-        const existingTagFilters = filterBar.querySelector('.tag-filters')
-        if (existingTagFilters) existingTagFilters.remove()
-        filterBar.insertAdjacentHTML('afterend', createTagFilters(tags))
+        // Remove existing tag buttons
+        filterBar.querySelectorAll('.tag-filter-btn').forEach(btn => btn.remove())
+        // Add tag buttons to the filter bar
+        filterBar.insertAdjacentHTML('beforeend', createTagFilters(tags))
     }
 
     // Group products by category

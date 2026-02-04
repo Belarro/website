@@ -104,12 +104,19 @@ async function renderProducts() {
 
     // Collect tags and add tag filters to the filter bar
     const tags = collectTags(products)
+    console.log('Products tags data:', products.map(p => ({ name: p.name, tags: p.tags })))
+    console.log('Collected tags:', tags)
+
     const filterBar = document.querySelector('.filter-bar')
-    if (filterBar) {
+    console.log('Filter bar found:', !!filterBar)
+
+    if (filterBar && tags.length > 0) {
         // Remove existing tag buttons
         filterBar.querySelectorAll('.tag-filter-btn').forEach(btn => btn.remove())
         // Add tag buttons to the filter bar
-        filterBar.insertAdjacentHTML('beforeend', createTagFilters(tags))
+        const tagHtml = createTagFilters(tags)
+        console.log('Tag HTML:', tagHtml)
+        filterBar.insertAdjacentHTML('beforeend', tagHtml)
     }
 
     // Group products by category

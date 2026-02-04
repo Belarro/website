@@ -198,38 +198,45 @@ function initFilters() {
             }
 
             const selectedTag = isActive ? null : btn.getAttribute('data-tag')
-            const currentCategoryFilter = document.querySelector('.filter-btn.active')?.getAttribute('data-filter') || 'all'
 
-            cards.forEach(card => {
-                const category = card.getAttribute('data-category')
-                const cardTags = card.getAttribute('data-tags')?.split(',') || []
+            // When a tag is selected, show all matching products (ignore category filter)
+            // When no tag selected, respect the category filter
+            if (selectedTag) {
+                // Hide all category headers when filtering by tag
+                headers.forEach(header => header.style.display = 'none')
 
-                const matchesCategory = currentCategoryFilter === 'all' ||
-                    category === currentCategoryFilter ||
-                    (currentCategoryFilter === 'microgreen' && category === 'mix')
+                // Show only products with matching tag
+                cards.forEach(card => {
+                    const cardTags = card.getAttribute('data-tags')?.split(',') || []
+                    if (cardTags.includes(selectedTag)) {
+                        card.style.display = 'flex'
+                    } else {
+                        card.style.display = 'none'
+                    }
+                })
+            } else {
+                // No tag selected - restore category filter behavior
+                const currentCategoryFilter = document.querySelector('.filter-btn.active')?.getAttribute('data-filter') || 'all'
 
-                const matchesTag = !selectedTag || cardTags.includes(selectedTag)
+                cards.forEach(card => {
+                    const category = card.getAttribute('data-category')
+                    if (currentCategoryFilter === 'all' || category === currentCategoryFilter || (currentCategoryFilter === 'microgreen' && category === 'mix')) {
+                        card.style.display = 'flex'
+                    } else {
+                        card.style.display = 'none'
+                    }
+                })
 
-                if (matchesCategory && matchesTag) {
-                    card.style.display = 'flex'
-                } else {
-                    card.style.display = 'none'
-                }
-            })
-
-            // Show/hide headers based on visible cards
-            headers.forEach(header => {
-                const headerCat = header.getAttribute('data-category-header')
-                const visibleCards = document.querySelectorAll(`.variety-card[data-category="${headerCat}"]:not([style*="display: none"])`)
-                const mixCards = headerCat === 'microgreen' ?
-                    document.querySelectorAll('.variety-card[data-category="mix"]:not([style*="display: none"])') : []
-
-                if (visibleCards.length > 0 || mixCards.length > 0) {
-                    header.style.display = 'flex'
-                } else {
-                    header.style.display = 'none'
-                }
-            })
+                // Show headers based on category filter
+                headers.forEach(header => {
+                    const headerCat = header.getAttribute('data-category-header')
+                    if (currentCategoryFilter === 'all' || headerCat === currentCategoryFilter) {
+                        header.style.display = 'flex'
+                    } else {
+                        header.style.display = 'none'
+                    }
+                })
+            }
         })
     })
 }

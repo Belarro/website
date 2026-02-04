@@ -471,8 +471,8 @@ export default function ProductEdit() {
                       alignItems: 'center',
                       gap: '6px',
                       padding: '4px 10px',
-                      background: 'var(--color-primary)',
-                      color: 'white',
+                      background: '#2563eb',
+                      color: '#ffffff',
                       borderRadius: '16px',
                       fontSize: '13px'
                     }}
@@ -484,12 +484,11 @@ export default function ProductEdit() {
                       style={{
                         background: 'none',
                         border: 'none',
-                        color: 'white',
+                        color: '#ffffff',
                         cursor: 'pointer',
                         padding: '0',
                         fontSize: '16px',
-                        lineHeight: 1,
-                        opacity: 0.8
+                        lineHeight: 1
                       }}
                     >
                       ×
@@ -517,23 +516,23 @@ export default function ProductEdit() {
                         onClick={() => setForm(prev => ({ ...prev, tags: [...prev.tags, tag] }))}
                         style={{
                           padding: '4px 10px',
-                          background: 'var(--color-light)',
-                          color: 'var(--color-dark)',
-                          border: '1px solid var(--color-gray)',
+                          background: '#f3f4f6',
+                          color: '#1f2937',
+                          border: '1px solid #d1d5db',
                           borderRadius: '16px',
                           fontSize: '12px',
                           cursor: 'pointer',
                           transition: 'all 0.2s ease'
                         }}
                         onMouseOver={(e) => {
-                          e.target.style.background = 'var(--color-primary)'
-                          e.target.style.color = 'white'
-                          e.target.style.borderColor = 'var(--color-primary)'
+                          e.target.style.background = '#2563eb'
+                          e.target.style.color = '#ffffff'
+                          e.target.style.borderColor = '#2563eb'
                         }}
                         onMouseOut={(e) => {
-                          e.target.style.background = 'var(--color-light)'
-                          e.target.style.color = 'var(--color-dark)'
-                          e.target.style.borderColor = 'var(--color-gray)'
+                          e.target.style.background = '#f3f4f6'
+                          e.target.style.color = '#1f2937'
+                          e.target.style.borderColor = '#d1d5db'
                         }}
                       >
                         + {tag}

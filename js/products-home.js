@@ -3,6 +3,7 @@
  * Loads featured products for the homepage showcase
  */
 
+(function() {
 const SUPABASE_URL = 'https://gcgscmtjesyiziebutzw.supabase.co'
 const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImdjZ3NjbXRqZXN5aXppZWJ1dHp3Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzAwNDQwMjgsImV4cCI6MjA4NTYyMDAyOH0.Ikf7mpFUKPJx9wA827xHTxSV2u5JpWCPw7j6wiKbgN0'
 
@@ -98,3 +99,4 @@ async function renderHomepageProducts() {
 
 // Initialize when DOM is ready
 document.addEventListener('DOMContentLoaded', renderHomepageProducts)
+})();

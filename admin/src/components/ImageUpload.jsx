@@ -74,7 +74,7 @@ function processImage(file) {
     })
 }
 
-export default function ImageUpload({ value, onChange }) {
+export default function ImageUpload({ value, onChange, flip = 'none' }) {
     const [isDragging, setIsDragging] = useState(false)
     const [uploading, setUploading] = useState(false)
     const [error, setError] = useState(null)
@@ -169,7 +169,13 @@ export default function ImageUpload({ value, onChange }) {
 
             {value ? (
                 <div className="image-preview">
-                    <img src={value} alt="Product preview" />
+                    <img
+                        src={value}
+                        alt="Product preview"
+                        style={{
+                            transform: flip === 'horizontal' ? 'scaleX(-1)' : flip === 'vertical' ? 'scaleY(-1)' : 'none'
+                        }}
+                    />
                     <div className="image-preview-overlay">
                         <button
                             type="button"

@@ -38,11 +38,16 @@ function createProductCard(product) {
 
     const tags = product.tags && Array.isArray(product.tags) ? product.tags.join(',') : ''
 
+    // Photo flip transform
+    const flipStyle = product.photo_flip === 'horizontal' ? 'transform: scaleX(-1);'
+        : product.photo_flip === 'vertical' ? 'transform: scaleY(-1);'
+        : ''
+
     return `
         <div class="variety-card" data-category="${product.category}" data-tags="${tags}">
             <div class="variety-image-wrapper">
                 <img src="${product.photo || 'https://images.unsplash.com/photo-1599307409240-cf178b30d885?auto=format&fit=crop&q=80&w=600'}"
-                     alt="${name}" class="variety-image" loading="lazy">
+                     alt="${name}" class="variety-image" loading="lazy" style="${flipStyle}">
                 <div class="variety-overlay">Passt zu: ${serviceFit}</div>
             </div>
             <div class="variety-content">
@@ -116,13 +121,13 @@ async function renderProducts() {
         return
     }
 
-    // Collect tags and add tag filters to the filter section
+    // Collect tags and add tag filters to the filter bar
     const tags = collectTags(products)
-    const filterSection = document.querySelector('.filter-section')
-    if (filterSection) {
-        const existingTagFilters = filterSection.querySelector('.tag-filters')
+    const filterBar = document.querySelector('.filter-bar')
+    if (filterBar) {
+        const existingTagFilters = filterBar.querySelector('.tag-filters')
         if (existingTagFilters) existingTagFilters.remove()
-        filterSection.insertAdjacentHTML('beforeend', createTagFilters(tags))
+        filterBar.insertAdjacentHTML('afterend', createTagFilters(tags))
     }
 
     // Group products by category

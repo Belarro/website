@@ -79,17 +79,10 @@ export const productsApi = {
   },
 
   async update(id, updates) {
-    console.log('=== SUPABASE UPDATE DEBUG ===')
-    console.log('Updating product ID:', id)
-    console.log('Updates received:', JSON.stringify(updates, null, 2))
-    console.log('Tags in updates:', updates.tags)
-
     const updatePayload = {
       ...updates,
       updated_at: new Date().toISOString()
     }
-
-    console.log('Final payload to Supabase:', JSON.stringify(updatePayload, null, 2))
 
     const { data, error } = await supabase
       .from('products')
@@ -97,9 +90,6 @@ export const productsApi = {
       .eq('id', id)
       .select()
       .single()
-
-    console.log('Supabase response - data:', JSON.stringify(data, null, 2))
-    console.log('Supabase response - error:', error)
 
     if (error) throw error
     return data
@@ -112,6 +102,23 @@ export const productsApi = {
       .eq('id', id)
 
     if (error) throw error
+  },
+
+  async getAllTags() {
+    const { data, error } = await supabase
+      .from('products')
+      .select('tags')
+
+    if (error) throw error
+
+    // Collect all unique tags from all products
+    const allTags = new Set()
+    data.forEach(product => {
+      if (product.tags && Array.isArray(product.tags)) {
+        product.tags.forEach(tag => allTags.add(tag))
+      }
+    })
+    return Array.from(allTags).sort()
   }
 }
 

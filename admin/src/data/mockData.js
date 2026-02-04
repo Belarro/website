@@ -15,6 +15,7 @@ export const mockProducts = [
     flavor_profile: 'Sweet, fresh, crunchy.',
     description_chef: 'Classic shoots grown in soil for clean sweetness and real texture. Reliable crunch with a clear pea finish.',
     photo: 'https://images.unsplash.com/photo-1599307409240-cf178b30d885?auto=format&fit=crop&q=80&w=800',
+    photo_flip: 'none',
     created_at: '2025-01-01T00:00:00Z',
     updated_at: '2025-01-01T00:00:00Z'
   },

@@ -24,6 +24,7 @@ export default function ProductEdit() {
     flavor_profile: '',
     description_chef: '',
     photo_url: null,
+    photo_flip: 'none',
     tags: [],
     // German translations
     name_de: '',
@@ -33,6 +34,7 @@ export default function ProductEdit() {
   })
 
   const [newTag, setNewTag] = useState('')
+  const [allTags, setAllTags] = useState([])
 
   const [loading, setLoading] = useState(false)
   const [loadingProduct, setLoadingProduct] = useState(!isNew)
@@ -43,7 +45,17 @@ export default function ProductEdit() {
     if (!isNew) {
       loadProduct()
     }
+    loadAllTags()
   }, [id, isNew])
+
+  const loadAllTags = async () => {
+    try {
+      const tags = await productsApi.getAllTags()
+      setAllTags(tags)
+    } catch (err) {
+      console.error('Error loading tags:', err)
+    }
+  }
 
   const loadProduct = async () => {
     try {
@@ -64,6 +76,7 @@ export default function ProductEdit() {
           flavor_profile: product.flavor_profile || '',
           description_chef: product.description_chef || '',
           photo_url: product.photo || null,
+          photo_flip: product.photo_flip || 'none',
           tags: product.tags || [],
           // German translations
           name_de: product.name_de || '',
@@ -109,11 +122,6 @@ export default function ProductEdit() {
     setLoading(true)
     setError(null)
 
-    console.log('=== SAVE DEBUG v4 ===')
-    console.log('Tags in form state:', form.tags)
-    console.log('Tags type:', typeof form.tags)
-    console.log('Tags is array:', Array.isArray(form.tags))
-
     try {
       const productData = {
         name: form.name,
@@ -131,6 +139,7 @@ export default function ProductEdit() {
         flavor_profile: form.flavor_profile,
         description_chef: form.description_chef,
         photo: form.photo_url,
+        photo_flip: form.photo_flip,
         tags: form.tags,
         // German translations
         name_de: form.name_de,
@@ -139,17 +148,11 @@ export default function ProductEdit() {
         service_fit_de: form.service_fit_de
       }
 
-      console.log('Full productData being sent:', JSON.stringify(productData, null, 2))
-
-      let result
       if (isNew) {
-        result = await productsApi.create(productData)
+        await productsApi.create(productData)
       } else {
-        result = await productsApi.update(id, productData)
+        await productsApi.update(id, productData)
       }
-
-      console.log('API Response:', JSON.stringify(result, null, 2))
-      console.log('Tags in response:', result?.tags)
 
       navigate('/products')
     } catch (err) {
@@ -346,7 +349,61 @@ export default function ProductEdit() {
           <div style={{ display: 'flex', flexDirection: 'column', gap: '24px' }}>
             <div className="card">
               <h2>Media</h2>
-              <ImageUpload value={form.photo_url} onChange={handleImageChange} />
+              <ImageUpload value={form.photo_url} onChange={handleImageChange} flip={form.photo_flip} />
+
+              {/* Photo Flip Control */}
+              {form.photo_url && (
+                <div className="form-group" style={{ marginTop: '16px' }}>
+                  <label className="form-label">Flip Image</label>
+                  <div style={{ display: 'flex', gap: '8px' }}>
+                    <button
+                      type="button"
+                      onClick={() => setForm(prev => ({ ...prev, photo_flip: 'none' }))}
+                      style={{
+                        padding: '8px 16px',
+                        border: form.photo_flip === 'none' ? '2px solid var(--color-primary)' : '1px solid var(--color-gray)',
+                        background: form.photo_flip === 'none' ? 'var(--color-primary)' : 'white',
+                        color: form.photo_flip === 'none' ? 'white' : 'var(--color-dark)',
+                        borderRadius: '6px',
+                        cursor: 'pointer',
+                        fontSize: '13px'
+                      }}
+                    >
+                      None
+                    </button>
+                    <button
+                      type="button"
+                      onClick={() => setForm(prev => ({ ...prev, photo_flip: 'horizontal' }))}
+                      style={{
+                        padding: '8px 16px',
+                        border: form.photo_flip === 'horizontal' ? '2px solid var(--color-primary)' : '1px solid var(--color-gray)',
+                        background: form.photo_flip === 'horizontal' ? 'var(--color-primary)' : 'white',
+                        color: form.photo_flip === 'horizontal' ? 'white' : 'var(--color-dark)',
+                        borderRadius: '6px',
+                        cursor: 'pointer',
+                        fontSize: '13px'
+                      }}
+                    >
+                      ↔ Horizontal
+                    </button>
+                    <button
+                      type="button"
+                      onClick={() => setForm(prev => ({ ...prev, photo_flip: 'vertical' }))}
+                      style={{
+                        padding: '8px 16px',
+                        border: form.photo_flip === 'vertical' ? '2px solid var(--color-primary)' : '1px solid var(--color-gray)',
+                        background: form.photo_flip === 'vertical' ? 'var(--color-primary)' : 'white',
+                        color: form.photo_flip === 'vertical' ? 'white' : 'var(--color-dark)',
+                        borderRadius: '6px',
+                        cursor: 'pointer',
+                        fontSize: '13px'
+                      }}
+                    >
+                      ↕ Vertical
+                    </button>
+                  </div>
+                </div>
+              )}
             </div>
 
             <div className="card">
@@ -362,77 +419,7 @@ export default function ProductEdit() {
             </div>
 
             <div className="card">
-              <h2 style={{ color: 'red' }}>Tags (v7)</h2>
-              <div style={{ background: '#ffe066', padding: '12px', borderRadius: '8px', marginBottom: '16px' }}>
-                <p style={{ margin: '0 0 8px 0', fontWeight: 'bold' }}>DEBUG BUTTONS:</p>
-                <div style={{ display: 'flex', gap: '8px', flexWrap: 'wrap' }}>
-                  <button
-                    type="button"
-                    onClick={async () => {
-                      alert('Button clicked! Product ID: ' + id)
-                      try {
-                        const response = await fetch('https://gcgscmtjesyiziebutzw.supabase.co/rest/v1/products?select=id,name,tags&limit=1', {
-                          headers: {
-                            'apikey': 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImdjZ3NjbXRqZXN5aXppZWJ1dHp3Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzAwNDQwMjgsImV4cCI6MjA4NTYyMDAyOH0.Ikf7mpFUKPJx9wA827xHTxSV2u5JpWCPw7j6wiKbgN0'
-                          }
-                        })
-                        const data = await response.json()
-                        alert('Fetch result: ' + JSON.stringify(data, null, 2))
-                        console.log('Fetch result:', data)
-                      } catch (e) {
-                        alert('Fetch error: ' + e.message)
-                      }
-                    }}
-                    style={{ background: '#4CAF50', color: 'white', border: 'none', padding: '8px 16px', borderRadius: '4px', cursor: 'pointer' }}
-                  >
-                    1. CHECK: Does tags column exist?
-                  </button>
-                  <button
-                    type="button"
-                    onClick={async () => {
-                      alert('Testing JSON array format (correct way)...')
-                      try {
-                        // Use proper JSON array - Supabase REST API expects this format
-                        const response = await fetch(`https://gcgscmtjesyiziebutzw.supabase.co/rest/v1/products?id=eq.${id}`, {
-                          method: 'PATCH',
-                          headers: {
-                            'apikey': 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImdjZ3NjbXRqZXN5aXppZWJ1dHp3Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzAwNDQwMjgsImV4cCI6MjA4NTYyMDAyOH0.Ikf7mpFUKPJx9wA827xHTxSV2u5JpWCPw7j6wiKbgN0',
-                            'Authorization': 'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImdjZ3NjbXRqZXN5aXppZWJ1dHp3Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzAwNDQwMjgsImV4cCI6MjA4NTYyMDAyOH0.Ikf7mpFUKPJx9wA827xHTxSV2u5JpWCPw7j6wiKbgN0',
-                            'Content-Type': 'application/json',
-                            'Prefer': 'return=representation'
-                          },
-                          body: JSON.stringify({ tags: ['TestA', 'TestB'] })
-                        })
-                        const data = await response.json()
-                        alert('JSON Array result (status ' + response.status + '): ' + JSON.stringify(data, null, 2))
-                        console.log('JSON Array result:', data)
-                      } catch (e) {
-                        alert('Save error: ' + e.message)
-                      }
-                    }}
-                    style={{ background: '#FF5722', color: 'white', border: 'none', padding: '8px 16px', borderRadius: '4px', cursor: 'pointer' }}
-                  >
-                    2. TEST: JSON array format
-                  </button>
-                  <button
-                    type="button"
-                    onClick={async () => {
-                      alert('Testing via Supabase JS client...')
-                      try {
-                        // Test using the same Supabase client the app uses
-                        const result = await productsApi.update(id, { tags: ['ClientTest1', 'ClientTest2'] })
-                        alert('Supabase JS result: ' + JSON.stringify(result, null, 2))
-                        console.log('Supabase JS result:', result)
-                      } catch (e) {
-                        alert('Supabase JS error: ' + e.message)
-                      }
-                    }}
-                    style={{ background: '#9C27B0', color: 'white', border: 'none', padding: '8px 16px', borderRadius: '4px', cursor: 'pointer' }}
-                  >
-                    3. TEST: Supabase JS Client
-                  </button>
-                </div>
-              </div>
+              <h2>Tags</h2>
               <p style={{ fontSize: '13px', color: 'var(--color-gray-text)', marginBottom: '12px' }}>
                 Add tags for filtering on the website (e.g., Brassica, Asian, Spicy)
               </p>
@@ -490,6 +477,46 @@ export default function ProductEdit() {
                   </span>
                 )}
               </div>
+
+              {/* Existing tags suggestions */}
+              {allTags.filter(tag => !form.tags.includes(tag)).length > 0 && (
+                <div style={{ marginTop: '16px', paddingTop: '16px', borderTop: '1px solid var(--color-light)' }}>
+                  <p style={{ fontSize: '12px', color: 'var(--color-gray-text)', marginBottom: '8px' }}>
+                    Existing tags (click to add):
+                  </p>
+                  <div style={{ display: 'flex', flexWrap: 'wrap', gap: '6px' }}>
+                    {allTags.filter(tag => !form.tags.includes(tag)).map(tag => (
+                      <button
+                        key={tag}
+                        type="button"
+                        onClick={() => setForm(prev => ({ ...prev, tags: [...prev.tags, tag] }))}
+                        style={{
+                          padding: '4px 10px',
+                          background: 'var(--color-light)',
+                          color: 'var(--color-dark)',
+                          border: '1px solid var(--color-gray)',
+                          borderRadius: '16px',
+                          fontSize: '12px',
+                          cursor: 'pointer',
+                          transition: 'all 0.2s ease'
+                        }}
+                        onMouseOver={(e) => {
+                          e.target.style.background = 'var(--color-primary)'
+                          e.target.style.color = 'white'
+                          e.target.style.borderColor = 'var(--color-primary)'
+                        }}
+                        onMouseOut={(e) => {
+                          e.target.style.background = 'var(--color-light)'
+                          e.target.style.color = 'var(--color-dark)'
+                          e.target.style.borderColor = 'var(--color-gray)'
+                        }}
+                      >
+                        + {tag}
+                      </button>
+                    ))}
+                  </div>
+                </div>
+              )}
             </div>
           </div>
 

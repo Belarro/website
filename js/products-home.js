@@ -9,20 +9,24 @@ const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBh
 // Fetch featured products from Supabase
 async function fetchFeaturedProducts() {
     try {
-        // Fetch products marked as featured_homepage
-        const response = await fetch(`${SUPABASE_URL}/rest/v1/products?select=*&featured_homepage=eq.true&availability_status=neq.hidden&order=sort_order.asc&limit=6`, {
-            headers: {
-                'apikey': SUPABASE_ANON_KEY,
-                'Authorization': `Bearer ${SUPABASE_ANON_KEY}`
+        // Try to fetch products marked as featured_homepage first
+        let featured = []
+        try {
+            const response = await fetch(`${SUPABASE_URL}/rest/v1/products?select=*&featured_homepage=eq.true&availability_status=neq.hidden&order=sort_order.asc&limit=6`, {
+                headers: {
+                    'apikey': SUPABASE_ANON_KEY,
+                    'Authorization': `Bearer ${SUPABASE_ANON_KEY}`
+                }
+            })
+            if (response.ok) {
+                featured = await response.json()
             }
-        })
+        } catch (e) {
+            console.log('Featured query failed, using fallback')
+        }
 
-        if (!response.ok) throw new Error('Failed to fetch products')
-
-        const featured = await response.json()
-
-        // If no featured products, fall back to first 6 available products
-        if (featured.length === 0) {
+        // If no featured products or query failed, fall back to first 6 available products
+        if (!featured || featured.length === 0) {
             const fallbackResponse = await fetch(`${SUPABASE_URL}/rest/v1/products?select=*&availability_status=neq.hidden&order=sort_order.asc&limit=6`, {
                 headers: {
                     'apikey': SUPABASE_ANON_KEY,

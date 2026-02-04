@@ -1,10 +1,59 @@
+import { useState, useEffect } from 'react'
 import { Link } from 'react-router-dom'
-import { mockProducts, mockKitchens, mockUsers } from '../data/mockData'
+import { productsApi, kitchensApi, usersApi } from '../lib/supabase'
 
 export default function Dashboard() {
-  const activeProducts = mockProducts.filter(p => p.availability_status !== 'hidden').length
-  const activeKitchens = mockKitchens.filter(k => k.status === 'active').length
-  const activeUsers = mockUsers.filter(u => u.status === 'active').length
+  const [stats, setStats] = useState({
+    products: 0,
+    kitchens: 0,
+    users: 0
+  })
+  const [loading, setLoading] = useState(true)
+
+  useEffect(() => {
+    loadStats()
+  }, [])
+
+  const loadStats = async () => {
+    try {
+      // Fetch products count
+      let productCount = 0
+      try {
+        const products = await productsApi.getAll()
+        productCount = products.filter(p => p.availability_status !== 'hidden').length
+      } catch (err) {
+        console.log('Products table may not exist yet')
+      }
+
+      // Fetch kitchens count
+      let kitchenCount = 0
+      try {
+        const kitchens = await kitchensApi.getAll()
+        kitchenCount = kitchens ? kitchens.filter(k => k.status === 'active').length : 0
+      } catch (err) {
+        console.log('Kitchens table may not exist yet')
+      }
+
+      // Fetch users count
+      let userCount = 0
+      try {
+        const users = await usersApi.getAll()
+        userCount = users ? users.filter(u => u.status === 'active').length : 0
+      } catch (err) {
+        console.log('Users table may not exist yet')
+      }
+
+      setStats({
+        products: productCount,
+        kitchens: kitchenCount,
+        users: userCount
+      })
+    } catch (err) {
+      console.error('Error loading stats:', err)
+    } finally {
+      setLoading(false)
+    }
+  }
 
   return (
     <div>
@@ -21,7 +70,9 @@ export default function Dashboard() {
       <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))', gap: '24px' }}>
         <Link to="/products" className="card" style={{ textDecoration: 'none', position: 'relative', overflow: 'hidden' }}>
           <div style={{ position: 'relative', zIndex: 1 }}>
-            <div className="card-title" style={{ fontSize: '48px', letterSpacing: '-0.03em' }}>{activeProducts}</div>
+            <div className="card-title" style={{ fontSize: '48px', letterSpacing: '-0.03em' }}>
+              {loading ? '...' : stats.products}
+            </div>
             <div className="card-meta" style={{ marginTop: '8px' }}>Live Products</div>
             <div style={{ marginTop: '24px', fontSize: '13px', color: 'var(--color-green)', fontWeight: 600, display: 'flex', alignItems: 'center', gap: '6px' }}>
               <span style={{ width: '6px', height: '6px', borderRadius: '50%', background: 'currentColor' }}></span>
@@ -31,19 +82,23 @@ export default function Dashboard() {
         </Link>
 
         <Link to="/kitchens" className="card" style={{ textDecoration: 'none' }}>
-          <div className="card-title" style={{ fontSize: '48px', letterSpacing: '-0.03em' }}>{activeKitchens}</div>
+          <div className="card-title" style={{ fontSize: '48px', letterSpacing: '-0.03em' }}>
+            {loading ? '...' : stats.kitchens}
+          </div>
           <div className="card-meta" style={{ marginTop: '8px' }}>Active Kitchens</div>
-          <div style={{ marginTop: '24px', fontSize: '13px', color: 'var(--color-green)', fontWeight: 600, display: 'flex', alignItems: 'center', gap: '6px' }}>
-            <span style={{ width: '6px', height: '6px', borderRadius: '50%', background: 'currentColor' }}></span>
-            100% On-time this week
+          <div style={{ marginTop: '24px', fontSize: '13px', color: stats.kitchens > 0 ? 'var(--color-green)' : 'var(--color-gray-text)', fontWeight: 600, display: 'flex', alignItems: 'center', gap: '6px' }}>
+            {stats.kitchens > 0 && <span style={{ width: '6px', height: '6px', borderRadius: '50%', background: 'currentColor' }}></span>}
+            {stats.kitchens > 0 ? '100% On-time this week' : 'No kitchens registered yet'}
           </div>
         </Link>
 
         <Link to="/users" className="card" style={{ textDecoration: 'none' }}>
-          <div className="card-title" style={{ fontSize: '48px', letterSpacing: '-0.03em' }}>{activeUsers}</div>
+          <div className="card-title" style={{ fontSize: '48px', letterSpacing: '-0.03em' }}>
+            {loading ? '...' : stats.users}
+          </div>
           <div className="card-meta" style={{ marginTop: '8px' }}>System Users</div>
           <div style={{ marginTop: '24px', fontSize: '13px', color: 'var(--color-gray-text)', fontWeight: 600 }}>
-            Access Controls Active
+            {stats.users > 0 ? 'Access Controls Active' : 'No users added yet'}
           </div>
         </Link>
       </div>

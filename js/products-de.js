@@ -89,7 +89,7 @@ function createTagFilters(tags) {
     if (tags.length === 0) return ''
 
     return tags.map(tag => `
-        <button class="tag-filter-btn" data-tag="${tag}">${tag}</button>
+        <button class="tag-filter-btn" data-tag="${tag}" style="background:#fff;border:1px solid #a3a3a3;padding:8px 18px;border-radius:100px;font-size:13px;font-weight:500;cursor:pointer;color:#404040;font-family:inherit;">${tag}</button>
     `).join('')
 }
 

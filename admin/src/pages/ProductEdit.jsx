@@ -78,7 +78,7 @@ export default function ProductEdit() {
           description_chef: product.description_chef || '',
           photo_url: product.photo || null,
           photo_flip: product.photo_flip || 'none',
-          tags: product.tags || [],
+          tags: Array.isArray(product.tags) ? product.tags : [],
           featured_homepage: product.featured_homepage || false,
           // German translations
           name_de: product.name_de || '',
@@ -109,8 +109,9 @@ export default function ProductEdit() {
 
   const addTag = () => {
     const tag = newTag.trim()
-    if (tag && !form.tags.includes(tag)) {
-      setForm(prev => ({ ...prev, tags: [...prev.tags, tag] }))
+    const currentTags = Array.isArray(form.tags) ? form.tags : []
+    if (tag && !currentTags.includes(tag)) {
+      setForm(prev => ({ ...prev, tags: [...currentTags, tag] }))
       setNewTag('')
     }
   }

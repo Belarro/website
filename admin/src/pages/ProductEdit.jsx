@@ -152,6 +152,9 @@ export default function ProductEdit() {
         service_fit_de: form.service_fit_de
       }
 
+      console.log('Saving product with tags:', form.tags)
+      console.log('Full productData:', productData)
+
       if (isNew) {
         await productsApi.create(productData)
       } else {

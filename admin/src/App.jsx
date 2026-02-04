@@ -10,6 +10,7 @@ import KitchenEdit from './pages/KitchenEdit'
 import Users from './pages/Users'
 import UserEdit from './pages/UserEdit'
 import ChefOrder from './pages/ChefOrder'
+import Submissions from './pages/Submissions'
 
 function App() {
   return (
@@ -33,6 +34,7 @@ function App() {
         <Route path="/kitchens/:id" element={<KitchenEdit />} />
         <Route path="/users" element={<Users />} />
         <Route path="/users/:id" element={<UserEdit />} />
+        <Route path="/submissions" element={<Submissions />} />
       </Route>
 
       {/* Fallback */}

@@ -175,5 +175,65 @@
     </footer>
 
     <script src="../js/main.js"></script>
+    <script>
+        // Supabase config
+        const SUPABASE_URL = 'https://gcgscmtjesyiziebutzw.supabase.co';
+        const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImdjZ3NjbXRqZXN5aXppZWJ1dHp3Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzAwNDQwMjgsImV4cCI6MjA4NTYyMDAyOH0.Ikf7mpFUKPJx9wA827xHTxSV2u5JpWCPw7j6wiKbgN0';
+
+        // Form submission
+        document.getElementById('contact-form').addEventListener('submit', async function(e) {
+            e.preventDefault();
+
+            const form = this;
+            const submitBtn = form.querySelector('.form-submit');
+            const originalText = submitBtn.textContent;
+
+            submitBtn.textContent = 'Wird gesendet...';
+            submitBtn.disabled = true;
+
+            const formData = new FormData(form);
+
+            const submission = {
+                form_type: 'contact',
+                contact_name: formData.get('name'),
+                email: formData.get('email'),
+                subject: formData.get('subject') || null,
+                message: formData.get('message')
+            };
+
+            try {
+                const response = await fetch(`${SUPABASE_URL}/rest/v1/form_submissions`, {
+                    method: 'POST',
+                    headers: {
+                        'apikey': SUPABASE_ANON_KEY,
+                        'Authorization': `Bearer ${SUPABASE_ANON_KEY}`,
+                        'Content-Type': 'application/json',
+                        'Prefer': 'return=minimal'
+                    },
+                    body: JSON.stringify(submission)
+                });
+
+                if (!response.ok) throw new Error('Failed to submit');
+
+                // Show success state
+                form.innerHTML = `
+                    <div class="form-success">
+                        <div class="form-success-icon">
+                            <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <polyline points="20 6 9 17 4 12"></polyline>
+                            </svg>
+                        </div>
+                        <h2>Nachricht gesendet</h2>
+                        <p>Wir melden uns innerhalb von 24 Stunden.</p>
+                    </div>
+                `;
+            } catch (error) {
+                console.error('Form submission error:', error);
+                submitBtn.textContent = originalText;
+                submitBtn.disabled = false;
+                alert('Etwas ist schief gelaufen. Bitte versuchen Sie es erneut oder schreiben Sie uns direkt.');
+            }
+        });
+    </script>
 </body>
 </html>

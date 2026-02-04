@@ -185,6 +185,40 @@ export const kitchensApi = {
   }
 }
 
+// Submissions API
+export const submissionsApi = {
+  async getAll() {
+    const { data, error } = await supabase
+      .from('form_submissions')
+      .select('*')
+      .order('created_at', { ascending: false })
+
+    if (error) throw error
+    return data
+  },
+
+  async updateStatus(id, status) {
+    const { data, error } = await supabase
+      .from('form_submissions')
+      .update({ status })
+      .eq('id', id)
+      .select()
+      .single()
+
+    if (error) throw error
+    return data
+  },
+
+  async delete(id) {
+    const { error } = await supabase
+      .from('form_submissions')
+      .delete()
+      .eq('id', id)
+
+    if (error) throw error
+  }
+}
+
 // Users API
 export const usersApi = {
   async getAll() {

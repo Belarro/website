@@ -50,6 +50,12 @@ export default function Layout() {
           >
             Users
           </NavLink>
+          <NavLink
+            to="/submissions"
+            className={({ isActive }) => `sidebar-link ${isActive ? 'active' : ''}`}
+          >
+            Submissions
+          </NavLink>
         </nav>
 
         <div className="sidebar-footer">

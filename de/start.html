@@ -251,8 +251,12 @@
             if (tab) tab.click();
         }
 
+        // Supabase config
+        const SUPABASE_URL = 'https://gcgscmtjesyiziebutzw.supabase.co';
+        const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImdjZ3NjbXRqZXN5aXppZWJ1dHp3Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzAwNDQwMjgsImV4cCI6MjA4NTYyMDAyOH0.Ikf7mpFUKPJx9wA827xHTxSV2u5JpWCPw7j6wiKbgN0';
+
         // Form submission
-        document.getElementById('setup-form').addEventListener('submit', function(e) {
+        document.getElementById('setup-form').addEventListener('submit', async function(e) {
             e.preventDefault();
 
             const form = this;
@@ -262,12 +266,41 @@
             submitBtn.textContent = 'Wird gesendet...';
             submitBtn.disabled = true;
 
-            fetch('/', {
-                method: 'POST',
-                headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
-                body: new URLSearchParams(new FormData(form)).toString()
-            })
-            .then(() => {
+            // Collect form data
+            const formData = new FormData(form);
+            const intent = formData.get('intent');
+
+            // Collect interests checkboxes
+            const interests = formData.getAll('interests[]');
+
+            const submission = {
+                form_type: 'start',
+                intent: intent,
+                restaurant_name: formData.get('restaurant_name'),
+                contact_name: formData.get('contact_name'),
+                email: formData.get('email'),
+                phone: formData.get('phone') || null,
+                interests: interests.length > 0 ? interests : null,
+                notes: formData.get('notes') || null,
+                sample_varieties: formData.get('sample_varieties') || null,
+                delivery_address: formData.get('delivery_address') || null,
+                message: formData.get('message') || null
+            };
+
+            try {
+                const response = await fetch(`${SUPABASE_URL}/rest/v1/form_submissions`, {
+                    method: 'POST',
+                    headers: {
+                        'apikey': SUPABASE_ANON_KEY,
+                        'Authorization': `Bearer ${SUPABASE_ANON_KEY}`,
+                        'Content-Type': 'application/json',
+                        'Prefer': 'return=minimal'
+                    },
+                    body: JSON.stringify(submission)
+                });
+
+                if (!response.ok) throw new Error('Failed to submit');
+
                 // Show success state
                 form.innerHTML = `
                     <div class="form-success">
@@ -280,12 +313,12 @@
                         <p>Wir melden uns innerhalb von 24 Stunden.</p>
                     </div>
                 `;
-            })
-            .catch(() => {
+            } catch (error) {
+                console.error('Form submission error:', error);
                 submitBtn.textContent = originalText;
                 submitBtn.disabled = false;
                 alert('Etwas ist schief gelaufen. Bitte versuchen Sie es erneut oder schreiben Sie uns direkt.');
-            });
+            }
         });
     </script>
 </body>

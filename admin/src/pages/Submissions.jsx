@@ -87,6 +87,7 @@ export default function Submissions() {
     switch (intent) {
       case 'weekly': return 'Weekly Setup'
       case 'samples': return 'Sample Request'
+      case 'visit': return 'Book a Visit'
       case 'inquiry': return 'General Inquiry'
       default: return intent
     }
@@ -121,12 +122,21 @@ export default function Submissions() {
         </svg>
       )
     }
+    if (intent === 'visit') {
+      return (
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+          <rect x="3" y="4" width="18" height="18" rx="2" ry="2"/>
+          <line x1="16" y1="2" x2="16" y2="6"/>
+          <line x1="8" y1="2" x2="8" y2="6"/>
+          <line x1="3" y1="10" x2="21" y2="10"/>
+        </svg>
+      )
+    }
     return (
       <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-        <rect x="3" y="4" width="18" height="18" rx="2" ry="2"/>
-        <line x1="16" y1="2" x2="16" y2="6"/>
-        <line x1="8" y1="2" x2="8" y2="6"/>
-        <line x1="3" y1="10" x2="21" y2="10"/>
+        <circle cx="12" cy="12" r="10"/>
+        <path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"/>
+        <line x1="12" y1="17" x2="12.01" y2="17"/>
       </svg>
     )
   }
@@ -548,10 +558,68 @@ export default function Submissions() {
                       color: '#9ca3af',
                       marginBottom: '6px'
                     }}>
-                      Delivery Address
+                      {selectedSubmission.intent === 'visit' ? 'Kitchen Address' : 'Delivery Address'}
                     </div>
                     <div style={{ fontSize: '14px', color: '#374151', whiteSpace: 'pre-line' }}>
                       {selectedSubmission.delivery_address}
+                    </div>
+                  </div>
+                )}
+
+                {selectedSubmission.preferred_days && selectedSubmission.preferred_days.length > 0 && (
+                  <div>
+                    <div style={{
+                      fontSize: '11px',
+                      fontWeight: 600,
+                      textTransform: 'uppercase',
+                      letterSpacing: '0.05em',
+                      color: '#9ca3af',
+                      marginBottom: '8px'
+                    }}>
+                      Preferred Days
+                    </div>
+                    <div style={{ display: 'flex', gap: '6px', flexWrap: 'wrap' }}>
+                      {selectedSubmission.preferred_days.map(day => (
+                        <span key={day} style={{
+                          background: '#f1f5f9',
+                          padding: '4px 10px',
+                          borderRadius: '100px',
+                          fontSize: '12px',
+                          color: '#475569',
+                          fontWeight: 500
+                        }}>
+                          {day}
+                        </span>
+                      ))}
+                    </div>
+                  </div>
+                )}
+
+                {selectedSubmission.preferred_times && selectedSubmission.preferred_times.length > 0 && (
+                  <div>
+                    <div style={{
+                      fontSize: '11px',
+                      fontWeight: 600,
+                      textTransform: 'uppercase',
+                      letterSpacing: '0.05em',
+                      color: '#9ca3af',
+                      marginBottom: '8px'
+                    }}>
+                      Preferred Times
+                    </div>
+                    <div style={{ display: 'flex', gap: '6px', flexWrap: 'wrap' }}>
+                      {selectedSubmission.preferred_times.map(time => (
+                        <span key={time} style={{
+                          background: '#f1f5f9',
+                          padding: '4px 10px',
+                          borderRadius: '100px',
+                          fontSize: '12px',
+                          color: '#475569',
+                          fontWeight: 500
+                        }}>
+                          {time}
+                        </span>
+                      ))}
                     </div>
                   </div>
                 )}

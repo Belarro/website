@@ -4,11 +4,11 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Get Started — BELARRO</title>
-    <meta name="description" content="Start your weekly delivery of microgreens and specialty plants. No minimum order. No delivery fees.">
+    <meta name="description" content="Request free samples of microgreens and specialty plants, or book a visit to your kitchen. Berlin's premium supplier for professional chefs.">
 
     <!-- Open Graph -->
     <meta property="og:title" content="Get Started — BELARRO">
-    <meta property="og:description" content="Start your weekly delivery of microgreens and specialty plants.">
+    <meta property="og:description" content="Request free samples or book a kitchen visit. Premium microgreens for professional chefs.">
     <meta property="og:type" content="website">
 
     <!-- Canonical -->
@@ -63,7 +63,7 @@
         <section class="start-hero">
             <div class="container">
                 <h1>Get started</h1>
-                <p>Weekly delivery. No minimum. No fees.</p>
+                <p>Try our products or let us visit your kitchen.</p>
             </div>
         </section>
 
@@ -73,14 +73,14 @@
                 <div class="start-form-container">
                     <!-- Intent Tabs -->
                     <div class="intent-tabs">
-                        <button type="button" class="intent-tab active" data-intent="weekly">Weekly setup</button>
-                        <button type="button" class="intent-tab" data-intent="samples">Request samples</button>
+                        <button type="button" class="intent-tab active" data-intent="samples">Request samples</button>
+                        <button type="button" class="intent-tab" data-intent="visit">Book a visit</button>
                         <button type="button" class="intent-tab" data-intent="inquiry">General inquiry</button>
                     </div>
 
-                    <form id="setup-form" name="weekly-setup" method="POST" data-netlify="true" netlify-honeypot="bot-field">
+                    <form id="setup-form" name="start-form" method="POST" data-netlify="true" netlify-honeypot="bot-field">
                         <input type="hidden" name="bot-field">
-                        <input type="hidden" id="form-intent" name="intent" value="weekly">
+                        <input type="hidden" id="form-intent" name="intent" value="samples">
 
                         <!-- Contact Fields - Always visible -->
                         <div class="form-section">
@@ -107,38 +107,8 @@
                             </div>
                         </div>
 
-                        <!-- Weekly Setup Content -->
-                        <div class="intent-content active" data-intent-content="weekly">
-                            <div class="form-section">
-                                <label class="form-label">Interested in</label>
-                                <div class="checkbox-group">
-                                    <label class="checkbox-label">
-                                        <input type="checkbox" name="interests[]" value="microgreens">
-                                        <span>Microgreens</span>
-                                    </label>
-                                    <label class="checkbox-label">
-                                        <input type="checkbox" name="interests[]" value="shoots">
-                                        <span>Shoots (Pea, Sunflower)</span>
-                                    </label>
-                                    <label class="checkbox-label">
-                                        <input type="checkbox" name="interests[]" value="herbs">
-                                        <span>Petite Herbs</span>
-                                    </label>
-                                    <label class="checkbox-label">
-                                        <input type="checkbox" name="interests[]" value="mixes">
-                                        <span>Mixes</span>
-                                    </label>
-                                </div>
-                            </div>
-
-                            <div class="form-group">
-                                <label class="form-label" for="weekly-notes">Notes <span class="form-label-optional">(optional)</span></label>
-                                <textarea id="weekly-notes" name="notes" class="form-textarea" rows="3" placeholder="Specific varieties, quantities, delivery preferences..."></textarea>
-                            </div>
-                        </div>
-
                         <!-- Samples Content -->
-                        <div class="intent-content" data-intent-content="samples">
+                        <div class="intent-content active" data-intent-content="samples">
                             <div class="form-group">
                                 <label class="form-label" for="sample-varieties">Which varieties would you like to try?</label>
                                 <textarea id="sample-varieties" name="sample_varieties" class="form-textarea" rows="3" placeholder="E.g., Pea Shoots, Sunflower, Radish Mix..."></textarea>
@@ -147,6 +117,64 @@
                             <div class="form-group">
                                 <label class="form-label" for="delivery-address">Delivery address</label>
                                 <textarea id="delivery-address" name="delivery_address" class="form-textarea" rows="2" placeholder="Street, City, Postal code"></textarea>
+                            </div>
+                        </div>
+
+                        <!-- Visit Content -->
+                        <div class="intent-content" data-intent-content="visit">
+                            <div class="form-section">
+                                <label class="form-label">Preferred days</label>
+                                <p class="form-hint">Select when it's best for us to visit your kitchen.</p>
+                                <div class="checkbox-group">
+                                    <label class="checkbox-label">
+                                        <input type="checkbox" name="preferred_days[]" value="Monday">
+                                        <span>Monday</span>
+                                    </label>
+                                    <label class="checkbox-label">
+                                        <input type="checkbox" name="preferred_days[]" value="Tuesday">
+                                        <span>Tuesday</span>
+                                    </label>
+                                    <label class="checkbox-label">
+                                        <input type="checkbox" name="preferred_days[]" value="Wednesday">
+                                        <span>Wednesday</span>
+                                    </label>
+                                    <label class="checkbox-label">
+                                        <input type="checkbox" name="preferred_days[]" value="Thursday">
+                                        <span>Thursday</span>
+                                    </label>
+                                    <label class="checkbox-label">
+                                        <input type="checkbox" name="preferred_days[]" value="Friday">
+                                        <span>Friday</span>
+                                    </label>
+                                </div>
+                            </div>
+
+                            <div class="form-section">
+                                <label class="form-label">Preferred time</label>
+                                <div class="checkbox-group">
+                                    <label class="checkbox-label">
+                                        <input type="checkbox" name="preferred_times[]" value="Morning (9-12)">
+                                        <span>Morning (9-12)</span>
+                                    </label>
+                                    <label class="checkbox-label">
+                                        <input type="checkbox" name="preferred_times[]" value="Afternoon (12-15)">
+                                        <span>Afternoon (12-15)</span>
+                                    </label>
+                                    <label class="checkbox-label">
+                                        <input type="checkbox" name="preferred_times[]" value="Late afternoon (15-18)">
+                                        <span>Late afternoon (15-18)</span>
+                                    </label>
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <label class="form-label" for="visit-address">Kitchen address</label>
+                                <textarea id="visit-address" name="visit_address" class="form-textarea" rows="2" placeholder="Street, City, Postal code"></textarea>
+                            </div>
+
+                            <div class="form-group">
+                                <label class="form-label" for="visit-notes">Anything we should know? <span class="form-label-optional">(optional)</span></label>
+                                <textarea id="visit-notes" name="notes" class="form-textarea" rows="2" placeholder="Parking info, best entrance, topics to discuss..."></textarea>
                             </div>
                         </div>
 
@@ -165,16 +193,16 @@
                 <!-- Trust badges -->
                 <div class="trust-badges">
                     <div class="trust-badge">
-                        <span class="trust-badge-value">0</span>
-                        <span class="trust-badge-label">Minimum order</span>
+                        <span class="trust-badge-value">Free</span>
+                        <span class="trust-badge-label">Samples</span>
                     </div>
                     <div class="trust-badge">
-                        <span class="trust-badge-value">0</span>
-                        <span class="trust-badge-label">Delivery fees</span>
+                        <span class="trust-badge-value">We come</span>
+                        <span class="trust-badge-label">To you</span>
                     </div>
                     <div class="trust-badge">
                         <span class="trust-badge-value">24h</span>
-                        <span class="trust-badge-label">Response time</span>
+                        <span class="trust-badge-label">Response</span>
                     </div>
                 </div>
             </div>
@@ -194,8 +222,8 @@
                     <div class="footer-col">
                         <h4>Product</h4>
                         <a href="/varieties.html">Varieties</a>
-                        <a href="/start.html">Weekly Setup</a>
-                        <a href="/start.html?intent=samples">Request Samples</a>
+                        <a href="/start.html">Request Samples</a>
+                        <a href="/start.html?intent=visit">Book a Visit</a>
                     </div>
                     <div class="footer-col">
                         <h4>Company</h4>
@@ -270,8 +298,9 @@
             const formData = new FormData(form);
             const intent = formData.get('intent');
 
-            // Collect interests checkboxes
-            const interests = formData.getAll('interests[]');
+            // Collect checkbox arrays
+            const preferredDays = formData.getAll('preferred_days[]');
+            const preferredTimes = formData.getAll('preferred_times[]');
 
             const submission = {
                 form_type: 'start',
@@ -280,10 +309,11 @@
                 contact_name: formData.get('contact_name'),
                 email: formData.get('email'),
                 phone: formData.get('phone') || null,
-                interests: interests.length > 0 ? interests : null,
-                notes: formData.get('notes') || null,
                 sample_varieties: formData.get('sample_varieties') || null,
-                delivery_address: formData.get('delivery_address') || null,
+                delivery_address: formData.get('delivery_address') || formData.get('visit_address') || null,
+                preferred_days: preferredDays.length > 0 ? preferredDays : null,
+                preferred_times: preferredTimes.length > 0 ? preferredTimes : null,
+                notes: formData.get('notes') || null,
                 message: formData.get('message') || null
             };
 

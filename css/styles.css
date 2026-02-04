@@ -1283,6 +1283,13 @@ main {
     margin-left: var(--space-2);
 }
 
+/* Form hint text */
+.form-hint {
+    font-size: 13px;
+    color: var(--color-gray-400);
+    margin: 4px 0 12px 0;
+}
+
 /* Floating label variant */
 .form-group-floating {
     position: relative;

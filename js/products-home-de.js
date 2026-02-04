@@ -82,25 +82,20 @@ function createProductCard(product) {
 
 // Render featured products on homepage
 async function renderHomepageProducts() {
-    console.log('renderHomepageProducts called')
     const container = document.querySelector('.homepage-varieties-showcase')
-    console.log('Container found:', container)
     if (!container) return
 
     // Show loading state
     container.innerHTML = '<div style="text-align: center; padding: 48px; grid-column: 1/-1;"><p>Laden...</p></div>'
 
     const products = await fetchFeaturedProducts()
-    console.log('Products fetched:', products)
 
     if (!products || products.length === 0) {
         container.innerHTML = '<div style="text-align: center; padding: 48px; grid-column: 1/-1;"><p>Keine Produkte verfügbar.</p></div>'
         return
     }
 
-    const html = products.map(createProductCard).join('')
-    console.log('HTML generated, length:', html.length)
-    container.innerHTML = html
+    container.innerHTML = products.map(createProductCard).join('')
 }
 
 // Initialize when DOM is ready

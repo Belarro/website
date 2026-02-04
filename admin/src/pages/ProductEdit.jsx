@@ -36,6 +36,7 @@ export default function ProductEdit() {
 
   const [newTag, setNewTag] = useState('')
   const [allTags, setAllTags] = useState([])
+  const [featuredCount, setFeaturedCount] = useState(0)
 
   const [loading, setLoading] = useState(false)
   const [loadingProduct, setLoadingProduct] = useState(!isNew)
@@ -47,7 +48,18 @@ export default function ProductEdit() {
       loadProduct()
     }
     loadAllTags()
+    loadFeaturedCount()
   }, [id, isNew])
+
+  const loadFeaturedCount = async () => {
+    try {
+      const products = await productsApi.getAll()
+      const count = products.filter(p => p.featured_homepage && p.id !== id).length
+      setFeaturedCount(count)
+    } catch (err) {
+      console.error('Error loading featured count:', err)
+    }
+  }
 
   const loadAllTags = async () => {
     try {
@@ -356,17 +368,26 @@ export default function ProductEdit() {
           <div style={{ display: 'flex', flexDirection: 'column', gap: '24px' }}>
             {/* Featured on Homepage */}
             <div className="card" style={{ background: form.featured_homepage ? '#e8f5e9' : 'white' }}>
-              <label style={{ display: 'flex', alignItems: 'center', gap: '12px', cursor: 'pointer' }}>
+              <label style={{ display: 'flex', alignItems: 'center', gap: '12px', cursor: featuredCount >= 6 && !form.featured_homepage ? 'not-allowed' : 'pointer' }}>
                 <input
                   type="checkbox"
                   checked={form.featured_homepage}
-                  onChange={(e) => setForm(prev => ({ ...prev, featured_homepage: e.target.checked }))}
-                  style={{ width: '20px', height: '20px', cursor: 'pointer' }}
+                  onChange={(e) => {
+                    if (e.target.checked && featuredCount >= 6) {
+                      alert('Maximum 6 products can be featured on the homepage. Please uncheck another product first.')
+                      return
+                    }
+                    setForm(prev => ({ ...prev, featured_homepage: e.target.checked }))
+                  }}
+                  disabled={featuredCount >= 6 && !form.featured_homepage}
+                  style={{ width: '20px', height: '20px', cursor: featuredCount >= 6 && !form.featured_homepage ? 'not-allowed' : 'pointer' }}
                 />
                 <div>
                   <h2 style={{ margin: 0 }}>Featured on Homepage</h2>
                   <p style={{ margin: '4px 0 0 0', fontSize: '13px', color: 'var(--color-gray-text)' }}>
-                    Show this product on the main homepage (max 6)
+                    {featuredCount >= 6 && !form.featured_homepage
+                      ? `Already 6 products featured - uncheck another first`
+                      : `Show this product on the main homepage (${featuredCount}/6 featured)`}
                   </p>
                 </div>
               </label>

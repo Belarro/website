@@ -1,9 +1,45 @@
 import { NavLink, Outlet, useNavigate } from 'react-router-dom'
+import { useState, useEffect } from 'react'
 import { useAuth } from '../context/AuthContext'
+import { submissionsApi } from '../lib/supabase'
+
+// Helper to get viewed submissions from localStorage
+const getViewedSubmissions = () => {
+  try {
+    return JSON.parse(localStorage.getItem('viewedSubmissions') || '[]')
+  } catch {
+    return []
+  }
+}
 
 export default function Layout() {
   const navigate = useNavigate()
   const { user, signOut } = useAuth()
+  const [unreadCount, setUnreadCount] = useState(0)
+
+  const loadUnreadCount = async () => {
+    try {
+      const submissions = await submissionsApi.getAll()
+      const viewedIds = getViewedSubmissions()
+      const count = submissions.filter(s => s.status === 'new' && !viewedIds.includes(s.id)).length
+      setUnreadCount(count)
+    } catch (err) {
+      console.error('Error loading unread count:', err)
+    }
+  }
+
+  useEffect(() => {
+    loadUnreadCount()
+    // Listen for updates from Submissions page
+    const handleUpdate = () => loadUnreadCount()
+    window.addEventListener('submissionsUpdated', handleUpdate)
+    // Refresh every 30 seconds for new submissions
+    const interval = setInterval(loadUnreadCount, 30000)
+    return () => {
+      window.removeEventListener('submissionsUpdated', handleUpdate)
+      clearInterval(interval)
+    }
+  }, [])
 
   const handleLogout = () => {
     signOut()
@@ -53,8 +89,26 @@ export default function Layout() {
           <NavLink
             to="/submissions"
             className={({ isActive }) => `sidebar-link ${isActive ? 'active' : ''}`}
+            style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}
           >
             Submissions
+            {unreadCount > 0 && (
+              <span style={{
+                minWidth: '20px',
+                height: '20px',
+                padding: '0 6px',
+                background: '#ef4444',
+                color: 'white',
+                borderRadius: '10px',
+                fontSize: '11px',
+                fontWeight: 600,
+                display: 'flex',
+                alignItems: 'center',
+                justifyContent: 'center'
+              }}>
+                {unreadCount}
+              </span>
+            )}
           </NavLink>
         </nav>
 

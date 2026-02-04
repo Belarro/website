@@ -1,14 +1,36 @@
 import { useState, useEffect } from 'react'
 import { submissionsApi } from '../lib/supabase'
 
+// Helper to manage viewed submissions in localStorage
+const getViewedSubmissions = () => {
+  try {
+    return JSON.parse(localStorage.getItem('viewedSubmissions') || '[]')
+  } catch {
+    return []
+  }
+}
+
+const markSubmissionViewed = (id) => {
+  const viewed = getViewedSubmissions()
+  if (!viewed.includes(id)) {
+    viewed.push(id)
+    localStorage.setItem('viewedSubmissions', JSON.stringify(viewed))
+    // Dispatch event so Layout can update
+    window.dispatchEvent(new CustomEvent('submissionsUpdated'))
+  }
+}
+
 export default function Submissions() {
   const [submissions, setSubmissions] = useState([])
   const [loading, setLoading] = useState(true)
   const [filter, setFilter] = useState('all')
   const [selectedSubmission, setSelectedSubmission] = useState(null)
+  const [viewedIds, setViewedIds] = useState(getViewedSubmissions())
 
   useEffect(() => {
     loadSubmissions()
+    // Dispatch event to sync sidebar count
+    window.dispatchEvent(new CustomEvent('submissionsUpdated'))
   }, [])
 
   const loadSubmissions = async () => {
@@ -142,6 +164,13 @@ export default function Submissions() {
   }
 
   const newCount = submissions.filter(s => s.status === 'new').length
+  const unreadCount = submissions.filter(s => s.status === 'new' && !viewedIds.includes(s.id)).length
+
+  const handleSelectSubmission = (submission) => {
+    setSelectedSubmission(submission)
+    markSubmissionViewed(submission.id)
+    setViewedIds(getViewedSubmissions())
+  }
 
   if (loading) {
     return (
@@ -183,7 +212,20 @@ export default function Submissions() {
             color: '#6b7280'
           }}>
             {submissions.length} total submissions
-            {newCount > 0 && (
+            {unreadCount > 0 && (
+              <span style={{
+                marginLeft: '8px',
+                padding: '2px 8px',
+                background: '#dbeafe',
+                color: '#1e40af',
+                borderRadius: '100px',
+                fontSize: '12px',
+                fontWeight: 500
+              }}>
+                {unreadCount} unread
+              </span>
+            )}
+            {newCount > 0 && newCount !== unreadCount && (
               <span style={{
                 marginLeft: '8px',
                 padding: '2px 8px',
@@ -294,7 +336,7 @@ export default function Submissions() {
               {filteredSubmissions.map((submission, index) => (
                 <div
                   key={submission.id}
-                  onClick={() => setSelectedSubmission(submission)}
+                  onClick={() => handleSelectSubmission(submission)}
                   style={{
                     display: 'flex',
                     alignItems: 'center',
@@ -316,16 +358,27 @@ export default function Submissions() {
                     }
                   }}
                 >
+                  {/* Unread Dot */}
+                  {submission.status === 'new' && !viewedIds.includes(submission.id) && (
+                    <div style={{
+                      width: '8px',
+                      height: '8px',
+                      borderRadius: '50%',
+                      background: '#2563eb',
+                      flexShrink: 0
+                    }} />
+                  )}
+
                   {/* Type Icon */}
                   <div style={{
                     width: '40px',
                     height: '40px',
                     borderRadius: '10px',
-                    background: '#f3f4f6',
+                    background: submission.status === 'new' && !viewedIds.includes(submission.id) ? '#dbeafe' : '#f3f4f6',
                     display: 'flex',
                     alignItems: 'center',
                     justifyContent: 'center',
-                    color: '#6b7280',
+                    color: submission.status === 'new' && !viewedIds.includes(submission.id) ? '#2563eb' : '#6b7280',
                     flexShrink: 0
                   }}>
                     {getTypeIcon(submission.form_type, submission.intent)}

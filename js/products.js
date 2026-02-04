@@ -11,8 +11,10 @@ async function fetchProducts() {
         const response = await fetch(`${SUPABASE_URL}/rest/v1/products?select=*&availability_status=neq.hidden&order=sort_order.asc`, {
             headers: {
                 'apikey': SUPABASE_ANON_KEY,
-                'Authorization': `Bearer ${SUPABASE_ANON_KEY}`
-            }
+                'Authorization': `Bearer ${SUPABASE_ANON_KEY}`,
+                'Cache-Control': 'no-cache'
+            },
+            cache: 'no-store'
         })
 
         if (!response.ok) throw new Error('Failed to fetch products')

@@ -15,8 +15,10 @@ async function fetchFeaturedProducts() {
             const response = await fetch(`${SUPABASE_URL}/rest/v1/products?select=*&featured_homepage=eq.true&availability_status=neq.hidden&order=sort_order.asc&limit=6`, {
                 headers: {
                     'apikey': SUPABASE_ANON_KEY,
-                    'Authorization': `Bearer ${SUPABASE_ANON_KEY}`
-                }
+                    'Authorization': `Bearer ${SUPABASE_ANON_KEY}`,
+                    'Cache-Control': 'no-cache'
+                },
+                cache: 'no-store'
             })
             if (response.ok) {
                 featured = await response.json()
@@ -30,8 +32,10 @@ async function fetchFeaturedProducts() {
             const fallbackResponse = await fetch(`${SUPABASE_URL}/rest/v1/products?select=*&availability_status=neq.hidden&order=sort_order.asc&limit=6`, {
                 headers: {
                     'apikey': SUPABASE_ANON_KEY,
-                    'Authorization': `Bearer ${SUPABASE_ANON_KEY}`
-                }
+                    'Authorization': `Bearer ${SUPABASE_ANON_KEY}`,
+                    'Cache-Control': 'no-cache'
+                },
+                cache: 'no-store'
             })
             if (!fallbackResponse.ok) throw new Error('Failed to fetch products')
             return await fallbackResponse.json()

@@ -111,10 +111,8 @@ async function renderProducts() {
     // Collect tags and add tag filters to the filter bar
     const tags = collectTags(products)
     const filterBar = document.querySelector('.filter-bar')
-    if (filterBar) {
-        // Remove existing tag buttons
+    if (filterBar && tags.length > 0) {
         filterBar.querySelectorAll('.tag-filter-btn').forEach(btn => btn.remove())
-        // Add tag buttons to the filter bar
         filterBar.insertAdjacentHTML('beforeend', createTagFilters(tags))
     }
 

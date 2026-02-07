@@ -4,7 +4,12 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Nachhaltigkeit — BELARRO</title>
-    <meta name="description" content="Wie Belarro Nachhaltigkeit angeht: Lokaler Anbau, Produktion auf Bestellung, reduzierte Verschwendung, reduzierter Transport.">
+    <meta name="description" content="Wie Belarro Nachhaltigkeit angeht: Auf Erde gezüchtet, lokale Produktion, minimaler Abfall, keine Pestizide.">
+
+    <!-- Open Graph -->
+    <meta property="og:title" content="Nachhaltigkeit — BELARRO">
+    <meta property="og:description" content="Lokaler Anbau. Produktion auf Bestellung. Reduzierte Verschwendung.">
+    <meta property="og:type" content="website">
 
     <!-- Canonical -->
     <link rel="canonical" href="https://belarro.com/de/sustainability">
@@ -17,30 +22,23 @@
     <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;500;600;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Archivo:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 
     <!-- Styles -->
     <link rel="stylesheet" href="../css/styles.css">
 </head>
 <body>
     <!-- Header -->
-    <header class="header">
-        <div class="header-container">
-            <a href="/de/" class="logo" aria-label="BELARRO Startseite">
-                <span class="logo-text">BELARRO</span>
-                <span class="logo-dots">
-                    <span class="dot"></span>
-                    <span class="dot"></span>
-                    <span class="dot"></span>
-                </span>
-            </a>
-            <nav class="nav-desktop">
+    <header id="header">
+        <div class="header-content">
+            <a href="/de/" class="logo">BELARRO<span class="logo-dots">...</span></a>
+            <nav>
                 <a href="/de/varieties.html">Sorten</a>
                 <a href="/de/about.html">Über uns</a>
                 <a href="/de/contact.html">Kontakt</a>
                 <a href="/sustainability.html" class="lang-switch">EN</a>
+                <a href="/de/start.html" class="btn btn-primary">Proben anfordern</a>
             </nav>
-            <a href="/de/start.html" class="btn btn-primary header-cta">Wöchentliche Lieferung starten</a>
             <button class="nav-toggle" aria-label="Navigation umschalten">
                 <span></span>
                 <span></span>
@@ -50,72 +48,197 @@
     </header>
 
     <!-- Mobile Navigation -->
-    <nav class="nav-mobile">
+    <div class="nav-mobile">
         <a href="/de/varieties.html">Sorten</a>
         <a href="/de/about.html">Über uns</a>
         <a href="/de/contact.html">Kontakt</a>
-        <a href="/de/start.html" class="btn btn-primary">Wöchentliche Lieferung starten</a>
+        <a href="/de/start.html" class="btn btn-primary">Proben anfordern</a>
         <a href="/sustainability.html" class="lang-switch">English</a>
-    </nav>
+    </div>
 
-    <main>
-        <section class="section">
-            <div class="container">
+    <!-- Page Hero -->
+    <section class="page-hero">
+        <div class="container">
+            <div class="page-hero-content fade-in">
                 <h1>Nachhaltigkeit</h1>
+                <p class="page-hero-lead">Wie Belarro mit Ressourcen umgeht. Lokale Produktion. Minimaler Abfall. Faktische Auswirkungen.</p>
+            </div>
+        </div>
+    </section>
 
-                <p>Wie Belarro mit Ressourcen umgeht.</p>
-
-                <ul class="benefits-list mt-lg">
-                    <li><strong>Lokaler Anbau</strong> — Alle Pflanzen werden in Berlin gezüchtet, was die Transportwege reduziert.</li>
-                    <li><strong>Produktion auf Bestellung</strong> — Wir säen nach Ihrer Bestellung. Keine spekulative Produktion. Kein Lager das weggeworfen wird.</li>
-                    <li><strong>Reduzierte Verschwendung</strong> — Der wöchentliche Rhythmus bedeutet konstante Mengen. Weniger Überproduktion, weniger Entsorgung.</li>
-                    <li><strong>Reduzierter Transport</strong> — Kurze Wege von der Farm zur Küche. Direkt geliefert.</li>
-                    <li><strong>Anbau auf Erde</strong> — Pflanzen werden auf Erde gezüchtet, nicht auf hydroponischen Schwämmen.</li>
-                </ul>
-
-                <div class="mt-xl">
-                    <a href="/de/start.html" class="btn btn-primary">Wöchentliche Lieferung starten</a>
+    <!-- Approach Section -->
+    <section class="approach-section">
+        <div class="container">
+            <div class="section-label fade-in">Unser Ansatz</div>
+            <div class="approach-intro fade-in">
+                <h2>Sechs Prinzipien leiten unseren täglichen Betrieb.</h2>
+                <p>Kein Marketing-Spin. Das sind die Fakten darüber, wie wir anbauen, wie wir liefern und wie wir mit Ressourcen umgehen.</p>
+            </div>
+            <div class="approach-grid">
+                <div class="approach-item fade-in">
+                    <div class="approach-icon">1</div>
+                    <div class="approach-content">
+                        <h3>Auf Erde gezüchtet</h3>
+                        <p>Wir verwenden echtes Bodensubstrat, keine hydroponischen Schwämme oder Schaumstoff. Pflanzen entwickeln stärkere Wurzelsysteme und bessere Geschmacksprofile. Das verwendete Substrat ist vollständig kompostierbar und kann in den Nährstoffkreislauf zurückgeführt werden.</p>
+                    </div>
+                </div>
+                <div class="approach-item fade-in">
+                    <div class="approach-icon">2</div>
+                    <div class="approach-content">
+                        <h3>Lokale Produktion</h3>
+                        <p>Alle Pflanzen werden in Berlin gezüchtet und innerhalb der Stadt geliefert. Kein Nachtversand. Keine länderübergreifende Logistik. Vom Hof in die Küche am selben Tag, an dem wir ernten.</p>
+                    </div>
+                </div>
+                <div class="approach-item fade-in">
+                    <div class="approach-icon">3</div>
+                    <div class="approach-content">
+                        <h3>Keine Pestizide</h3>
+                        <p>Kontrollierte Innenraumumgebung bedeutet keine Schädlinge. Keine Fungizide. Keine Herbizide. Keine chemischen Behandlungen. Saubere Anbaubedingungen eliminieren die Notwendigkeit für Eingriffe.</p>
+                    </div>
+                </div>
+                <div class="approach-item fade-in">
+                    <div class="approach-icon">4</div>
+                    <div class="approach-content">
+                        <h3>Minimaler Abfall</h3>
+                        <p>Wir produzieren auf Bestellung basierend auf wöchentlichen Verpflichtungen. Keine spekulative Produktion. Kein Lagerbestand, der unverkauft abläuft. Vorhersehbarer Rhythmus bedeutet vorhersehbare Mengen und praktisch null Ernteabfall.</p>
+                    </div>
+                </div>
+                <div class="approach-item fade-in">
+                    <div class="approach-icon">5</div>
+                    <div class="approach-content">
+                        <h3>Wassereffizient</h3>
+                        <p>Kontrollierter Innenanbau verbraucht bis zu 95% weniger Wasser als Feldanbau. Präzise Bewässerung liefert Wasser direkt in die Wurzelzone. Kein Abfluss, keine Verschwendung, keine Abhängigkeit vom Wetter.</p>
+                    </div>
+                </div>
+                <div class="approach-item fade-in">
+                    <div class="approach-icon">6</div>
+                    <div class="approach-content">
+                        <h3>Energieeffizient</h3>
+                        <p>LED-Wachstumslampen verbrauchen einen Bruchteil traditioneller Systeme. Die Klimakontrolle ist pro Wachstumsphase optimiert. Vertikaler Anbau maximiert den Ertrag pro Quadratmeter und reduziert die Anlagenfläche.</p>
+                    </div>
                 </div>
             </div>
-        </section>
-    </main>
+        </div>
+    </section>
+
+    <!-- Impact Section -->
+    <section class="impact-section">
+        <div class="container">
+            <div class="impact-content">
+                <div class="section-label fade-in">In Zahlen</div>
+                <h2 class="fade-in">Echte Kennzahlen, keine Behauptungen.</h2>
+                <div class="impact-grid">
+                    <div class="impact-stat fade-in">
+                        <div class="impact-stat-value">100%</div>
+                        <div class="impact-stat-label">In Berlin gezüchtet, innerhalb der Stadt geliefert</div>
+                    </div>
+                    <div class="impact-stat fade-in">
+                        <div class="impact-stat-value">&lt;2h</div>
+                        <div class="impact-stat-label">Durchschnittliche Zeit von der Ernte bis zur Küche</div>
+                    </div>
+                    <div class="impact-stat fade-in">
+                        <div class="impact-stat-value">0</div>
+                        <div class="impact-stat-label">Verwendete Pestizide, Herbizide oder Fungizide</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Details Section -->
+    <section class="details-section">
+        <div class="container">
+            <div class="details-split">
+                <div class="details-image fade-in">
+                    <img src="../assets/images/20240130_151920.jpg" alt="Bodensubstrat in Anzuchtschalen">
+                </div>
+                <div class="details-content fade-in">
+                    <h3>Warum Erde wichtig ist</h3>
+                    <p>Hydroponische Systeme verwenden Schaumstoff oder synthetische Schwämme, die entsorgt werden müssen. Unser bodenbasierter Ansatz nutzt kompostierbares Substrat aus torffreien Mischungen.</p>
+                    <p>Nach der Ernte kann das Substrat kompostiert und wieder landwirtschaftlich genutzt werden. Kein Abfallstrom. Keine synthetischen Materialien landen auf Mülldeponien.</p>
+                </div>
+            </div>
+
+            <div class="details-split reverse">
+                <div class="details-image fade-in">
+                    <img src="../assets/images/20250701_093846.jpg" alt="Anzuchtwagen mit Microgreens">
+                </div>
+                <div class="details-content fade-in">
+                    <h3>Lokal bedeutet lokal</h3>
+                    <p>Produktion in Berlin für Kunden in Berlin. Lieferungen bleiben innerhalb der Stadtgrenzen. Keine Flüge. Kein Nachtversand. Kein länderübergreifender Transport.</p>
+                    <p>Kurze Entfernungen bedeuten frischere Produkte für Sie und geringere Emissionen für alle. Ernte und Lieferung am selben Tag wären mit entfernten Farmen nicht möglich.</p>
+                </div>
+            </div>
+
+            <div class="details-split">
+                <div class="details-image fade-in">
+                    <img src="../assets/images/DSC_5265.JPG" alt="Kontrollierte Anbauumgebung">
+                </div>
+                <div class="details-content fade-in">
+                    <h3>Produktion auf Bestellung</h3>
+                    <p>Das wöchentliche Setup-Modell bedeutet, dass wir basierend auf bestätigten Bestellungen säen. Pflanzen kommen in die Erde und wissen, dass sie ein Ziel haben. Dies eliminiert die Verschwendung, die bei spekulativer Landwirtschaft üblich ist.</p>
+                    <p>Standardlandwirtschaft produziert nach Prognose, nicht nach Nachfrage. Unverkaufte Ware wird zu Abfall. Unser Modell kehrt dies um: Nachfrage löst Produktion aus.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA Section -->
+    <section class="cta-section">
+        <div class="container">
+            <div class="cta-content">
+                <p class="cta-statement fade-in">Wir züchten, was Sie bestellen. Nicht mehr, nicht weniger.</p>
+                <p class="cta-supporting fade-in">Starten Sie Ihr wöchentliches Setup und sehen Sie den Unterschied.</p>
+                <div class="cta-buttons fade-in">
+                    <a href="/de/start.html" class="btn btn-primary">Proben anfordern</a>
+                </div>
+            </div>
+        </div>
+    </section>
 
     <!-- Footer -->
-    <footer class="footer">
-        <div class="container-wide">
-            <div class="footer-content">
+    <footer>
+        <div class="container">
+            <div class="footer-top">
                 <div class="footer-brand">
-                    <span class="logo-text">BELARRO</span>
-                    <p>Neue Pflanzen für professionelle Küchen.</p>
+                    <a href="/de/" class="logo">BELARRO<span class="logo-dots">...</span></a>
+                    <p class="footer-tagline">Neue Pflanzen für professionelle Küchen.</p>
                     <p class="footer-location">Berlin, Deutschland</p>
                 </div>
-                <nav class="footer-nav">
-                    <div class="footer-col">
-                        <h4>Produkt</h4>
-                        <a href="/de/varieties.html">Sorten</a>
-                        <a href="/de/start.html">Wöchentliche Lieferung</a>
-                        <a href="/de/start.html?intent=samples">Proben anfordern</a>
-                    </div>
-                    <div class="footer-col">
-                        <h4>Unternehmen</h4>
-                        <a href="/de/about.html">Über uns</a>
-                        <a href="/de/sustainability.html">Nachhaltigkeit</a>
-                        <a href="/de/contact.html">Kontakt</a>
-                    </div>
-                    <div class="footer-col">
-                        <h4>Rechtliches</h4>
-                        <a href="/de/impressum.html">Impressum</a>
-                        <a href="/de/privacy.html">Datenschutz</a>
-                    </div>
-                    <div class="footer-col">
-                        <h4>Kontakt</h4>
-                        <a href="mailto:hello@belarro.com">hello@belarro.com</a>
-                        <a href="tel:+4915906442264">+49 1590 6442264</a>
-                    </div>
-                </nav>
+                <div class="footer-column">
+                    <h5>Produkt</h5>
+                    <ul>
+                        <li><a href="/de/varieties.html">Sorten</a></li>
+                        <li><a href="/de/start.html">Proben anfordern</a></li>
+                        <li><a href="/de/start.html?intent=visit">Besuch buchen</a></li>
+                    </ul>
+                </div>
+                <div class="footer-column">
+                    <h5>Unternehmen</h5>
+                    <ul>
+                        <li><a href="/de/about.html">Über uns</a></li>
+                        <li><a href="/de/sustainability.html">Nachhaltigkeit</a></li>
+                        <li><a href="/de/contact.html">Kontakt</a></li>
+                    </ul>
+                </div>
+                <div class="footer-column">
+                    <h5>Rechtliches</h5>
+                    <ul>
+                        <li><a href="/de/impressum.html">Impressum</a></li>
+                        <li><a href="/de/privacy.html">Datenschutz</a></li>
+                    </ul>
+                </div>
+                <div class="footer-column">
+                    <h5>Kontakt</h5>
+                    <ul>
+                        <li><a href="mailto:hello@belarro.com">hello@belarro.com</a></li>
+                        <li><a href="tel:+4915906442264">+49 1590 6442264</a></li>
+                    </ul>
+                </div>
             </div>
             <div class="footer-bottom">
-                <p>&copy; 2025 Citfarm UG. Alle Rechte vorbehalten.</p>
+                <div class="footer-copyright">&copy; 2025 Citfarm UG. Belarro ist eine Marke der Citfarm UG.</div>
+                <div class="footer-brand-info">Made in Berlin</div>
             </div>
         </div>
     </footer>

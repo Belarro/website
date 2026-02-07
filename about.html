@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>About — BELARRO</title>
+    <title>About — BELARRO | Fresh microgreens for professional kitchens</title>
     <meta name="description" content="Belarro grows microgreens and specialty plants for professional kitchens in Berlin. Grown to order. Delivered weekly.">
 
     <!-- Open Graph -->
@@ -22,30 +22,23 @@
     <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;500;600;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Archivo:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 
     <!-- Styles -->
     <link rel="stylesheet" href="css/styles.css">
 </head>
 <body>
     <!-- Header -->
-    <header class="header">
-        <div class="header-container">
-            <a href="/" class="logo" aria-label="BELARRO Home">
-                <span class="logo-text">BELARRO</span>
-                <span class="logo-dots">
-                    <span class="dot"></span>
-                    <span class="dot"></span>
-                    <span class="dot"></span>
-                </span>
-            </a>
-            <nav class="nav-desktop">
+    <header id="header">
+        <div class="header-content">
+            <a href="/" class="logo">BELARRO<span class="logo-dots">...</span></a>
+            <nav>
                 <a href="/varieties.html">Varieties</a>
-                <a href="/about.html" class="active">About</a>
+                <a href="/about.html">About</a>
                 <a href="/contact.html">Contact</a>
                 <a href="/de/about.html" class="lang-switch">DE</a>
+                <a href="/start.html" class="btn btn-primary">Request samples</a>
             </nav>
-            <a href="/start.html" class="btn btn-primary header-cta">Start weekly setup</a>
             <button class="nav-toggle" aria-label="Toggle navigation">
                 <span></span>
                 <span></span>
@@ -55,119 +48,188 @@
     </header>
 
     <!-- Mobile Navigation -->
-    <nav class="nav-mobile">
+    <div class="nav-mobile">
         <a href="/varieties.html">Varieties</a>
         <a href="/about.html">About</a>
         <a href="/contact.html">Contact</a>
-        <a href="/start.html" class="btn btn-primary">Start weekly setup</a>
+        <a href="/start.html" class="btn btn-primary">Request samples</a>
         <a href="/de/about.html" class="lang-switch">Deutsch</a>
-    </nav>
+    </div>
 
-    <main>
-        <!-- Hero Section -->
-        <section class="page-hero">
-            <div class="container">
-                <p class="section-label">Our story</p>
-                <h1>About Belarro</h1>
-                <p class="page-hero-subtitle">New plants for professional kitchens. Grown to order. Delivered weekly.</p>
+    <!-- Hero -->
+    <section class="hero hero-about">
+        <div class="hero-bg">
+            <img src="assets/images/herro cut.1jpeg.jpeg" alt="Team member tending to microgreens">
+        </div>
+        <div class="hero-content fade-in">
+            <p class="section-label">Our story</p>
+            <h1>About Belarro</h1>
+            <p class="hero-lead">New plants for professional kitchens. Grown to order. Delivered weekly.</p>
+        </div>
+    </section>
+
+    <!-- Intro Section -->
+    <section class="intro-section">
+        <div class="container">
+            <div class="intro-content fade-in">
+                <p class="intro-text">Belarro grows microgreens and specialty plants for professional kitchens in Berlin. We focus on plants you won't find through standard distribution channels.</p>
             </div>
-        </section>
+        </div>
+    </section>
 
-        <!-- Intro Section -->
-        <section class="section-sm">
-            <div class="container">
-                <p class="about-intro">Belarro grows microgreens and specialty plants for professional kitchens in Berlin. We focus on plants you won't find through standard distribution channels.</p>
-            </div>
-        </section>
-
-        <!-- Values Grid -->
-        <section class="section">
-            <div class="container-wide">
-                <div class="about-grid">
-                    <div class="about-block">
-                        <h3>How we grow</h3>
-                        <p>Everything is grown on real soil, not hydroponic sponge. This produces better flavor, better texture, and plants that perform in real kitchen environments. We seed after you order — nothing sits around waiting.</p>
-                    </div>
-                    <div class="about-block">
-                        <h3>How we deliver</h3>
-                        <p>Weekly delivery on a consistent rhythm. Same day, same time, same quantities. You set it once and it runs by default. Change only when your menu changes or when seasons shift.</p>
-                    </div>
-                    <div class="about-block">
-                        <h3>Why Berlin</h3>
-                        <p>Short distances matter for delicate plants. Farm to kitchen in hours, not days. This means longer shelf life, better freshness, and plants that actually work in service.</p>
-                    </div>
-                    <div class="about-block">
-                        <h3>Who we serve</h3>
-                        <p>Professional kitchens that want specialty plants without the operational complexity. Restaurants, hotels, caterers, and private chefs who value consistency and quality.</p>
-                    </div>
+    <!-- How We Grow Section -->
+    <section class="story-grid-section">
+        <div class="container">
+            <div class="section-label fade-in">How we grow</div>
+            <div class="story-grid">
+                <div class="story-image fade-in">
+                    <img src="assets/images/20240130_151920.jpg" alt="Soil-based growing trays with various seeds">
+                </div>
+                <div class="story-content fade-in">
+                    <h3>Real soil. Real flavor.</h3>
+                    <p>Everything is grown on real soil, not hydroponic sponge. This produces better flavor, better texture, and plants that perform in real kitchen environments.</p>
+                    <p>We seed after you order. Nothing sits around waiting.</p>
                 </div>
             </div>
-        </section>
+        </div>
+    </section>
 
-        <!-- Principles Section -->
-        <section class="section-dark">
-            <div class="container">
-                <p class="section-label">Our principles</p>
+    <!-- How We Deliver Section -->
+    <section class="delivery-section">
+        <div class="container">
+            <div class="delivery-grid">
+                <div class="delivery-image fade-in">
+                    <img src="assets/images/WhatsApp Image 2026-02-02 at 8.37.13 PM (8).jpeg" alt="Packaged microgreens ready for delivery">
+                </div>
+                <div class="delivery-content fade-in">
+                    <div class="section-label">How we deliver</div>
+                    <h3>Weekly rhythm. Consistent results.</h3>
+                    <p>Weekly delivery on a consistent rhythm. Same day, same time, same quantities. You set it once and it runs by default. Change only when your menu changes or when seasons shift.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Why Berlin Section -->
+    <section class="berlin-section">
+        <div class="berlin-bg">
+            <img src="assets/images/DSC_5265.JPG" alt="Belarro growing facility">
+        </div>
+        <div class="container">
+            <div class="berlin-content fade-in">
+                <div class="section-label">Why Berlin</div>
+                <h3>Short distances. Better freshness.</h3>
+                <p>Short distances matter for delicate plants. Farm to kitchen in hours, not days. This means longer shelf life, better freshness, and plants that actually work in service.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Who We Serve Section -->
+    <section class="serve-section">
+        <div class="container">
+            <div class="serve-content">
+                <div class="section-label fade-in">Who we serve</div>
+                <h3 class="fade-in">Professional kitchens that value consistency.</h3>
+                <p class="fade-in">Professional kitchens that want specialty plants without the operational complexity. We work with chefs who value consistency and quality.</p>
+                <div class="serve-list">
+                    <div class="serve-item fade-in">Restaurants</div>
+                    <div class="serve-item fade-in">Hotels</div>
+                    <div class="serve-item fade-in">Caterers</div>
+                    <div class="serve-item fade-in">Private chefs</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Principles Section -->
+    <section class="principles-section">
+        <div class="container">
+            <div class="section-label fade-in">Our principles</div>
+            <div class="principles-header fade-in">
                 <h2>What we believe</h2>
-                <ul class="value-list">
-                    <li>Consistency over complexity</li>
-                    <li>Real soil, real flavor</li>
-                    <li>Grown to order, never stockpiled</li>
-                    <li>Short distances, longer freshness</li>
-                    <li>Service first, innovation when it fits</li>
-                </ul>
             </div>
-        </section>
-
-        <!-- CTA Section -->
-        <section class="section-cta-final">
-            <div class="container">
-                <h2>Start your weekly setup</h2>
-                <p>Set it once. Change it when it makes sense.</p>
-                <div class="cta-actions">
-                    <a href="/start.html" class="btn btn-primary btn-large">Start weekly setup</a>
-                    <a href="/contact.html" class="btn btn-secondary btn-large">Get in touch</a>
+            <div class="principles-list">
+                <div class="principle-item fade-in">
+                    <div class="principle-icon"></div>
+                    <div class="principle-text">Consistency over complexity</div>
+                </div>
+                <div class="principle-item fade-in">
+                    <div class="principle-icon"></div>
+                    <div class="principle-text">Real soil, real flavor</div>
+                </div>
+                <div class="principle-item fade-in">
+                    <div class="principle-icon"></div>
+                    <div class="principle-text">Grown to order, never stockpiled</div>
+                </div>
+                <div class="principle-item fade-in">
+                    <div class="principle-icon"></div>
+                    <div class="principle-text">Short distances, longer freshness</div>
+                </div>
+                <div class="principle-item fade-in">
+                    <div class="principle-icon"></div>
+                    <div class="principle-text">Service first, innovation when it fits</div>
                 </div>
             </div>
-        </section>
-    </main>
+        </div>
+    </section>
+
+    <!-- CTA Section -->
+    <section class="cta-section">
+        <div class="container">
+            <div class="cta-content">
+                <h2 class="fade-in">Start your weekly setup</h2>
+                <p class="cta-subtitle fade-in">Set it once. Change it when it makes sense.</p>
+                <div class="cta-actions fade-in">
+                    <a href="/start.html" class="btn btn-primary">Request samples</a>
+                    <a href="/contact.html" class="btn btn-outline-dark">Get in touch</a>
+                </div>
+            </div>
+        </div>
+    </section>
 
     <!-- Footer -->
-    <footer class="footer">
-        <div class="container-wide">
-            <div class="footer-content">
+    <footer>
+        <div class="container">
+            <div class="footer-top">
                 <div class="footer-brand">
-                    <span class="logo-text">BELARRO</span>
-                    <p>New plants for professional kitchens.</p>
+                    <a href="/" class="logo">BELARRO<span class="logo-dots">...</span></a>
+                    <p class="footer-tagline">New plants for professional kitchens.</p>
                     <p class="footer-location">Berlin, Germany</p>
                 </div>
-                <nav class="footer-nav">
-                    <div class="footer-col">
-                        <h4>Product</h4>
-                        <a href="/varieties.html">Varieties</a>
-                        <a href="/start.html">Weekly Setup</a>
-                        <a href="/start.html?intent=samples">Request Samples</a>
-                    </div>
-                    <div class="footer-col">
-                        <h4>Company</h4>
-                        <a href="/about.html">About</a>
-                        <a href="/sustainability.html">Sustainability</a>
-                        <a href="/contact.html">Contact</a>
-                    </div>
-                    <div class="footer-col">
-                        <h4>Legal</h4>
-                        <a href="/impressum.html">Impressum</a>
-                        <a href="/privacy.html">Privacy Policy</a>
-                    </div>
-                    <div class="footer-col">
-                        <h4>Contact</h4>
-                        <a href="mailto:hello@belarro.com">hello@belarro.com</a>
-                        <a href="tel:+4915906442264">+49 1590 6442264</a>
-                    </div>
-                </nav>
+                <div class="footer-column">
+                    <h5>Product</h5>
+                    <ul>
+                        <li><a href="/varieties.html">Varieties</a></li>
+                        <li><a href="/start.html">Request Samples</a></li>
+                        <li><a href="/start.html?intent=visit">Book a Visit</a></li>
+                    </ul>
+                </div>
+                <div class="footer-column">
+                    <h5>Company</h5>
+                    <ul>
+                        <li><a href="/about.html">About</a></li>
+                        <li><a href="/sustainability.html">Sustainability</a></li>
+                        <li><a href="/contact.html">Contact</a></li>
+                    </ul>
+                </div>
+                <div class="footer-column">
+                    <h5>Legal</h5>
+                    <ul>
+                        <li><a href="/impressum.html">Impressum</a></li>
+                        <li><a href="/privacy.html">Privacy Policy</a></li>
+                    </ul>
+                </div>
+                <div class="footer-column">
+                    <h5>Contact</h5>
+                    <ul>
+                        <li><a href="mailto:hello@belarro.com">hello@belarro.com</a></li>
+                        <li><a href="tel:+4915906442264">+49 1590 6442264</a></li>
+                    </ul>
+                </div>
             </div>
             <div class="footer-bottom">
-                <p>&copy; 2025 Citfarm UG. All rights reserved.</p>
+                <div class="footer-copyright">&copy; 2025 Citfarm UG. Belarro is a brand of Citfarm UG.</div>
+                <div class="footer-brand-info">Made in Berlin</div>
             </div>
         </div>
     </footer>

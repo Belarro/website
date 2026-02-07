@@ -25,30 +25,23 @@
     <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;500;600;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Archivo:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 
     <!-- Styles -->
     <link rel="stylesheet" href="../css/styles.css">
 </head>
 <body>
     <!-- Header -->
-    <header class="header header-sticky">
-        <div class="header-container">
-            <a href="/de/" class="logo" aria-label="BELARRO Startseite">
-                <span class="logo-text">BELARRO</span>
-                <span class="logo-dots">
-                    <span class="dot"></span>
-                    <span class="dot"></span>
-                    <span class="dot"></span>
-                </span>
-            </a>
-            <nav class="nav-desktop">
+    <header id="header">
+        <div class="header-content">
+            <a href="/de/" class="logo">BELARRO<span class="logo-dots">...</span></a>
+            <nav>
                 <a href="/de/varieties.html">Sorten</a>
                 <a href="/de/about.html">Über uns</a>
                 <a href="/de/contact.html">Kontakt</a>
                 <a href="/" class="lang-switch">EN</a>
+                <a href="/de/start.html" class="btn btn-primary">Proben anfordern</a>
             </nav>
-            <a href="/de/start.html" class="btn btn-primary header-cta">Jetzt starten</a>
             <button class="nav-toggle" aria-label="Navigation umschalten">
                 <span></span>
                 <span></span>
@@ -58,264 +51,302 @@
     </header>
 
     <!-- Mobile Navigation -->
-    <nav class="nav-mobile">
+    <div class="nav-mobile">
         <a href="/de/varieties.html">Sorten</a>
         <a href="/de/about.html">Über uns</a>
         <a href="/de/contact.html">Kontakt</a>
-        <a href="/de/start.html" class="btn btn-primary">Jetzt starten</a>
+        <a href="/de/start.html" class="btn btn-primary">Proben anfordern</a>
         <a href="/" class="lang-switch">English</a>
-    </nav>
+    </div>
 
-    <main>
-        <!-- Hero Section - Full Height -->
-        <section class="hero hero-full">
-            <div class="container">
-                <div class="hero-badge">Vertikale Farm in Berlin</div>
-                <h1>Neue Pflanzen für professionelle Küchen.</h1>
-                <p class="hero-subtitle">Auf Bestellung gezüchtet. Wöchentlich geliefert.</p>
-                <p class="hero-supporting">Gratis Proben. Wir kommen zu Ihnen.</p>
-                <div class="hero-actions">
-                    <a href="/de/start.html" class="btn btn-primary">Proben anfordern</a>
-                    <a href="/de/start.html?intent=visit" class="btn btn-secondary">Besuch buchen</a>
+    <!-- Hero -->
+    <section class="hero">
+        <div class="hero-bg">
+            <img src="../assets/images/WhatsApp Image 2025-04-14 at 4.42.57 PM.jpeg" alt="Lebende Microgreens in Schalen">
+        </div>
+        <div class="hero-content fade-in">
+            <h1>Microgreens auf Bestellung. Direkt in Ihre Küche geliefert.</h1>
+            <p class="hero-lead">Frische Zutaten für professionelle Küchen in Berlin. Auf Erde gezüchtet. Wöchentliche Lieferung. Keine Mindestbestellung.</p>
+            <div class="hero-cta">
+                <a href="/de/start.html" class="btn btn-primary">Proben anfordern</a>
+                <a href="/de/start.html?intent=visit" class="btn btn-outline">Besuch buchen</a>
+            </div>
+            <div class="hero-stats">
+                <div class="hero-stats-grid">
+                    <div class="hero-stat">
+                        <div class="hero-stat-accent"></div>
+                        <div class="hero-stat-number" data-count-to="24" data-count-suffix="+" data-count="varieties">24+</div>
+                        <div class="hero-stat-label">Sorten</div>
+                    </div>
+                    <div class="hero-stat">
+                        <div class="hero-stat-accent"></div>
+                        <div class="hero-stat-number" data-count-to="10">10</div>
+                        <div class="hero-stat-label">Tage Haltbarkeit</div>
+                    </div>
+                    <div class="hero-stat">
+                        <div class="hero-stat-accent"></div>
+                        <div class="hero-stat-number" data-count-to="0">0</div>
+                        <div class="hero-stat-label">Mindestbestellung</div>
+                    </div>
+                    <div class="hero-stat">
+                        <div class="hero-stat-accent"></div>
+                        <div class="hero-stat-number" data-count-to="0">0</div>
+                        <div class="hero-stat-label">Lieferkosten</div>
+                    </div>
                 </div>
+            </div>
+        </div>
+    </section>
 
-                <!-- Stats Bar -->
-                <div class="stats-bar">
-                    <div class="stat">
-                        <div class="stat-inner">
-                            <span class="stat-number" data-count="varieties">24+</span>
-                            <span class="stat-label">Sorten</span>
+    <!-- Proof Strip -->
+    <section class="proof-strip">
+        <div class="proof-content">
+            <p class="proof-statement">Beliefert professionelle Küchen in <span>Berlin</span></p>
+        </div>
+    </section>
+
+    <!-- System Section -->
+    <section class="system-section">
+        <div class="container">
+            <div class="section-label fade-in">Wie wir anbauen</div>
+            <div class="system-grid">
+                <div class="system-image fade-in">
+                    <img src="../assets/images/DSC_5265.JPG" alt="Mehretagige Anbauregale">
+                </div>
+                <div class="system-content">
+                    <h2 class="fade-in">Von der Ernte in Ihre Küche. Am selben Tag.</h2>
+                    <p class="system-description fade-in">Wir züchten auf Bestellung in einem 10- bis 28-Tage-Zyklus. Sobald fertig, geht es schnell. Morgens geerntet, nachmittags in Ihrer Küche. Kein Großhändler. Keine Lagerung. Keine Verzögerungen.</p>
+                    <div class="system-points">
+                        <div class="system-point fade-in">
+                            <div class="system-point-number">1</div>
+                            <div class="system-point-content">
+                                <h4>Aussaat nach Bestellung</h4>
+                                <p>Wir züchten was Sie brauchen. 7- bis 14-Tage-Wachstumszyklus.</p>
+                            </div>
                         </div>
-                    </div>
-                    <div class="stat">
-                        <div class="stat-inner">
-                            <span class="stat-number">10</span>
-                            <span class="stat-label">Tage Haltbarkeit</span>
+                        <div class="system-point fade-in">
+                            <div class="system-point-number">2</div>
+                            <div class="system-point-content">
+                                <h4>Kontrollierte Umgebung</h4>
+                                <p>LED-Spektrum, Klimakontrolle, Erdsubstrat. Jede Woche das gleiche Ergebnis.</p>
+                            </div>
                         </div>
-                    </div>
-                    <div class="stat">
-                        <div class="stat-inner">
-                            <span class="stat-number">0</span>
-                            <span class="stat-label">Mindestbestellung</span>
+                        <div class="system-point fade-in">
+                            <div class="system-point-number">3</div>
+                            <div class="system-point-content">
+                                <h4>Ernte bis Lieferung</h4>
+                                <p>Ernte am Morgen. Lieferung am selben Tag. Kein Großhändler.</p>
+                            </div>
                         </div>
-                    </div>
-                    <div class="stat">
-                        <div class="stat-inner">
-                            <span class="stat-number">0</span>
-                            <span class="stat-label">Liefergebühren</span>
+                        <div class="system-point fade-in">
+                            <div class="system-point-number">4</div>
+                            <div class="system-point-content">
+                                <h4>Wöchentlicher Rhythmus</h4>
+                                <p>Einmal einrichten. Läuft von selbst. Ändern nur wenn nötig.</p>
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
-        </section>
+        </div>
+    </section>
 
-        <!-- Problem Section -->
-        <section class="section">
-            <div class="container">
-                <p class="section-label">Das Problem</p>
-                <h2>Standardvertrieb funktioniert nicht für Spezialpflanzen.</h2>
+    <!-- Product Showcase -->
+    <section class="product-showcase">
+        <div class="container">
+            <div class="section-label fade-in">Was gerade wächst</div>
+            <div class="section-header fade-in">
+                <h2 data-count-text="varieties">Frische Microgreens und Spezialitäten für Köche in Berlin.</h2>
+            </div>
+            <div class="product-grid homepage-varieties-showcase">
+                <!-- Products loaded dynamically from Supabase -->
+                <div style="text-align: center; padding: 48px; grid-column: 1/-1;">
+                    <p>Sorten werden geladen...</p>
+                </div>
+            </div>
+            <div class="view-all-link fade-in">
+                <a href="/de/varieties.html">Alle Sorten ansehen →</a>
+            </div>
+        </div>
+    </section>
 
-                <div class="problem-grid">
-                    <div class="problem-item">
-                        <span class="problem-number">1</span>
-                        <h3>Begrenzte Auswahl</h3>
-                        <p>Großhändler führen was sich in Masse verkauft. Spezialpflanzen passen nicht in dieses Modell.</p>
+    <!-- Use Cases -->
+    <section class="use-cases">
+        <div class="container">
+            <div class="section-label fade-in">In der Küche</div>
+            <div class="section-header fade-in">
+                <h2>Ihr Essen. Ihr Anrichten. Unsere Pflanzen.</h2>
+            </div>
+            <div class="use-case-grid">
+                <div class="use-case-card fade-in">
+                    <div class="use-case-image">
+                        <img src="../assets/images/stock/salmon-greens.jpg" alt="Lachsfilet mit frischen Kräutern">
                     </div>
-                    <div class="problem-item">
-                        <span class="problem-number">2</span>
-                        <h3>Unzuverlässige Lieferung</h3>
-                        <p>Wenn verfügbar, variieren Qualität und Frische. Schwer, eine Speisekarte darauf aufzubauen.</p>
+                    <div class="use-case-overlay">
+                        <h3 class="use-case-title">Auf Proteinen</h3>
+                        <p class="use-case-description">Frischer Kontrast zu reichhaltigem Fleisch und Fisch. Fügt Farbe und Textur hinzu.</p>
                     </div>
-                    <div class="problem-item">
-                        <span class="problem-number">3</span>
-                        <h3>Kurze Haltbarkeit</h3>
-                        <p>Pflanzen reisen weit, lagern lange. Bis sie ankommen, läuft die Uhr bereits.</p>
+                </div>
+                <div class="use-case-card fade-in">
+                    <div class="use-case-image">
+                        <img src="../assets/images/stock/salad-composed.jpg" alt="Eleganter komponierter Salat mit frischen Kräutern">
+                    </div>
+                    <div class="use-case-overlay">
+                        <h3 class="use-case-title">Auf komponierten Salaten</h3>
+                        <p class="use-case-description">Schichten Sie Aromen und Texturen. Mehrere Sorten in einem Gericht.</p>
+                    </div>
+                </div>
+                <div class="use-case-card fade-in">
+                    <div class="use-case-image">
+                        <img src="../assets/images/food/sweet micro.png" alt="Erdbeertorte mit frischen Microgreens">
+                    </div>
+                    <div class="use-case-overlay">
+                        <h3 class="use-case-title">Auf Desserts</h3>
+                        <p class="use-case-description">Unerwartete grüne Elemente. Shiso und Amaranth funktionieren wunderbar.</p>
+                    </div>
+                </div>
+                <div class="use-case-card fade-in">
+                    <div class="use-case-image">
+                        <img src="../assets/images/food/Screenshot_20250114_215822_Instagram.jpg" alt="Microgreens als Garnitur auf professionellem Teller">
+                    </div>
+                    <div class="use-case-overlay">
+                        <h3 class="use-case-title">Als Garnitur oder Hauptelement</h3>
+                        <p class="use-case-description">Letzter Schliff oder zentrales Element. Sie entscheiden die Rolle.</p>
                     </div>
                 </div>
             </div>
-        </section>
+        </div>
+    </section>
 
-        <!-- Solution Section -->
-        <section class="section section-bordered">
-            <div class="container">
-                <p class="section-label">Die Lösung</p>
-                <h2>Ein wöchentlicher Rhythmus für Ihre Küche.</h2>
-
-                <div class="solution-content">
-                    <div class="solution-text">
-                        <p class="solution-lead">Belarro züchtet Pflanzen, die es nicht im Supermarkt gibt. Alles wird auf Bestellung gezüchtet und in einem konstanten wöchentlichen Rhythmus geliefert.</p>
-
-                        <ul class="checklist">
-                            <li>Pflanzen, die nicht über Standardvertrieb erhältlich sind</li>
-                            <li>Auf Erde gezüchtet, nicht auf hydroponischem Schwamm</li>
-                            <li>Frisch geerntet, direkt geliefert</li>
-                            <li>Für echten Service konzipiert, nicht für Transport</li>
-                            <li>Konstante wöchentliche Lieferung zum Planen</li>
-                        </ul>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <!-- How It Works -->
-        <section class="section">
-            <div class="container">
-                <p class="section-label">So funktioniert es</p>
-                <h2>Einmal einrichten. Läuft von selbst.</h2>
-
-                <div class="steps-vertical">
-                    <div class="step-v">
-                        <div class="step-v-number">1</div>
-                        <div class="step-v-line"></div>
-                        <div class="step-v-content">
-                            <h3>Sagen Sie uns was Sie brauchen</h3>
-                            <p>Sie wählen Sorten und Mengen. Dauert 5 Minuten.</p>
-                        </div>
-                    </div>
-                    <div class="step-v">
-                        <div class="step-v-number">2</div>
-                        <div class="step-v-line"></div>
-                        <div class="step-v-content">
-                            <h3>Wir züchten auf Bestellung</h3>
-                            <p>Wir säen nach Ihrer Bestellung. Kein Lager. Keine Reste.</p>
-                        </div>
-                    </div>
-                    <div class="step-v">
-                        <div class="step-v-number">3</div>
-                        <div class="step-v-line"></div>
-                        <div class="step-v-content">
-                            <h3>Wöchentliche Lieferung beginnt</h3>
-                            <p>Gleicher Tag, gleiche Zeit, gleiche Mengen. Konstanter Rhythmus.</p>
-                        </div>
-                    </div>
-                    <div class="step-v">
-                        <div class="step-v-number">4</div>
-                        <div class="step-v-content">
-                            <h3>Ändern nur wenn nötig</h3>
-                            <p>Neue Speisekarte? Neue Saison? Sagen Sie Bescheid. Sonst läuft alles weiter.</p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <!-- Anchor Statement -->
-        <section class="section section-anchor">
-            <div class="container">
-                <p class="anchor-statement">Neue Pflanzen. Keine zusätzliche Arbeit.</p>
-                <p class="anchor-supporting">Konstanz zuerst. Innovation wenn sie passt.</p>
-            </div>
-        </section>
-
-        <!-- Categories Section -->
-        <section class="section">
-            <div class="container">
-                <p class="section-label">Was wir züchten</p>
-                <h2 data-count-text="varieties">Drei Kategorien. 24+ Sorten.</h2>
-
-                <div class="varieties-showcase homepage-varieties-showcase"
-                    style="margin-top: 32px; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));">
-                    <!-- Products loaded dynamically from Supabase -->
-                </div>
-
-                <div class="mt-lg">
-                    <a href="/de/varieties.html" class="btn btn-secondary">Alle Sorten ansehen</a>
-                </div>
-            </div>
-        </section>
-
-        <!-- Trust Section -->
-        <section class="section section-dark">
-            <div class="container">
-                <p class="section-label">Warum Belarro</p>
+    <!-- Why Belarro -->
+    <section class="why-belarro">
+        <div class="container">
+            <div class="section-label fade-in">Warum Belarro</div>
+            <div class="section-header fade-in">
                 <h2>Für professionelle Küchen gebaut.</h2>
-
-                <div class="trust-grid">
-                    <div class="trust-item">
-                        <h3>Keine Mindestbestellung</h3>
-                        <p>Bestellen Sie was Sie brauchen. Skalieren Sie frei hoch oder runter.</p>
-                    </div>
-                    <div class="trust-item">
-                        <h3>Keine Liefergebühren</h3>
-                        <p>Wöchentliche Lieferung inklusive. Keine Zuschläge.</p>
-                    </div>
-                    <div class="trust-item">
-                        <h3>10 Tage Haltbarkeit</h3>
-                        <p>Frisch geerntet, direkt geliefert. Hält länger als Großhandel.</p>
-                    </div>
-                    <div class="trust-item">
-                        <h3>Auf Erde gezüchtet</h3>
-                        <p>Echte Erde, nicht hydroponischer Schwamm. Besserer Geschmack, bessere Textur.</p>
-                    </div>
-                    <div class="trust-item">
-                        <h3>In Berlin</h3>
-                        <p>Kurze Wege. Von der Farm in die Küche in Stunden, nicht Tagen.</p>
-                    </div>
-                    <div class="trust-item">
-                        <h3>Flexible Änderungen</h3>
-                        <p>Neue Speisekarte? Sagen Sie Bescheid. Änderungen gelten ab nächstem Zyklus.</p>
-                    </div>
+            </div>
+            <div class="why-grid">
+                <div class="why-item fade-in">
+                    <h4>Keine Mindestbestellung</h4>
+                    <p>Bestellen Sie was Sie brauchen. Skalieren Sie frei hoch oder runter. Testen Sie neue Sorten ohne Verpflichtung.</p>
+                </div>
+                <div class="why-item fade-in">
+                    <h4>Keine Liefergebühren</h4>
+                    <p>Wöchentliche Lieferung inklusive. Keine Zuschläge. Keine versteckten Kosten.</p>
+                </div>
+                <div class="why-item fade-in">
+                    <h4>10 Tage Haltbarkeit</h4>
+                    <p>Frisch geerntet, direkt geliefert. Hält länger als Großhandel. Planen Sie Ihre Speisekarte damit.</p>
+                </div>
+                <div class="why-item fade-in">
+                    <h4>Auf Erde gezüchtet</h4>
+                    <p>Echtes Erdsubstrat, nicht hydroponischer Schwamm. Besserer Geschmack, bessere Textur, stärkere Wurzeln.</p>
+                </div>
+                <div class="why-item fade-in">
+                    <h4>In Berlin</h4>
+                    <p>Kurze Wege. Von der Farm in die Küche in Stunden, nicht Tagen. Kein langer Transport, kein Kältekettenstress.</p>
+                </div>
+                <div class="why-item fade-in">
+                    <h4>Flexible Änderungen</h4>
+                    <p>Speisekarte geändert? Sagen Sie Bescheid. Änderungen gelten ab nächstem Zyklus. Kein Papierkram.</p>
                 </div>
             </div>
-        </section>
+        </div>
+    </section>
 
-        <!-- Final CTA -->
-        <section class="section section-cta-final">
-            <div class="container">
-                <h2>Starten Sie Ihre wöchentliche Lieferung</h2>
-                <p>Einmal einrichten. Ändern wenn sinnvoll.</p>
-                <div class="cta-actions">
-                    <a href="/de/start.html" class="btn btn-primary btn-large">Wöchentliche Lieferung starten</a>
-                    <a href="/de/start.html?intent=samples" class="btn btn-secondary btn-large">Erst Proben anfordern</a>
-                </div>
-                <p class="cta-note">Keine Verpflichtung. Kein Minimum. Jederzeit kündbar.</p>
+    <!-- How to Start -->
+    <section class="how-to-start">
+        <div class="container">
+            <div class="section-label fade-in">Wie starten</div>
+            <div class="section-header fade-in">
+                <h2>Drei Schritte. Dann läuft es.</h2>
             </div>
-        </section>
+            <div class="steps-grid">
+                <div class="step-card fade-in">
+                    <div class="step-number">1</div>
+                    <h4>Kostenlose Proben anfordern</h4>
+                    <p>Wir bringen Proben in Ihre Küche.</p>
+                </div>
+                <div class="step-card fade-in">
+                    <div class="step-number">2</div>
+                    <h4>Wöchentliche Bestellung festlegen</h4>
+                    <p>Sorten wählen. Dauert 5 Minuten.</p>
+                </div>
+                <div class="step-card fade-in">
+                    <div class="step-number">3</div>
+                    <h4>Wir liefern, Sie kreieren</h4>
+                    <p>Gleicher Tag, gleiche Zeit, gleiche Qualität.</p>
+                </div>
+            </div>
+            <div class="steps-cta fade-in">
+                <a href="/de/start.html" class="btn btn-primary">Proben anfordern</a>
+            </div>
+        </div>
+    </section>
 
-    </main>
+    <!-- Final Anchor -->
+    <section class="final-anchor">
+        <div class="container">
+            <div class="anchor-content">
+                <p class="anchor-statement fade-in">Wir züchten für Köche, denen Frische, Konsistenz und Kontrolle wichtig sind.</p>
+                <p class="anchor-supporting fade-in">Nicht mehr, nicht weniger.</p>
+                <div class="anchor-cta fade-in">
+                    <a href="/de/start.html" class="btn btn-primary">Proben anfordern</a>
+                    <a href="/de/start.html?intent=visit" class="btn btn-outline-dark">Farmbesuch buchen</a>
+                </div>
+            </div>
+        </div>
+    </section>
 
     <!-- Footer -->
-    <footer class="footer">
-        <div class="container-wide">
-            <div class="footer-content">
+    <footer>
+        <div class="container">
+            <div class="footer-top">
                 <div class="footer-brand">
-                    <span class="logo-text">BELARRO</span>
-                    <p>Neue Pflanzen für professionelle Küchen.</p>
+                    <a href="/de/" class="logo">BELARRO<span class="logo-dots">...</span></a>
+                    <p class="footer-tagline">Neue Pflanzen für professionelle Küchen.</p>
                     <p class="footer-location">Berlin, Deutschland</p>
                 </div>
-                <nav class="footer-nav">
-                    <div class="footer-col">
-                        <h4>Produkt</h4>
-                        <a href="/de/varieties.html">Sorten</a>
-                        <a href="/de/start.html">Wöchentliche Lieferung</a>
-                        <a href="/de/start.html?intent=samples">Proben anfordern</a>
-                    </div>
-                    <div class="footer-col">
-                        <h4>Unternehmen</h4>
-                        <a href="/de/about.html">Über uns</a>
-                        <a href="/de/sustainability.html">Nachhaltigkeit</a>
-                        <a href="/de/contact.html">Kontakt</a>
-                    </div>
-                    <div class="footer-col">
-                        <h4>Rechtliches</h4>
-                        <a href="/de/impressum.html">Impressum</a>
-                        <a href="/de/privacy.html">Datenschutz</a>
-                    </div>
-                    <div class="footer-col">
-                        <h4>Kontakt</h4>
-                        <a href="mailto:hello@belarro.com">hello@belarro.com</a>
-                        <a href="tel:+4915906442264">+49 1590 6442264</a>
-                    </div>
-                </nav>
+                <div class="footer-column">
+                    <h5>Produkt</h5>
+                    <ul>
+                        <li><a href="/de/varieties.html">Sorten</a></li>
+                        <li><a href="/de/start.html">Proben anfordern</a></li>
+                        <li><a href="/de/start.html?intent=visit">Besuch buchen</a></li>
+                    </ul>
+                </div>
+                <div class="footer-column">
+                    <h5>Unternehmen</h5>
+                    <ul>
+                        <li><a href="/de/about.html">Über uns</a></li>
+                        <li><a href="/de/sustainability.html">Nachhaltigkeit</a></li>
+                        <li><a href="/de/contact.html">Kontakt</a></li>
+                    </ul>
+                </div>
+                <div class="footer-column">
+                    <h5>Rechtliches</h5>
+                    <ul>
+                        <li><a href="/de/impressum.html">Impressum</a></li>
+                        <li><a href="/de/privacy.html">Datenschutz</a></li>
+                    </ul>
+                </div>
+                <div class="footer-column">
+                    <h5>Kontakt</h5>
+                    <ul>
+                        <li><a href="mailto:hello@belarro.com">hello@belarro.com</a></li>
+                        <li><a href="tel:+4915906442264">+49 1590 6442264</a></li>
+                    </ul>
+                </div>
             </div>
             <div class="footer-bottom">
-                <p>&copy; 2025 Citfarm UG. Alle Rechte vorbehalten.</p>
+                <div class="footer-copyright">&copy; 2025 Citfarm UG. Belarro ist eine Marke der Citfarm UG.</div>
+                <div class="footer-brand-info">Made in Berlin</div>
             </div>
         </div>
     </footer>
 
-    <script src="../js/main.js?v=4"></script>
-    <script src="../js/counter.js?v=4"></script>
-    <script src="../js/products-home-de.js?v=4"></script>
+    <script src="../js/main.js"></script>
+    <script src="../js/counter.js"></script>
+    <script src="../js/products-home-de.js"></script>
 </body>
 </html>

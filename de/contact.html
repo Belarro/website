@@ -22,30 +22,23 @@
     <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;500;600;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Archivo:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 
     <!-- Styles -->
     <link rel="stylesheet" href="../css/styles.css">
 </head>
 <body>
     <!-- Header -->
-    <header class="header">
-        <div class="header-container">
-            <a href="/de/" class="logo" aria-label="BELARRO Startseite">
-                <span class="logo-text">BELARRO</span>
-                <span class="logo-dots">
-                    <span class="dot"></span>
-                    <span class="dot"></span>
-                    <span class="dot"></span>
-                </span>
-            </a>
-            <nav class="nav-desktop">
+    <header id="header">
+        <div class="header-content">
+            <a href="/de/" class="logo">BELARRO<span class="logo-dots">...</span></a>
+            <nav>
                 <a href="/de/varieties.html">Sorten</a>
                 <a href="/de/about.html">Über uns</a>
-                <a href="/de/contact.html" class="active">Kontakt</a>
+                <a href="/de/contact.html">Kontakt</a>
                 <a href="/contact.html" class="lang-switch">EN</a>
+                <a href="/de/start.html" class="btn btn-primary">Proben anfordern</a>
             </nav>
-            <a href="/de/start.html" class="btn btn-primary header-cta">Wöchentliche Lieferung</a>
             <button class="nav-toggle" aria-label="Navigation umschalten">
                 <span></span>
                 <span></span>
@@ -55,124 +48,134 @@
     </header>
 
     <!-- Mobile Navigation -->
-    <nav class="nav-mobile">
+    <div class="nav-mobile">
         <a href="/de/varieties.html">Sorten</a>
         <a href="/de/about.html">Über uns</a>
         <a href="/de/contact.html">Kontakt</a>
-        <a href="/de/start.html" class="btn btn-primary">Wöchentliche Lieferung</a>
+        <a href="/de/start.html" class="btn btn-primary">Proben anfordern</a>
         <a href="/contact.html" class="lang-switch">English</a>
-    </nav>
+    </div>
 
-    <main>
-        <!-- Hero Section -->
-        <section class="page-hero">
-            <div class="container">
-                <p class="section-label">Kontakt aufnehmen</p>
-                <h1>Kontakt</h1>
-                <p class="page-hero-subtitle">Fragen zur wöchentlichen Lieferung? Nutzen Sie das <a href="/de/start.html" style="text-decoration: underline; text-underline-offset: 3px;">Einrichtungsformular</a>. Für alles andere erreichen Sie uns unten.</p>
-            </div>
-        </section>
+    <!-- Page Header -->
+    <section class="page-header">
+        <div class="container">
+            <p class="section-label fade-in">Kontakt aufnehmen</p>
+            <h1 class="fade-in">Kontakt</h1>
+            <p class="page-subtitle fade-in">Fragen zur wöchentlichen Lieferung? Nutzen Sie das Einrichtungsformular. Für alles andere erreichen Sie uns unten.</p>
+        </div>
+    </section>
 
-        <!-- Contact Content -->
-        <section class="section">
-            <div class="container-wide">
-                <div class="contact-grid">
-                    <!-- Contact Info -->
-                    <div class="contact-info">
-                        <div class="contact-block">
-                            <h3>E-Mail</h3>
-                            <a href="mailto:hello@belarro.com">hello@belarro.com</a>
-                        </div>
-
-                        <div class="contact-block">
-                            <h3>Telefon</h3>
-                            <a href="tel:+4915906442264">+49 1590 6442264</a>
-                        </div>
-
-                        <div class="contact-block">
-                            <h3>Adresse</h3>
-                            <p>Hufelandstr. 42<br>10407 Berlin</p>
-                        </div>
-
-                        <div class="contact-block">
-                            <h3>Öffnungszeiten</h3>
-                            <p>Montag — Freitag<br>9:00 — 17:00</p>
-                        </div>
-                    </div>
-
-                    <!-- Contact Form -->
-                    <div class="contact-form">
-                        <h2>Nachricht senden</h2>
-                        <p>Wir antworten in der Regel innerhalb von 24 Stunden.</p>
-                        <form id="contact-form" name="contact-de" method="POST" data-netlify="true" netlify-honeypot="bot-field">
-                            <input type="hidden" name="bot-field">
-
-                            <div class="form-row">
-                                <div class="form-group">
-                                    <label class="form-label" for="name">Name</label>
-                                    <input type="text" id="name" name="name" class="form-input" placeholder="Ihr Name" required>
-                                </div>
-
-                                <div class="form-group">
-                                    <label class="form-label" for="email">E-Mail</label>
-                                    <input type="email" id="email" name="email" class="form-input" placeholder="ihre@email.com" required>
-                                </div>
-                            </div>
-
-                            <div class="form-group">
-                                <label class="form-label" for="subject">Betreff <span class="form-label-optional">(optional)</span></label>
-                                <input type="text" id="subject" name="subject" class="form-input" placeholder="Worum geht es?">
-                            </div>
-
-                            <div class="form-group">
-                                <label class="form-label" for="message">Nachricht</label>
-                                <textarea id="message" name="message" class="form-textarea" placeholder="Ihre Nachricht..." required></textarea>
-                            </div>
-
-                            <button type="submit" class="btn btn-primary form-submit">Nachricht senden</button>
-                        </form>
-                    </div>
-                </div>
-            </div>
-        </section>
-    </main>
-
-    <!-- Footer -->
-    <footer class="footer">
+    <!-- Contact Section -->
+    <section class="contact-section">
         <div class="container-wide">
-            <div class="footer-content">
-                <div class="footer-brand">
-                    <span class="logo-text">BELARRO</span>
-                    <p>Neue Pflanzen für professionelle Küchen.</p>
-                    <p class="footer-location">Berlin, Deutschland</p>
-                </div>
-                <nav class="footer-nav">
-                    <div class="footer-col">
-                        <h4>Produkt</h4>
-                        <a href="/de/varieties.html">Sorten</a>
-                        <a href="/de/start.html">Wöchentliche Lieferung</a>
-                        <a href="/de/start.html?intent=samples">Proben anfordern</a>
-                    </div>
-                    <div class="footer-col">
-                        <h4>Unternehmen</h4>
-                        <a href="/de/about.html">Über uns</a>
-                        <a href="/de/sustainability.html">Nachhaltigkeit</a>
-                        <a href="/de/contact.html">Kontakt</a>
-                    </div>
-                    <div class="footer-col">
-                        <h4>Rechtliches</h4>
-                        <a href="/de/impressum.html">Impressum</a>
-                        <a href="/de/privacy.html">Datenschutz</a>
-                    </div>
-                    <div class="footer-col">
-                        <h4>Kontakt</h4>
+            <div class="contact-grid">
+                <!-- Contact Info -->
+                <div class="contact-info">
+                    <div class="contact-block fade-in">
+                        <h3>E-Mail</h3>
                         <a href="mailto:hello@belarro.com">hello@belarro.com</a>
+                    </div>
+
+                    <div class="contact-block fade-in">
+                        <h3>Telefon</h3>
                         <a href="tel:+4915906442264">+49 1590 6442264</a>
                     </div>
-                </nav>
+
+                    <div class="contact-block fade-in">
+                        <h3>Standort</h3>
+                        <p>Berlin, Deutschland</p>
+                    </div>
+
+                    <div class="contact-block fade-in">
+                        <h3>Antwortzeit</h3>
+                        <p>Wir antworten innerhalb von 24 Stunden</p>
+                    </div>
+
+                    <div class="quick-links fade-in">
+                        <a href="/de/start.html?intent=samples">Proben anfordern →</a>
+                        <a href="/de/start.html?intent=visit">Besuch buchen →</a>
+                    </div>
+                </div>
+
+                <!-- Contact Form -->
+                <div class="contact-form-wrapper fade-in">
+                    <h2>Nachricht senden</h2>
+                    <p class="form-intro">Wir antworten in der Regel innerhalb von 24 Stunden.</p>
+                    <form id="contact-form">
+                        <input type="hidden" name="bot-field">
+
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label class="form-label" for="name">Name</label>
+                                <input type="text" id="name" name="name" class="form-input" placeholder="Ihr Name" required>
+                            </div>
+
+                            <div class="form-group">
+                                <label class="form-label" for="email">E-Mail</label>
+                                <input type="email" id="email" name="email" class="form-input" placeholder="ihre@email.com" required>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="form-label" for="subject">Betreff <span class="form-label-optional">(optional)</span></label>
+                            <input type="text" id="subject" name="subject" class="form-input" placeholder="Worum geht es?">
+                        </div>
+
+                        <div class="form-group">
+                            <label class="form-label" for="message">Nachricht</label>
+                            <textarea id="message" name="message" class="form-textarea" placeholder="Ihre Nachricht..." required></textarea>
+                        </div>
+
+                        <button type="submit" class="btn btn-primary form-submit">Nachricht senden</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-top">
+                <div class="footer-brand">
+                    <a href="/de/" class="logo">BELARRO<span class="logo-dots">...</span></a>
+                    <p class="footer-tagline">Neue Pflanzen für professionelle Küchen.</p>
+                    <p class="footer-location">Berlin, Deutschland</p>
+                </div>
+                <div class="footer-column">
+                    <h5>Produkt</h5>
+                    <ul>
+                        <li><a href="/de/varieties.html">Sorten</a></li>
+                        <li><a href="/de/start.html">Proben anfordern</a></li>
+                        <li><a href="/de/start.html?intent=visit">Besuch buchen</a></li>
+                    </ul>
+                </div>
+                <div class="footer-column">
+                    <h5>Unternehmen</h5>
+                    <ul>
+                        <li><a href="/de/about.html">Über uns</a></li>
+                        <li><a href="/de/sustainability.html">Nachhaltigkeit</a></li>
+                        <li><a href="/de/contact.html">Kontakt</a></li>
+                    </ul>
+                </div>
+                <div class="footer-column">
+                    <h5>Rechtliches</h5>
+                    <ul>
+                        <li><a href="/de/impressum.html">Impressum</a></li>
+                        <li><a href="/de/privacy.html">Datenschutz</a></li>
+                    </ul>
+                </div>
+                <div class="footer-column">
+                    <h5>Kontakt</h5>
+                    <ul>
+                        <li><a href="mailto:hello@belarro.com">hello@belarro.com</a></li>
+                        <li><a href="tel:+4915906442264">+49 1590 6442264</a></li>
+                    </ul>
+                </div>
             </div>
             <div class="footer-bottom">
-                <p>&copy; 2025 Citfarm UG. Alle Rechte vorbehalten.</p>
+                <div class="footer-copyright">&copy; 2025 Citfarm UG. Belarro ist eine Marke der Citfarm UG.</div>
+                <div class="footer-brand-info">Made in Berlin</div>
             </div>
         </div>
     </footer>
@@ -218,7 +221,6 @@
 
                 if (!response.ok) throw new Error('Failed to submit');
 
-                // Show success state
                 form.innerHTML = `
                     <div class="form-success">
                         <div class="form-success-icon">
@@ -231,7 +233,6 @@
                     </div>
                 `;
 
-                // Redirect to homepage after 3 seconds
                 setTimeout(() => {
                     window.location.href = '/de/';
                 }, 3000);

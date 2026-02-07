@@ -76,22 +76,22 @@
                 <div class="hero-stats-grid">
                     <div class="hero-stat">
                         <div class="hero-stat-accent"></div>
-                        <div class="hero-stat-number" data-count-to="24" data-count-suffix="+" data-count="varieties">24+</div>
+                        <div class="hero-stat-number">24+</div>
                         <div class="hero-stat-label">Sorten</div>
                     </div>
                     <div class="hero-stat">
                         <div class="hero-stat-accent"></div>
-                        <div class="hero-stat-number" data-count-to="10">10</div>
+                        <div class="hero-stat-number">10</div>
                         <div class="hero-stat-label">Tage Haltbarkeit</div>
                     </div>
                     <div class="hero-stat">
                         <div class="hero-stat-accent"></div>
-                        <div class="hero-stat-number" data-count-to="0">0</div>
+                        <div class="hero-stat-number">0</div>
                         <div class="hero-stat-label">Mindestbestellung</div>
                     </div>
                     <div class="hero-stat">
                         <div class="hero-stat-accent"></div>
-                        <div class="hero-stat-number" data-count-to="0">0</div>
+                        <div class="hero-stat-number">0</div>
                         <div class="hero-stat-label">Lieferkosten</div>
                     </div>
                 </div>
@@ -157,7 +157,7 @@
         <div class="container">
             <div class="section-label fade-in">Was gerade wächst</div>
             <div class="section-header fade-in">
-                <h2 data-count-text="varieties">Frische Microgreens und Spezialitäten für Köche in Berlin.</h2>
+                <h2>Frische Microgreens und Spezialitäten für Köche in Berlin.</h2>
             </div>
             <div class="product-grid homepage-varieties-showcase">
                 <!-- Products loaded dynamically from Supabase -->
@@ -347,89 +347,6 @@
     </footer>
 
     <script src="../js/main.js"></script>
-    <script>
-    // Count-up animation
-    (function () {
-        var SUPABASE_URL = 'https://gcgscmtjesyiziebutzw.supabase.co';
-        var SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImdjZ3NjbXRqZXN5aXppZWJ1dHp3Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzAwNDQwMjgsImV4cCI6MjA4NTYyMDAyOH0.Ikf7mpFUKPJx9wA827xHTxSV2u5JpWCPw7j6wiKbgN0';
-        var counted = false;
-
-        function animateCountUp(el, delay) {
-            var target = parseInt(el.getAttribute('data-count-to'), 10);
-            var suffix = el.getAttribute('data-count-suffix') || '';
-            var duration = target === 0 ? 400 : 1600;
-            el.textContent = '0' + suffix;
-            setTimeout(function () {
-                if (target === 0) return;
-                var start = performance.now();
-                function step(now) {
-                    var elapsed = now - start;
-                    var progress = Math.min(elapsed / duration, 1);
-                    var eased = 1 - Math.pow(1 - progress, 3);
-                    el.textContent = Math.round(eased * target) + suffix;
-                    if (progress < 1) requestAnimationFrame(step);
-                }
-                requestAnimationFrame(step);
-            }, delay);
-        }
-
-        function startCounting() {
-            if (counted) return;
-            counted = true;
-            var els = document.querySelectorAll('[data-count-to]');
-            if (!els.length) return;
-            var reducedMotion = false;
-            try { reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches; } catch(e) {}
-            if (reducedMotion) {
-                for (var i = 0; i < els.length; i++) {
-                    els[i].textContent = els[i].getAttribute('data-count-to') + (els[i].getAttribute('data-count-suffix') || '');
-                }
-            } else {
-                for (var i = 0; i < els.length; i++) {
-                    animateCountUp(els[i], 100 + i * 120);
-                }
-            }
-        }
-
-        // Wait for hero fade-in to complete before starting count animation
-        function onVisible() {
-            setTimeout(startCounting, 500);
-        }
-
-        var heroContent = document.querySelector('.hero-content');
-        if (heroContent && heroContent.classList.contains('fade-in')) {
-            if (heroContent.classList.contains('visible')) {
-                onVisible();
-            } else {
-                var observer = new MutationObserver(function () {
-                    if (heroContent.classList.contains('visible')) {
-                        observer.disconnect();
-                        onVisible();
-                    }
-                });
-                observer.observe(heroContent, { attributes: true, attributeFilter: ['class'] });
-                setTimeout(function () { observer.disconnect(); startCounting(); }, 4000);
-            }
-        } else {
-            startCounting();
-        }
-
-        // Fetch live product count
-        try {
-            fetch(SUPABASE_URL + '/rest/v1/products?select=id&availability_status=neq.hidden', {
-                headers: { 'apikey': SUPABASE_ANON_KEY, 'Authorization': 'Bearer ' + SUPABASE_ANON_KEY }
-            }).then(function (r) {
-                if (r.ok) return r.json();
-            }).then(function (products) {
-                if (!products) return;
-                var count = products.length;
-                document.querySelectorAll('[data-count-text="varieties"]').forEach(function (el) {
-                    el.textContent = 'Drei Kategorien. ' + count + '+ Sorten.';
-                });
-            }).catch(function () {});
-        } catch(e) {}
-    })();
-    </script>
     <script src="../js/products-home-de.js"></script>
 </body>
 </html>

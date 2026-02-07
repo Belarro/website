@@ -2,6 +2,8 @@
  * BELARRO — Dynamic product counter + count-up animation
  */
 
+(function () {
+
 const SUPABASE_URL = 'https://gcgscmtjesyiziebutzw.supabase.co'
 const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImdjZ3NjbXRqZXN5aXppZWJ1dHp3Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzAwNDQwMjgsImV4cCI6MjA4NTYyMDAyOH0.Ikf7mpFUKPJx9wA827xHTxSV2u5JpWCPw7j6wiKbgN0'
 
@@ -93,9 +95,14 @@ async function updateProductCount() {
     }
 }
 
-document.addEventListener('DOMContentLoaded', async function () {
-    // Fetch live count first so varieties has the real number
-    await updateProductCount()
-    // Then animate all stats
-    initCountUpAnimation()
-})
+// Run immediately — script is loaded at bottom of body, DOM is ready
+// Fetch live count, then animate. If fetch fails, animate with defaults.
+updateProductCount()
+    .then(function () {
+        initCountUpAnimation()
+    })
+    .catch(function () {
+        initCountUpAnimation()
+    })
+
+})()

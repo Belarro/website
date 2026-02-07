@@ -363,7 +363,68 @@
     </footer>
 
     <script src="js/main.js"></script>
-    <script src="js/counter.js"></script>
+    <script>
+    // Count-up animation
+    (function () {
+        var SUPABASE_URL = 'https://gcgscmtjesyiziebutzw.supabase.co';
+        var SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImdjZ3NjbXRqZXN5aXppZWJ1dHp3Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzAwNDQwMjgsImV4cCI6MjA4NTYyMDAyOH0.Ikf7mpFUKPJx9wA827xHTxSV2u5JpWCPw7j6wiKbgN0';
+
+        function animateCountUp(el, delay) {
+            var target = parseInt(el.getAttribute('data-count-to'), 10);
+            var suffix = el.getAttribute('data-count-suffix') || '';
+            var duration = target === 0 ? 400 : 1400;
+            el.textContent = '0' + suffix;
+            setTimeout(function () {
+                if (target === 0) return;
+                var start = performance.now();
+                function step(now) {
+                    var elapsed = now - start;
+                    var progress = Math.min(elapsed / duration, 1);
+                    var eased = 1 - Math.pow(1 - progress, 3);
+                    el.textContent = Math.round(eased * target) + suffix;
+                    if (progress < 1) requestAnimationFrame(step);
+                }
+                requestAnimationFrame(step);
+            }, delay);
+        }
+
+        // Start animation right away with whatever values are in the HTML
+        var els = document.querySelectorAll('[data-count-to]');
+        if (els.length) {
+            var reducedMotion = false;
+            try { reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches; } catch(e) {}
+
+            if (reducedMotion) {
+                for (var i = 0; i < els.length; i++) {
+                    els[i].textContent = els[i].getAttribute('data-count-to') + (els[i].getAttribute('data-count-suffix') || '');
+                }
+            } else {
+                for (var i = 0; i < els.length; i++) {
+                    animateCountUp(els[i], 400 + i * 150);
+                }
+            }
+        }
+
+        // Separately, try to fetch live product count (updates the text, not the animation)
+        try {
+            fetch(SUPABASE_URL + '/rest/v1/products?select=id&availability_status=neq.hidden', {
+                headers: { 'apikey': SUPABASE_ANON_KEY, 'Authorization': 'Bearer ' + SUPABASE_ANON_KEY }
+            }).then(function (r) {
+                if (r.ok) return r.json();
+            }).then(function (products) {
+                if (!products) return;
+                var count = products.length;
+                var textEls = document.querySelectorAll('[data-count-text="varieties"]');
+                for (var i = 0; i < textEls.length; i++) {
+                    var isGerman = document.documentElement.lang === 'de';
+                    textEls[i].textContent = isGerman
+                        ? 'Drei Kategorien. ' + count + '+ Sorten.'
+                        : 'Three categories. ' + count + '+ varieties.';
+                }
+            }).catch(function () {});
+        } catch(e) {}
+    })();
+    </script>
     <script src="js/products-home.js"></script>
 </body>
 </html>

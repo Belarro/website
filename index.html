@@ -364,7 +364,7 @@
 
     <script src="js/main.js"></script>
     <script>
-    // Count-up animation
+    // Count-up animation — waits for hero fade-in to be visible first
     (function () {
         var SUPABASE_URL = 'https://gcgscmtjesyiziebutzw.supabase.co';
         var SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImdjZ3NjbXRqZXN5aXppZWJ1dHp3Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzAwNDQwMjgsImV4cCI6MjA4NTYyMDAyOH0.Ikf7mpFUKPJx9wA827xHTxSV2u5JpWCPw7j6wiKbgN0';
@@ -388,24 +388,52 @@
             }, delay);
         }
 
-        // Start animation right away with whatever values are in the HTML
-        var els = document.querySelectorAll('[data-count-to]');
-        if (els.length) {
+        function startCounting() {
+            var els = document.querySelectorAll('[data-count-to]');
+            if (!els.length) return;
             var reducedMotion = false;
             try { reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches; } catch(e) {}
-
             if (reducedMotion) {
                 for (var i = 0; i < els.length; i++) {
                     els[i].textContent = els[i].getAttribute('data-count-to') + (els[i].getAttribute('data-count-suffix') || '');
                 }
             } else {
                 for (var i = 0; i < els.length; i++) {
-                    animateCountUp(els[i], 400 + i * 150);
+                    animateCountUp(els[i], 200 + i * 150);
                 }
             }
         }
 
-        // Separately, try to fetch live product count (updates the text, not the animation)
+        // Wait for the hero section to become visible (fade-in adds .visible class)
+        var heroContent = document.querySelector('.hero-content');
+        if (heroContent && heroContent.classList.contains('fade-in')) {
+            // Watch for the .visible class to be added by main.js IntersectionObserver
+            var observer = new MutationObserver(function (mutations) {
+                for (var m = 0; m < mutations.length; m++) {
+                    if (heroContent.classList.contains('visible')) {
+                        observer.disconnect();
+                        startCounting();
+                        return;
+                    }
+                }
+            });
+            observer.observe(heroContent, { attributes: true, attributeFilter: ['class'] });
+            // Fallback: if already visible or observer doesn't fire within 3s
+            if (heroContent.classList.contains('visible')) {
+                observer.disconnect();
+                startCounting();
+            } else {
+                setTimeout(function () {
+                    observer.disconnect();
+                    startCounting();
+                }, 3000);
+            }
+        } else {
+            // No fade-in, just start immediately
+            startCounting();
+        }
+
+        // Separately, fetch live product count
         try {
             fetch(SUPABASE_URL + '/rest/v1/products?select=id&availability_status=neq.hidden', {
                 headers: { 'apikey': SUPABASE_ANON_KEY, 'Authorization': 'Bearer ' + SUPABASE_ANON_KEY }
@@ -414,13 +442,12 @@
             }).then(function (products) {
                 if (!products) return;
                 var count = products.length;
-                var textEls = document.querySelectorAll('[data-count-text="varieties"]');
-                for (var i = 0; i < textEls.length; i++) {
+                document.querySelectorAll('[data-count-text="varieties"]').forEach(function (el) {
                     var isGerman = document.documentElement.lang === 'de';
-                    textEls[i].textContent = isGerman
+                    el.textContent = isGerman
                         ? 'Drei Kategorien. ' + count + '+ Sorten.'
                         : 'Three categories. ' + count + '+ varieties.';
-                }
+                });
             }).catch(function () {});
         } catch(e) {}
     })();

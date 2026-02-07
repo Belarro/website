@@ -348,15 +348,16 @@
 
     <script src="../js/main.js"></script>
     <script>
-    // Count-up animation — waits for hero fade-in to be visible first
+    // Count-up animation
     (function () {
         var SUPABASE_URL = 'https://gcgscmtjesyiziebutzw.supabase.co';
         var SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImdjZ3NjbXRqZXN5aXppZWJ1dHp3Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzAwNDQwMjgsImV4cCI6MjA4NTYyMDAyOH0.Ikf7mpFUKPJx9wA827xHTxSV2u5JpWCPw7j6wiKbgN0';
+        var counted = false;
 
         function animateCountUp(el, delay) {
             var target = parseInt(el.getAttribute('data-count-to'), 10);
             var suffix = el.getAttribute('data-count-suffix') || '';
-            var duration = target === 0 ? 400 : 1400;
+            var duration = target === 0 ? 400 : 1600;
             el.textContent = '0' + suffix;
             setTimeout(function () {
                 if (target === 0) return;
@@ -373,6 +374,8 @@
         }
 
         function startCounting() {
+            if (counted) return;
+            counted = true;
             var els = document.querySelectorAll('[data-count-to]');
             if (!els.length) return;
             var reducedMotion = false;
@@ -383,38 +386,35 @@
                 }
             } else {
                 for (var i = 0; i < els.length; i++) {
-                    animateCountUp(els[i], 200 + i * 150);
+                    animateCountUp(els[i], 100 + i * 120);
                 }
             }
         }
 
-        // Wait for the hero section to become visible (fade-in adds .visible class)
+        // Wait for hero fade-in to complete before starting count animation
+        function onVisible() {
+            setTimeout(startCounting, 500);
+        }
+
         var heroContent = document.querySelector('.hero-content');
         if (heroContent && heroContent.classList.contains('fade-in')) {
-            var observer = new MutationObserver(function (mutations) {
-                for (var m = 0; m < mutations.length; m++) {
+            if (heroContent.classList.contains('visible')) {
+                onVisible();
+            } else {
+                var observer = new MutationObserver(function () {
                     if (heroContent.classList.contains('visible')) {
                         observer.disconnect();
-                        startCounting();
-                        return;
+                        onVisible();
                     }
-                }
-            });
-            observer.observe(heroContent, { attributes: true, attributeFilter: ['class'] });
-            if (heroContent.classList.contains('visible')) {
-                observer.disconnect();
-                startCounting();
-            } else {
-                setTimeout(function () {
-                    observer.disconnect();
-                    startCounting();
-                }, 3000);
+                });
+                observer.observe(heroContent, { attributes: true, attributeFilter: ['class'] });
+                setTimeout(function () { observer.disconnect(); startCounting(); }, 4000);
             }
         } else {
             startCounting();
         }
 
-        // Separately, fetch live product count
+        // Fetch live product count
         try {
             fetch(SUPABASE_URL + '/rest/v1/products?select=id&availability_status=neq.hidden', {
                 headers: { 'apikey': SUPABASE_ANON_KEY, 'Authorization': 'Bearer ' + SUPABASE_ANON_KEY }
@@ -424,10 +424,7 @@
                 if (!products) return;
                 var count = products.length;
                 document.querySelectorAll('[data-count-text="varieties"]').forEach(function (el) {
-                    var isGerman = document.documentElement.lang === 'de';
-                    el.textContent = isGerman
-                        ? 'Drei Kategorien. ' + count + '+ Sorten.'
-                        : 'Three categories. ' + count + '+ varieties.';
+                    el.textContent = 'Drei Kategorien. ' + count + '+ Sorten.';
                 });
             }).catch(function () {});
         } catch(e) {}

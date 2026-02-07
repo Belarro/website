@@ -416,12 +416,12 @@ footer {
 /* Hero */
 .hero {
     position: relative;
-    min-height: 100vh;
+    min-height: 92vh;
     display: flex;
     align-items: center;
     justify-content: center;
     color: var(--white);
-    padding: calc(var(--spacing-base) * 15) 0 calc(var(--spacing-base) * 10);
+    padding: calc(var(--spacing-base) * 12) 0 calc(var(--spacing-base) * 6);
 }
 
 /* Subpage hero - compact variant */
@@ -512,7 +512,7 @@ footer {
 .hero-lead {
     font-size: clamp(1.125rem, 2vw, 1.375rem);
     line-height: 1.6;
-    margin-bottom: calc(var(--spacing-base) * 5);
+    margin-bottom: calc(var(--spacing-base) * 4);
     opacity: 0.95;
     text-shadow: 0 1px 8px rgba(0, 0, 0, 0.25);
 }
@@ -521,15 +521,15 @@ footer {
     display: flex;
     gap: calc(var(--spacing-base) * 2);
     justify-content: center;
-    margin-bottom: calc(var(--spacing-base) * 8);
+    margin-bottom: calc(var(--spacing-base) * 4);
     flex-wrap: wrap;
 }
 
 .hero-cta .btn {
-    height: 64px;
-    padding: 0 calc(var(--spacing-base) * 5);
-    font-size: 1rem;
-    border-radius: 12px;
+    height: 52px;
+    padding: 0 calc(var(--spacing-base) * 4);
+    font-size: 0.9375rem;
+    border-radius: 10px;
 }
 
 /* Hero buttons: white primary, transparent outline secondary */
@@ -546,7 +546,7 @@ footer {
 .hero-stats {
     max-width: 1000px;
     margin: 0 auto;
-    padding: calc(var(--spacing-base) * 8) 0 0;
+    padding: calc(var(--spacing-base) * 4) 0 0;
 }
 
 .hero-stats-grid {

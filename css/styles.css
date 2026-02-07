@@ -267,7 +267,11 @@ header.scrolled .nav-toggle span {
 
 .logo-dots {
     color: var(--accent-green);
-    margin-left: 4px;
+    margin-left: 2px;
+    position: relative;
+    top: -0.35em;
+    font-size: 1.1em;
+    letter-spacing: 0.05em;
 }
 
 nav {
@@ -400,8 +404,8 @@ footer {
 
 .fade-in {
     opacity: 0;
-    transform: translateY(30px);
-    transition: opacity 0.6s ease, transform 0.6s ease;
+    transform: translateY(20px);
+    transition: opacity 0.4s ease, transform 0.4s ease;
 }
 
 .fade-in.visible {

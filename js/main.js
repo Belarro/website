@@ -166,23 +166,8 @@ document.addEventListener('DOMContentLoaded', function () {
             }
         }
 
-        const heroContent = document.querySelector('.hero-content');
-        if (heroContent && heroContent.classList.contains('fade-in')) {
-            if (heroContent.classList.contains('visible')) {
-                setTimeout(startCounting, 400);
-            } else {
-                const mo = new MutationObserver(function () {
-                    if (heroContent.classList.contains('visible')) {
-                        mo.disconnect();
-                        setTimeout(startCounting, 400);
-                    }
-                });
-                mo.observe(heroContent, { attributes: true, attributeFilter: ['class'] });
-                setTimeout(function () { mo.disconnect(); startCounting(); }, 4000);
-            }
-        } else {
-            startCounting();
-        }
+        // Start counting shortly after page load (allows hero fade-in to begin)
+        setTimeout(startCounting, 800);
     }
 
     // ========================================

@@ -130,6 +130,62 @@ document.addEventListener('DOMContentLoaded', function () {
     }
 
     // ========================================
+    // Hero Stats Count-Up Animation
+    // ========================================
+    const countEls = document.querySelectorAll('[data-count-to]');
+    if (countEls.length) {
+        let counted = false;
+
+        function animateCount(el, delay) {
+            const target = parseInt(el.getAttribute('data-count-to'), 10);
+            const suffix = el.getAttribute('data-count-suffix') || '';
+            el.textContent = '0' + suffix;
+            if (target === 0) return;
+            setTimeout(function () {
+                const duration = 1400;
+                const start = performance.now();
+                function step(now) {
+                    const progress = Math.min((now - start) / duration, 1);
+                    const eased = 1 - Math.pow(1 - progress, 3);
+                    el.textContent = Math.round(eased * target) + suffix;
+                    if (progress < 1) requestAnimationFrame(step);
+                }
+                requestAnimationFrame(step);
+            }, delay);
+        }
+
+        function startCounting() {
+            if (counted) return;
+            counted = true;
+            if (prefersReducedMotion.matches) {
+                countEls.forEach(el => {
+                    el.textContent = el.getAttribute('data-count-to') + (el.getAttribute('data-count-suffix') || '');
+                });
+            } else {
+                countEls.forEach((el, i) => animateCount(el, 100 + i * 120));
+            }
+        }
+
+        const heroContent = document.querySelector('.hero-content');
+        if (heroContent && heroContent.classList.contains('fade-in')) {
+            if (heroContent.classList.contains('visible')) {
+                setTimeout(startCounting, 400);
+            } else {
+                const mo = new MutationObserver(function () {
+                    if (heroContent.classList.contains('visible')) {
+                        mo.disconnect();
+                        setTimeout(startCounting, 400);
+                    }
+                });
+                mo.observe(heroContent, { attributes: true, attributeFilter: ['class'] });
+                setTimeout(function () { mo.disconnect(); startCounting(); }, 4000);
+            }
+        } else {
+            startCounting();
+        }
+    }
+
+    // ========================================
     // Language Preference
     // ========================================
     document.querySelectorAll('.lang-switch').forEach(link => {

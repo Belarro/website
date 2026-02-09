@@ -130,59 +130,6 @@ document.addEventListener('DOMContentLoaded', function () {
     }
 
     // ========================================
-    // Hero Stats Count-Up Animation
-    // ========================================
-    const countEls = document.querySelectorAll('[data-count-to]');
-    if (countEls.length) {
-        let counted = false;
-
-        function animateCount(el, delay) {
-            const target = parseInt(el.getAttribute('data-count-to'), 10);
-            const suffix = el.getAttribute('data-count-suffix') || '';
-            el.textContent = '0' + suffix;
-            if (target === 0) return;
-            setTimeout(function () {
-                const duration = 1600;
-                const start = performance.now();
-                function step(now) {
-                    const progress = Math.min((now - start) / duration, 1);
-                    const eased = 1 - Math.pow(1 - progress, 3);
-                    el.textContent = Math.round(eased * target) + suffix;
-                    if (progress < 1) requestAnimationFrame(step);
-                }
-                requestAnimationFrame(step);
-            }, delay);
-        }
-
-        function startCounting() {
-            if (counted) return;
-            counted = true;
-            if (prefersReducedMotion.matches) {
-                countEls.forEach(function (el) {
-                    el.textContent = el.getAttribute('data-count-to') + (el.getAttribute('data-count-suffix') || '');
-                });
-            } else {
-                countEls.forEach(function (el, i) { animateCount(el, 200 + i * 150); });
-            }
-        }
-
-        // Wait for hero fade-in to fully complete before counting
-        var heroContent = document.querySelector('.hero-content');
-        if (heroContent) {
-            heroContent.addEventListener('transitionend', function handler(e) {
-                if (e.propertyName === 'opacity') {
-                    heroContent.removeEventListener('transitionend', handler);
-                    startCounting();
-                }
-            });
-            // Fallback if transition already happened or doesn't fire
-            setTimeout(function () { startCounting(); }, 3000);
-        } else {
-            startCounting();
-        }
-    }
-
-    // ========================================
     // Language Preference
     // ========================================
     document.querySelectorAll('.lang-switch').forEach(link => {

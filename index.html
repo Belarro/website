@@ -115,6 +115,37 @@
             </div>
         </div>
     </section>
+    <script>
+    (function(){
+        var els = document.querySelectorAll('.hero-stat-number[data-count-to]');
+        if (!els.length) return;
+        var done = false;
+        function go() {
+            if (done) return;
+            done = true;
+            for (var i = 0; i < els.length; i++) {
+                (function(el, idx) {
+                    var target = parseInt(el.getAttribute('data-count-to'), 10);
+                    var suffix = el.getAttribute('data-count-suffix') || '';
+                    el.textContent = '0' + suffix;
+                    if (target === 0) return;
+                    setTimeout(function() {
+                        var dur = 1600, st = performance.now();
+                        function tick(now) {
+                            var p = Math.min((now - st) / dur, 1);
+                            var e = 1 - Math.pow(1 - p, 3);
+                            el.textContent = Math.round(e * target) + suffix;
+                            if (p < 1) requestAnimationFrame(tick);
+                        }
+                        requestAnimationFrame(tick);
+                    }, 200 + idx * 150);
+                })(els[i], i);
+            }
+        }
+        window.addEventListener('load', function() { setTimeout(go, 600); });
+        setTimeout(go, 4000);
+    })();
+    </script>
 
     <!-- Proof Strip -->
     <section class="proof-strip">
@@ -363,7 +394,7 @@
         </div>
     </footer>
 
-    <script src="js/main.js?v=3"></script>
+    <script src="js/main.js?v=4"></script>
     <script src="js/products-home.js"></script>
 </body>
 </html>

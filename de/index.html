@@ -30,6 +30,7 @@
 
     <!-- Styles -->
     <link rel="stylesheet" href="../css/styles.css">
+    <style>.hero-stat-number[data-count-to]{visibility:hidden}</style>
 </head>
 <body>
     <!-- Header -->
@@ -102,9 +103,10 @@
     (function(){
         var els = document.querySelectorAll('.hero-stat-number[data-count-to]');
         if (!els.length) return;
-        // Immediately set to 0 before browser paints
+        // Set to 0 and reveal
         for (var j = 0; j < els.length; j++) {
             els[j].textContent = '0' + (els[j].getAttribute('data-count-suffix') || '');
+            els[j].style.visibility = 'visible';
         }
         var done = false;
         function go() {

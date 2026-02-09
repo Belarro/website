@@ -142,7 +142,7 @@ document.addEventListener('DOMContentLoaded', function () {
             el.textContent = '0' + suffix;
             if (target === 0) return;
             setTimeout(function () {
-                const duration = 1400;
+                const duration = 1600;
                 const start = performance.now();
                 function step(now) {
                     const progress = Math.min((now - start) / duration, 1);
@@ -158,16 +158,28 @@ document.addEventListener('DOMContentLoaded', function () {
             if (counted) return;
             counted = true;
             if (prefersReducedMotion.matches) {
-                countEls.forEach(el => {
+                countEls.forEach(function (el) {
                     el.textContent = el.getAttribute('data-count-to') + (el.getAttribute('data-count-suffix') || '');
                 });
             } else {
-                countEls.forEach((el, i) => animateCount(el, 100 + i * 120));
+                countEls.forEach(function (el, i) { animateCount(el, 200 + i * 150); });
             }
         }
 
-        // Start counting shortly after page load (allows hero fade-in to begin)
-        setTimeout(startCounting, 800);
+        // Wait for hero fade-in to fully complete before counting
+        var heroContent = document.querySelector('.hero-content');
+        if (heroContent) {
+            heroContent.addEventListener('transitionend', function handler(e) {
+                if (e.propertyName === 'opacity') {
+                    heroContent.removeEventListener('transitionend', handler);
+                    startCounting();
+                }
+            });
+            // Fallback if transition already happened or doesn't fire
+            setTimeout(function () { startCounting(); }, 3000);
+        } else {
+            startCounting();
+        }
     }
 
     // ========================================

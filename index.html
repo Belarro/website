@@ -93,12 +93,12 @@
                 <div class="hero-stats-grid">
                     <div class="hero-stat">
                         <div class="hero-stat-accent"></div>
-                        <div class="hero-stat-number" data-count-to="24" data-count-suffix="+">0+</div>
+                        <div class="hero-stat-number" data-count-to="24" data-count-suffix="+">24+</div>
                         <div class="hero-stat-label">Varieties</div>
                     </div>
                     <div class="hero-stat">
                         <div class="hero-stat-accent"></div>
-                        <div class="hero-stat-number" data-count-to="10">0</div>
+                        <div class="hero-stat-number" data-count-to="10">10</div>
                         <div class="hero-stat-label">Days shelf life</div>
                     </div>
                     <div class="hero-stat">
@@ -119,6 +119,10 @@
     (function(){
         var els = document.querySelectorAll('.hero-stat-number[data-count-to]');
         if (!els.length) return;
+        // Immediately set to 0 before browser paints
+        for (var j = 0; j < els.length; j++) {
+            els[j].textContent = '0' + (els[j].getAttribute('data-count-suffix') || '');
+        }
         var done = false;
         function go() {
             if (done) return;
@@ -127,7 +131,6 @@
                 (function(el, idx) {
                     var target = parseInt(el.getAttribute('data-count-to'), 10);
                     var suffix = el.getAttribute('data-count-suffix') || '';
-                    el.textContent = '0' + suffix;
                     if (target === 0) return;
                     setTimeout(function() {
                         var dur = 1600, st = performance.now();

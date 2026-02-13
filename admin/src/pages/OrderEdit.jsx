@@ -166,8 +166,7 @@ export default function OrderEdit() {
     try {
       const result = await standingOrdersApi.upsert(kitchenId, orderItems)
       console.log('Save result:', result)
-      setSaveSuccess(true)
-      setTimeout(() => setSaveSuccess(false), 3000)
+      navigate('/orders')
     } catch (err) {
       console.error('Save error:', err)
       setError(err.message)

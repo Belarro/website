@@ -51,7 +51,13 @@ export default function Orders() {
       const product = products.find(p => p.id === item.product_id)
       return product ? product.name : 'Unknown'
     })
-    return { itemCount: order.items.length, totalQty, productNames }
+    const totalCost = order.items.reduce((sum, item) => {
+      const product = products.find(p => p.id === item.product_id)
+      if (!product || !product.prices) return sum
+      const unitPrice = product.prices[item.size] || 0
+      return sum + (unitPrice * item.quantity)
+    }, 0)
+    return { itemCount: order.items.length, totalQty, productNames, totalCost }
   }
 
   if (loading) {
@@ -112,11 +118,12 @@ export default function Orders() {
             <table className="table">
               <thead>
                 <tr>
+                  <th></th>
                   <th>Kitchen</th>
                   <th>Standing Order</th>
+                  <th>Weekly Cost</th>
                   <th>Last Updated</th>
                   <th>Status</th>
-                  <th className="text-right">Actions</th>
                 </tr>
               </thead>
               <tbody>
@@ -125,6 +132,11 @@ export default function Orders() {
                   const order = getStandingOrder(kitchen.id)
                   return (
                     <tr key={kitchen.id}>
+                      <td>
+                        <Link to={`/orders/${kitchen.id}`} className="btn btn-small btn-secondary">
+                          {summary.itemCount > 0 ? 'Edit Order' : 'Set Up Order'}
+                        </Link>
+                      </td>
                       <td>
                         <strong>{kitchen.kitchen_name}</strong>
                         {kitchen.contact_name && (
@@ -146,6 +158,13 @@ export default function Orders() {
                         )}
                       </td>
                       <td>
+                        {summary.totalCost > 0 ? (
+                          <span style={{ fontWeight: 600 }}>&euro;{summary.totalCost.toFixed(2)}</span>
+                        ) : (
+                          <span style={{ color: 'var(--color-gray-text)' }}>&mdash;</span>
+                        )}
+                      </td>
+                      <td>
                         {order ? (
                           <span style={{ fontSize: '13px' }}>
                             {new Date(order.updated_at).toLocaleDateString('en-GB', { day: 'numeric', month: 'short', year: 'numeric' })}
@@ -158,11 +177,6 @@ export default function Orders() {
                         <span className={`status status-${kitchen.status}`}>
                           {kitchen.status}
                         </span>
-                      </td>
-                      <td className="text-right">
-                        <Link to={`/orders/${kitchen.id}`} className="btn btn-small btn-secondary">
-                          {summary.itemCount > 0 ? 'Edit Order' : 'Set Up Order'}
-                        </Link>
                       </td>
                     </tr>
                   )

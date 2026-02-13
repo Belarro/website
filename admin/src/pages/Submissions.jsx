@@ -174,16 +174,9 @@ export default function Submissions() {
 
   if (loading) {
     return (
-      <div style={{
-        display: 'flex',
-        flexDirection: 'column',
-        alignItems: 'center',
-        justifyContent: 'center',
-        padding: '80px 24px',
-        color: '#6b7280'
-      }}>
-        <div className="loading-spinner" style={{ marginBottom: '16px' }}></div>
-        <p style={{ margin: 0, fontSize: '14px' }}>Loading submissions...</p>
+      <div className="page-loading">
+        <div><div className="skeleton skeleton-title"></div><div className="skeleton skeleton-subtitle"></div></div>
+        <div className="skeleton skeleton-card"></div>
       </div>
     )
   }

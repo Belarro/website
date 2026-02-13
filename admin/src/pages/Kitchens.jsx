@@ -37,9 +37,9 @@ export default function Kitchens() {
 
   if (loading) {
     return (
-      <div style={{ padding: '48px', textAlign: 'center' }}>
-        <div className="loading-spinner" style={{ margin: '0 auto 16px' }}></div>
-        <p>Loading kitchens...</p>
+      <div className="page-loading">
+        <div><div className="skeleton skeleton-title"></div><div className="skeleton skeleton-subtitle"></div></div>
+        <div className="skeleton skeleton-card"></div>
       </div>
     )
   }

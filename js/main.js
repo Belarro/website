@@ -130,17 +130,8 @@ document.addEventListener('DOMContentLoaded', function () {
     }
 
     // ========================================
-    // Page Transitions — fade out before navigating
+    // Page Transitions — removed fade delay for instant navigation
     // ========================================
-    document.querySelectorAll('a').forEach(link => {
-        link.addEventListener('click', function (e) {
-            const href = this.getAttribute('href');
-            if (!href || href.startsWith('#') || href.startsWith('mailto:') || href.startsWith('tel:') || this.target === '_blank') return;
-            e.preventDefault();
-            document.body.classList.add('page-exit');
-            setTimeout(() => { window.location.href = href; }, 100);
-        });
-    });
 
     // ========================================
     // Language Preference

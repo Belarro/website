@@ -1,7 +1,6 @@
 import { useState, useEffect } from 'react'
 import { Link } from 'react-router-dom'
-import { kitchensApi, productsApi } from '../lib/supabase'
-import { mockStandingOrders } from '../data/mockData'
+import { kitchensApi, productsApi, standingOrdersApi } from '../lib/supabase'
 
 export default function Orders() {
   const [kitchens, setKitchens] = useState([])
@@ -18,14 +17,14 @@ export default function Orders() {
   const loadData = async () => {
     try {
       setLoading(true)
-      const [kitchenData, productData] = await Promise.all([
+      const [kitchenData, productData, ordersData] = await Promise.all([
         kitchensApi.getAll(),
-        productsApi.getAll()
+        productsApi.getAll(),
+        standingOrdersApi.getAll()
       ])
       setKitchens(kitchenData || [])
       setProducts(productData || [])
-      // Use mock standing orders for now
-      setStandingOrders(mockStandingOrders)
+      setStandingOrders(ordersData || [])
     } catch (err) {
       setError(err.message)
     } finally {

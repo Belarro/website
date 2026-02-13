@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react'
 import { useParams, useNavigate, Link } from 'react-router-dom'
-import { kitchensApi, productsApi } from '../lib/supabase'
-import { mockStandingOrders, mockOrderHistory, growingStageOptions } from '../data/mockData'
+import { kitchensApi, productsApi, standingOrdersApi, orderHistoryApi } from '../lib/supabase'
+import { growingStageOptions } from '../data/mockData'
 
 // Calculate total growing days for a product
 function getTotalGrowDays(product) {
@@ -89,22 +89,20 @@ export default function OrderEdit() {
   const loadData = async () => {
     try {
       setLoading(true)
-      const [kitchenData, productData] = await Promise.all([
+      const [kitchenData, productData, standingOrder, history] = await Promise.all([
         kitchensApi.getById(kitchenId),
-        productsApi.getAll()
+        productsApi.getAll(),
+        standingOrdersApi.getByKitchenId(kitchenId),
+        orderHistoryApi.getByKitchenId(kitchenId)
       ])
       setKitchen(kitchenData)
       setProducts(productData || [])
 
-      // Load standing order from mock
-      const standingOrder = mockStandingOrders.find(so => so.kitchen_id === kitchenId)
-      if (standingOrder) {
+      if (standingOrder && standingOrder.items) {
         setOrderItems(standingOrder.items.map(item => ({ ...item })))
       }
 
-      // Load order history from mock
-      const history = mockOrderHistory.filter(oh => oh.kitchen_id === kitchenId)
-      setOrderHistory(history)
+      setOrderHistory(history || [])
     } catch (err) {
       setError(err.message)
     } finally {
@@ -165,8 +163,7 @@ export default function OrderEdit() {
     setSaving(true)
     setError(null)
     try {
-      // Mock save for now
-      await new Promise(resolve => setTimeout(resolve, 500))
+      await standingOrdersApi.upsert(kitchenId, orderItems)
       setSaveSuccess(true)
       setTimeout(() => setSaveSuccess(false), 3000)
     } catch (err) {

@@ -68,7 +68,7 @@ export default function Orders() {
     return (
       <div style={{ padding: '48px', textAlign: 'center' }}>
         <p style={{ color: '#ef476f' }}>Error: {error}</p>
-        <button onClick={loadData} className="btn btn-secondary">Try Again</button>
+        <button onClick={loadData} className="btn btn-secondary" style={{ marginTop: '12px' }}>Try Again</button>
       </div>
     )
   }
@@ -78,17 +78,15 @@ export default function Orders() {
       <div className="page-header">
         <div>
           <h1>Orders</h1>
-          <div style={{ fontSize: '14px', color: 'var(--color-gray-text)' }}>
-            Manage standing orders per kitchen ({filteredKitchens.length} kitchens)
+          <div className="page-subtitle">
+            Manage standing orders per kitchen ({filteredKitchens.length} kitchen{filteredKitchens.length !== 1 ? 's' : ''})
           </div>
         </div>
       </div>
 
-      <div className="card" style={{ padding: '24px' }}>
+      <div className="card-static" style={{ padding: '24px' }}>
         <div className="filters">
-          <div style={{ flex: 1, fontWeight: 600, fontSize: '13px', textTransform: 'uppercase', letterSpacing: '0.05em', alignSelf: 'center' }}>
-            Filter:
-          </div>
+          <span className="filter-label">Filter:</span>
           <select
             className="form-select"
             value={statusFilter}
@@ -131,7 +129,7 @@ export default function Orders() {
                       <td>
                         <strong>{kitchen.kitchen_name}</strong>
                         {kitchen.contact_name && (
-                          <div style={{ fontSize: '12px', opacity: 0.7 }}>{kitchen.contact_name}</div>
+                          <div style={{ fontSize: '12px', color: 'var(--color-gray-text)', marginTop: '2px' }}>{kitchen.contact_name}</div>
                         )}
                       </td>
                       <td>
@@ -154,7 +152,7 @@ export default function Orders() {
                             {new Date(order.updated_at).toLocaleDateString('en-GB', { day: 'numeric', month: 'short', year: 'numeric' })}
                           </span>
                         ) : (
-                          <span style={{ opacity: 0.5 }}>&mdash;</span>
+                          <span style={{ color: 'var(--color-gray-text)' }}>&mdash;</span>
                         )}
                       </td>
                       <td>

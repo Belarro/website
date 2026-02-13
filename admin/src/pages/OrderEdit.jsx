@@ -80,6 +80,7 @@ export default function OrderEdit() {
   const [error, setError] = useState(null)
   const [activeTab, setActiveTab] = useState('order')
   const [searchQuery, setSearchQuery] = useState('')
+  const [saveSuccess, setSaveSuccess] = useState(false)
 
   useEffect(() => {
     loadData()
@@ -166,7 +167,8 @@ export default function OrderEdit() {
     try {
       // Mock save for now
       await new Promise(resolve => setTimeout(resolve, 500))
-      alert('Standing order saved successfully!')
+      setSaveSuccess(true)
+      setTimeout(() => setSaveSuccess(false), 3000)
     } catch (err) {
       setError(err.message)
     } finally {
@@ -198,30 +200,26 @@ export default function OrderEdit() {
     )
   }
 
-  const tabStyle = (tab) => ({
-    padding: '8px 20px',
-    border: 'none',
-    background: activeTab === tab ? 'var(--color-dark)' : 'transparent',
-    color: activeTab === tab ? 'white' : 'var(--color-gray-text)',
-    borderRadius: '100px',
-    cursor: 'pointer',
-    fontWeight: 600,
-    fontSize: '14px'
-  })
-
   const nextTuesday = getNextTuesday()
 
   return (
     <div>
+      {/* Success Toast */}
+      {saveSuccess && (
+        <div className="toast-success">
+          Order saved successfully
+        </div>
+      )}
+
       <div className="page-header">
         <div>
-          <Link to="/orders" style={{ fontSize: '14px', color: 'var(--color-gray-text)', marginBottom: '4px', display: 'block', textDecoration: 'none' }}>&larr; Back to Orders</Link>
+          <Link to="/orders" className="back-link">&larr; Back to Orders</Link>
           <h1>{kitchen?.kitchen_name || 'Kitchen Order'}</h1>
-          <div style={{ fontSize: '14px', color: 'var(--color-gray-text)', marginTop: '4px' }}>
+          <div className="page-subtitle">
             Next delivery: {nextTuesday.toLocaleDateString('en-GB', { weekday: 'long', day: 'numeric', month: 'long' })}
           </div>
         </div>
-        <div style={{ display: 'flex', gap: '12px' }}>
+        <div className="header-actions">
           <button type="button" className="btn btn-secondary" onClick={() => navigate('/orders')}>
             Cancel
           </button>
@@ -238,19 +236,19 @@ export default function OrderEdit() {
       )}
 
       {/* Tabs */}
-      <div style={{ display: 'flex', gap: '8px', marginBottom: '32px' }}>
-        <button type="button" style={tabStyle('order')} onClick={() => setActiveTab('order')}>
+      <div className="tab-bar">
+        <button type="button" className={`tab-btn${activeTab === 'order' ? ' active' : ''}`} onClick={() => setActiveTab('order')}>
           Standing Order
         </button>
-        <button type="button" style={tabStyle('history')} onClick={() => setActiveTab('history')}>
+        <button type="button" className={`tab-btn${activeTab === 'history' ? ' active' : ''}`} onClick={() => setActiveTab('history')}>
           Order History ({orderHistory.length})
         </button>
-        <button type="button" style={tabStyle('tracking')} onClick={() => setActiveTab('tracking')}>
+        <button type="button" className={`tab-btn${activeTab === 'tracking' ? ' active' : ''}`} onClick={() => setActiveTab('tracking')}>
           Production Tracking
         </button>
       </div>
 
-      <div style={{ display: 'grid', gridTemplateColumns: '2fr 1fr', gap: '32px' }}>
+      <div className="edit-grid">
 
         {/* Left Column */}
         <div>
@@ -507,7 +505,7 @@ export default function OrderEdit() {
         </div>
 
         {/* Right Column — Summary */}
-        <div style={{ display: 'flex', flexDirection: 'column', gap: '24px' }}>
+        <div className="order-sidebar">
           {/* Kitchen Info */}
           <div className="card">
             <h2>Kitchen Info</h2>
@@ -593,7 +591,7 @@ export default function OrderEdit() {
           </div>
 
           {/* Action Buttons */}
-          <div style={{ display: 'flex', flexDirection: 'column', gap: '8px' }}>
+          <div className="sidebar-actions">
             <button
               type="button"
               className="btn btn-primary"

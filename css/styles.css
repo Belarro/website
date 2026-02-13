@@ -4,6 +4,15 @@
    ======================================== */
 
 /* === PAGE TRANSITIONS === */
+body {
+    opacity: 0;
+    transition: opacity 0.2s ease;
+}
+
+body.page-ready {
+    opacity: 1;
+}
+
 body.page-exit {
     opacity: 0;
     transition: opacity 0.15s ease;

@@ -5,6 +5,13 @@
 document.addEventListener('DOMContentLoaded', function () {
 
     // ========================================
+    // Page Entry — fade in
+    // ========================================
+    requestAnimationFrame(() => {
+        document.body.classList.add('page-ready');
+    });
+
+    // ========================================
     // Mobile Navigation
     // ========================================
     const navToggle = document.querySelector('.nav-toggle');

@@ -5,17 +5,17 @@
 
 /* === PAGE TRANSITIONS === */
 body {
-    opacity: 0;
-    transition: opacity 0.2s ease;
-}
-
-body.page-ready {
-    opacity: 1;
+    animation: page-enter 0.12s ease both;
 }
 
 body.page-exit {
     opacity: 0;
-    transition: opacity 0.15s ease;
+    transition: opacity 0.1s ease;
+}
+
+@keyframes page-enter {
+    from { opacity: 0; }
+    to { opacity: 1; }
 }
 
 /* === CSS VARIABLES & RESET === */

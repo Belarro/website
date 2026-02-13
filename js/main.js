@@ -5,13 +5,6 @@
 document.addEventListener('DOMContentLoaded', function () {
 
     // ========================================
-    // Page Entry — fade in
-    // ========================================
-    requestAnimationFrame(() => {
-        document.body.classList.add('page-ready');
-    });
-
-    // ========================================
     // Mobile Navigation
     // ========================================
     const navToggle = document.querySelector('.nav-toggle');
@@ -145,7 +138,7 @@ document.addEventListener('DOMContentLoaded', function () {
             if (!href || href.startsWith('#') || href.startsWith('mailto:') || href.startsWith('tel:') || this.target === '_blank') return;
             e.preventDefault();
             document.body.classList.add('page-exit');
-            setTimeout(() => { window.location.href = href; }, 150);
+            setTimeout(() => { window.location.href = href; }, 100);
         });
     });
 

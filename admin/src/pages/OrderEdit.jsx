@@ -160,13 +160,16 @@ export default function OrderEdit() {
   }
 
   const handleSave = async () => {
+    console.log('handleSave called, kitchenId:', kitchenId, 'items:', orderItems)
     setSaving(true)
     setError(null)
     try {
-      await standingOrdersApi.upsert(kitchenId, orderItems)
+      const result = await standingOrdersApi.upsert(kitchenId, orderItems)
+      console.log('Save result:', result)
       setSaveSuccess(true)
       setTimeout(() => setSaveSuccess(false), 3000)
     } catch (err) {
+      console.error('Save error:', err)
       setError(err.message)
     } finally {
       setSaving(false)

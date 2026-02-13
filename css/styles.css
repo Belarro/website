@@ -490,8 +490,12 @@ footer {
     width: 100%;
     height: 100%;
     object-fit: cover;
+    object-position: center 20%;
+}
+
+/* Homepage hero - full width */
+.hero:not(.hero-varieties):not(.hero-about):not(.hero-compact) .hero-bg img {
     object-position: center 10%;
-    transform: scale(0.85);
 }
 
 .hero-bg::after {

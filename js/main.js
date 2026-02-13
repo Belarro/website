@@ -130,6 +130,19 @@ document.addEventListener('DOMContentLoaded', function () {
     }
 
     // ========================================
+    // Page Transitions — fade out before navigating
+    // ========================================
+    document.querySelectorAll('a').forEach(link => {
+        link.addEventListener('click', function (e) {
+            const href = this.getAttribute('href');
+            if (!href || href.startsWith('#') || href.startsWith('mailto:') || href.startsWith('tel:') || this.target === '_blank') return;
+            e.preventDefault();
+            document.body.classList.add('page-exit');
+            setTimeout(() => { window.location.href = href; }, 150);
+        });
+    });
+
+    // ========================================
     // Language Preference
     // ========================================
     document.querySelectorAll('.lang-switch').forEach(link => {

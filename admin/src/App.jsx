@@ -10,6 +10,8 @@ import KitchenEdit from './pages/KitchenEdit'
 import Users from './pages/Users'
 import UserEdit from './pages/UserEdit'
 import ChefOrder from './pages/ChefOrder'
+import Orders from './pages/Orders'
+import OrderEdit from './pages/OrderEdit'
 import Submissions from './pages/Submissions'
 
 function App() {
@@ -34,6 +36,8 @@ function App() {
         <Route path="/kitchens/:id" element={<KitchenEdit />} />
         <Route path="/users" element={<Users />} />
         <Route path="/users/:id" element={<UserEdit />} />
+        <Route path="/orders" element={<Orders />} />
+        <Route path="/orders/:kitchenId" element={<OrderEdit />} />
         <Route path="/submissions" element={<Submissions />} />
       </Route>
 

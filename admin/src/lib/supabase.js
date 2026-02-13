@@ -277,3 +277,110 @@ export const usersApi = {
     if (error) throw error
   }
 }
+
+// Standing Orders API
+export const standingOrdersApi = {
+  async getAll() {
+    const { data, error } = await supabase
+      .from('standing_orders')
+      .select('*')
+      .order('updated_at', { ascending: false })
+
+    if (error) throw error
+    return data
+  },
+
+  async getByKitchenId(kitchenId) {
+    const { data, error } = await supabase
+      .from('standing_orders')
+      .select('*')
+      .eq('kitchen_id', kitchenId)
+      .maybeSingle()
+
+    if (error) throw error
+    return data
+  },
+
+  async upsert(kitchenId, items) {
+    const { data, error } = await supabase
+      .from('standing_orders')
+      .upsert({
+        kitchen_id: kitchenId,
+        items,
+        updated_at: new Date().toISOString()
+      }, { onConflict: 'kitchen_id' })
+      .select()
+      .single()
+
+    if (error) throw error
+    return data
+  },
+
+  async delete(kitchenId) {
+    const { error } = await supabase
+      .from('standing_orders')
+      .delete()
+      .eq('kitchen_id', kitchenId)
+
+    if (error) throw error
+  }
+}
+
+// Order History API
+export const orderHistoryApi = {
+  async getAll() {
+    const { data, error } = await supabase
+      .from('order_history')
+      .select('*')
+      .order('delivery_date', { ascending: false })
+
+    if (error) throw error
+    return data
+  },
+
+  async getByKitchenId(kitchenId) {
+    const { data, error } = await supabase
+      .from('order_history')
+      .select('*')
+      .eq('kitchen_id', kitchenId)
+      .order('delivery_date', { ascending: false })
+
+    if (error) throw error
+    return data
+  },
+
+  async create(order) {
+    const { data, error } = await supabase
+      .from('order_history')
+      .insert([{
+        ...order,
+        created_at: new Date().toISOString()
+      }])
+      .select()
+      .single()
+
+    if (error) throw error
+    return data
+  },
+
+  async update(id, updates) {
+    const { data, error } = await supabase
+      .from('order_history')
+      .update(updates)
+      .eq('id', id)
+      .select()
+      .single()
+
+    if (error) throw error
+    return data
+  },
+
+  async delete(id) {
+    const { error } = await supabase
+      .from('order_history')
+      .delete()
+      .eq('id', id)
+
+    if (error) throw error
+  }
+}

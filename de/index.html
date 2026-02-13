@@ -1,19 +1,23 @@
 <!DOCTYPE html>
 <html lang="de">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>BELARRO — Neue Pflanzen für professionelle Küchen</title>
-    <meta name="description" content="Belarro züchtet Pflanzen, die es nicht im Supermarkt gibt. Auf Bestellung gezüchtet. Wöchentlich geliefert. Berlin.">
+    <meta name="description"
+        content="Belarro züchtet Pflanzen, die es nicht im Supermarkt gibt. Auf Bestellung gezüchtet. Wöchentlich geliefert. Berlin.">
 
     <!-- Open Graph -->
     <meta property="og:title" content="BELARRO — Neue Pflanzen für professionelle Küchen">
-    <meta property="og:description" content="Auf Bestellung gezüchtet. Wöchentlich geliefert. Microgreens und Spezialitäten für professionelle Küchen in Berlin.">
+    <meta property="og:description"
+        content="Auf Bestellung gezüchtet. Wöchentlich geliefert. Microgreens und Spezialitäten für professionelle Küchen in Berlin.">
     <meta property="og:type" content="website">
     <meta property="og:url" content="https://belarro.com/de/">
     <meta property="og:locale" content="de_DE">
     <meta property="og:locale:alternate" content="en_US">
-    <meta property="og:image" content="https://belarro.com/assets/images/WhatsApp%20Image%202025-04-14%20at%204.42.57%20PM.jpeg">
+    <meta property="og:image"
+        content="https://belarro.com/assets/images/WhatsApp%20Image%202025-04-14%20at%204.42.57%20PM.jpeg">
 
     <!-- Canonical -->
     <link rel="canonical" href="https://belarro.com/de/">
@@ -26,12 +30,18 @@
     <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Archivo:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Archivo:wght@300;400;500;600;700&display=swap"
+        rel="stylesheet">
 
     <!-- Styles -->
     <link rel="stylesheet" href="../css/styles.css">
-    <style>.hero-stat-number[data-count-to]{visibility:hidden}</style>
+    <style>
+        .hero-stat-number[data-count-to] {
+            visibility: hidden
+        }
+    </style>
 </head>
+
 <body>
     <!-- Header -->
     <header id="header">
@@ -64,11 +74,13 @@
     <!-- Hero -->
     <section class="hero">
         <div class="hero-bg">
-            <img src="../assets/images/WhatsApp Image 2025-04-14 at 4.42.57 PM.jpeg" alt="Lebende Microgreens in Schalen">
+            <img src="../assets/images/WhatsApp Image 2025-04-14 at 4.42.57 PM.jpeg"
+                alt="Lebende Microgreens in Schalen">
         </div>
         <div class="hero-content fade-in">
             <h1>Microgreens auf Bestellung. Direkt in Ihre Küche geliefert.</h1>
-            <p class="hero-lead">Frische Zutaten für professionelle Küchen in Berlin. Auf Erde gezüchtet. Wöchentliche Lieferung. Keine Mindestbestellung.</p>
+            <p class="hero-lead">Frische Zutaten für professionelle Küchen in Berlin. Auf Erde gezüchtet. Wöchentliche
+                Lieferung. Keine Mindestbestellung.</p>
             <div class="hero-cta">
                 <a href="/de/start.html" class="btn btn-primary">Proben anfordern</a>
                 <a href="/de/start.html?intent=visit" class="btn btn-outline">Besuch buchen</a>
@@ -77,7 +89,8 @@
                 <div class="hero-stats-grid">
                     <div class="hero-stat">
                         <div class="hero-stat-accent"></div>
-                        <div class="hero-stat-number" data-count-to="24" data-count-suffix="+">24+</div>
+                        <div class="hero-stat-number" data-count="varieties" data-count-to="24" data-count-suffix="+">
+                            24+</div>
                         <div class="hero-stat-label">Sorten</div>
                     </div>
                     <div class="hero-stat">
@@ -99,41 +112,7 @@
             </div>
         </div>
     </section>
-    <script>
-    (function(){
-        var els = document.querySelectorAll('.hero-stat-number[data-count-to]');
-        if (!els.length) return;
-        // Set to 0 and reveal
-        for (var j = 0; j < els.length; j++) {
-            els[j].textContent = '0' + (els[j].getAttribute('data-count-suffix') || '');
-            els[j].style.visibility = 'visible';
-        }
-        var done = false;
-        function go() {
-            if (done) return;
-            done = true;
-            for (var i = 0; i < els.length; i++) {
-                (function(el, idx) {
-                    var target = parseInt(el.getAttribute('data-count-to'), 10);
-                    var suffix = el.getAttribute('data-count-suffix') || '';
-                    if (target === 0) return;
-                    setTimeout(function() {
-                        var dur = 1600, st = performance.now();
-                        function tick(now) {
-                            var p = Math.min((now - st) / dur, 1);
-                            var e = 1 - Math.pow(1 - p, 3);
-                            el.textContent = Math.round(e * target) + suffix;
-                            if (p < 1) requestAnimationFrame(tick);
-                        }
-                        requestAnimationFrame(tick);
-                    }, 200 + idx * 150);
-                })(els[i], i);
-            }
-        }
-        window.addEventListener('load', function() { setTimeout(go, 600); });
-        setTimeout(go, 4000);
-    })();
-    </script>
+
 
     <!-- Proof Strip -->
     <section class="proof-strip">
@@ -152,7 +131,9 @@
                 </div>
                 <div class="system-content">
                     <h2 class="fade-in">Von der Ernte in Ihre Küche. Am selben Tag.</h2>
-                    <p class="system-description fade-in">Wir züchten auf Bestellung in einem 10- bis 28-Tage-Zyklus. Sobald fertig, geht es schnell. Morgens geerntet, nachmittags in Ihrer Küche. Kein Großhändler. Keine Lagerung. Keine Verzögerungen.</p>
+                    <p class="system-description fade-in">Wir züchten auf Bestellung in einem 10- bis 28-Tage-Zyklus.
+                        Sobald fertig, geht es schnell. Morgens geerntet, nachmittags in Ihrer Küche. Kein Großhändler.
+                        Keine Lagerung. Keine Verzögerungen.</p>
                     <div class="system-points">
                         <div class="system-point fade-in">
                             <div class="system-point-number">1</div>
@@ -221,16 +202,19 @@
                     </div>
                     <div class="use-case-overlay">
                         <h3 class="use-case-title">Auf Proteinen</h3>
-                        <p class="use-case-description">Frischer Kontrast zu reichhaltigem Fleisch und Fisch. Fügt Farbe und Textur hinzu.</p>
+                        <p class="use-case-description">Frischer Kontrast zu reichhaltigem Fleisch und Fisch. Fügt Farbe
+                            und Textur hinzu.</p>
                     </div>
                 </div>
                 <div class="use-case-card fade-in">
                     <div class="use-case-image">
-                        <img src="../assets/images/stock/salad-composed.jpg" alt="Eleganter komponierter Salat mit frischen Kräutern">
+                        <img src="../assets/images/stock/salad-composed.jpg"
+                            alt="Eleganter komponierter Salat mit frischen Kräutern">
                     </div>
                     <div class="use-case-overlay">
                         <h3 class="use-case-title">Auf komponierten Salaten</h3>
-                        <p class="use-case-description">Schichten Sie Aromen und Texturen. Mehrere Sorten in einem Gericht.</p>
+                        <p class="use-case-description">Schichten Sie Aromen und Texturen. Mehrere Sorten in einem
+                            Gericht.</p>
                     </div>
                 </div>
                 <div class="use-case-card fade-in">
@@ -239,16 +223,19 @@
                     </div>
                     <div class="use-case-overlay">
                         <h3 class="use-case-title">Auf Desserts</h3>
-                        <p class="use-case-description">Unerwartete grüne Elemente. Shiso und Amaranth funktionieren wunderbar.</p>
+                        <p class="use-case-description">Unerwartete grüne Elemente. Shiso und Amaranth funktionieren
+                            wunderbar.</p>
                     </div>
                 </div>
                 <div class="use-case-card fade-in">
                     <div class="use-case-image">
-                        <img src="../assets/images/food/Screenshot_20250114_215822_Instagram.jpg" alt="Microgreens als Garnitur auf professionellem Teller">
+                        <img src="../assets/images/food/Screenshot_20250114_215822_Instagram.jpg"
+                            alt="Microgreens als Garnitur auf professionellem Teller">
                     </div>
                     <div class="use-case-overlay">
                         <h3 class="use-case-title">Als Garnitur oder Hauptelement</h3>
-                        <p class="use-case-description">Letzter Schliff oder zentrales Element. Sie entscheiden die Rolle.</p>
+                        <p class="use-case-description">Letzter Schliff oder zentrales Element. Sie entscheiden die
+                            Rolle.</p>
                     </div>
                 </div>
             </div>
@@ -265,7 +252,8 @@
             <div class="why-grid">
                 <div class="why-item fade-in">
                     <h4>Keine Mindestbestellung</h4>
-                    <p>Bestellen Sie was Sie brauchen. Skalieren Sie frei hoch oder runter. Testen Sie neue Sorten ohne Verpflichtung.</p>
+                    <p>Bestellen Sie was Sie brauchen. Skalieren Sie frei hoch oder runter. Testen Sie neue Sorten ohne
+                        Verpflichtung.</p>
                 </div>
                 <div class="why-item fade-in">
                     <h4>Keine Liefergebühren</h4>
@@ -273,19 +261,23 @@
                 </div>
                 <div class="why-item fade-in">
                     <h4>10 Tage Haltbarkeit</h4>
-                    <p>Frisch geerntet, direkt geliefert. Hält länger als Großhandel. Planen Sie Ihre Speisekarte damit.</p>
+                    <p>Frisch geerntet, direkt geliefert. Hält länger als Großhandel. Planen Sie Ihre Speisekarte damit.
+                    </p>
                 </div>
                 <div class="why-item fade-in">
                     <h4>Auf Erde gezüchtet</h4>
-                    <p>Echtes Erdsubstrat, nicht hydroponischer Schwamm. Besserer Geschmack, bessere Textur, stärkere Wurzeln.</p>
+                    <p>Echtes Erdsubstrat, nicht hydroponischer Schwamm. Besserer Geschmack, bessere Textur, stärkere
+                        Wurzeln.</p>
                 </div>
                 <div class="why-item fade-in">
                     <h4>In Berlin</h4>
-                    <p>Kurze Wege. Von der Farm in die Küche in Stunden, nicht Tagen. Kein langer Transport, kein Kältekettenstress.</p>
+                    <p>Kurze Wege. Von der Farm in die Küche in Stunden, nicht Tagen. Kein langer Transport, kein
+                        Kältekettenstress.</p>
                 </div>
                 <div class="why-item fade-in">
                     <h4>Flexible Änderungen</h4>
-                    <p>Speisekarte geändert? Sagen Sie Bescheid. Änderungen gelten ab nächstem Zyklus. Kein Papierkram.</p>
+                    <p>Speisekarte geändert? Sagen Sie Bescheid. Änderungen gelten ab nächstem Zyklus. Kein Papierkram.
+                    </p>
                 </div>
             </div>
         </div>
@@ -325,7 +317,8 @@
     <section class="final-anchor">
         <div class="container">
             <div class="anchor-content">
-                <p class="anchor-statement fade-in">Wir züchten für Köche, denen Frische, Konsistenz und Kontrolle wichtig sind.</p>
+                <p class="anchor-statement fade-in">Wir züchten für Köche, denen Frische, Konsistenz und Kontrolle
+                    wichtig sind.</p>
                 <p class="anchor-supporting fade-in">Nicht mehr, nicht weniger.</p>
                 <div class="anchor-cta fade-in">
                     <a href="/de/start.html" class="btn btn-primary">Proben anfordern</a>
@@ -383,6 +376,8 @@
     </footer>
 
     <script src="../js/main.js?v=4"></script>
+    <script src="../js/counter.js"></script>
     <script src="../js/products-home-de.js"></script>
 </body>
+
 </html>

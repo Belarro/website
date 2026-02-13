@@ -81,6 +81,12 @@ export default function Layout() {
             Kitchens
           </NavLink>
           <NavLink
+            to="/orders"
+            className={({ isActive }) => `sidebar-link ${isActive ? 'active' : ''}`}
+          >
+            Orders
+          </NavLink>
+          <NavLink
             to="/users"
             className={({ isActive }) => `sidebar-link ${isActive ? 'active' : ''}`}
           >

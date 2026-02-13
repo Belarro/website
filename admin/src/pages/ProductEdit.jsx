@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react'
 import { useParams, useNavigate, Link } from 'react-router-dom'
 import { productsApi } from '../lib/supabase'
-import { categories, statusOptions } from '../data/mockData'
+import { categories, statusOptions, availableSizes, growingStageOptions } from '../data/mockData'
 import ImageUpload from '../components/ImageUpload'
 // v2 - Tags feature
 
@@ -31,7 +31,12 @@ export default function ProductEdit() {
     name_de: '',
     flavor_profile_de: '',
     description_chef_de: '',
-    service_fit_de: ''
+    service_fit_de: '',
+    available_sizes: [],
+    prices: {},
+    container_box_size: '',
+    growing_stages: [],
+    yield_per_tray: ''
   })
 
   const [newTag, setNewTag] = useState('')
@@ -96,7 +101,12 @@ export default function ProductEdit() {
           name_de: product.name_de || '',
           flavor_profile_de: product.flavor_profile_de || '',
           description_chef_de: product.description_chef_de || '',
-          service_fit_de: product.service_fit_de || ''
+          service_fit_de: product.service_fit_de || '',
+          available_sizes: Array.isArray(product.available_sizes) ? product.available_sizes : [],
+          prices: product.prices || {},
+          container_box_size: product.container_box_size || '',
+          growing_stages: Array.isArray(product.growing_stages) ? product.growing_stages : [],
+          yield_per_tray: product.yield_per_tray || ''
         })
       }
     } catch (err) {
@@ -161,7 +171,12 @@ export default function ProductEdit() {
         name_de: form.name_de,
         flavor_profile_de: form.flavor_profile_de,
         description_chef_de: form.description_chef_de,
-        service_fit_de: form.service_fit_de
+        service_fit_de: form.service_fit_de,
+        available_sizes: form.available_sizes,
+        prices: form.prices,
+        container_box_size: form.container_box_size,
+        growing_stages: form.growing_stages,
+        yield_per_tray: form.yield_per_tray
       }
 
       console.log('Saving product with tags:', form.tags)
@@ -240,131 +255,316 @@ export default function ProductEdit() {
       )}
 
       <form id="product-form" onSubmit={handleSubmit}>
-        <div style={{ display: 'grid', gridTemplateColumns: '2fr 1fr', gap: '32px' }}>
+        <div style={{ display: 'grid', gridTemplateColumns: '2fr 1fr', gap: '32px', alignItems: 'start' }}>
 
-          {/* Left Column: Main Info */}
-          <div className="card">
-            <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '20px' }}>
-              <h2 style={{ margin: 0 }}>Product Information</h2>
-              <div style={{ display: 'flex', gap: '8px' }}>
-                <button type="button" style={tabStyle('en')} onClick={() => setActiveTab('en')}>
-                  English
-                </button>
-                <button type="button" style={tabStyle('de')} onClick={() => setActiveTab('de')}>
-                  Deutsch
-                </button>
+          {/* Left Column: Content & Commercial */}
+          <div style={{ display: 'flex', flexDirection: 'column', gap: '24px' }}>
+
+            {/* Product Information */}
+            <div className="card">
+              <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '20px' }}>
+                <h2 style={{ margin: 0 }}>Product Information</h2>
+                <div style={{ display: 'flex', gap: '8px' }}>
+                  <button type="button" style={tabStyle('en')} onClick={() => setActiveTab('en')}>
+                    English
+                  </button>
+                  <button type="button" style={tabStyle('de')} onClick={() => setActiveTab('de')}>
+                    Deutsch
+                  </button>
+                </div>
               </div>
+
+              {activeTab === 'en' ? (
+                <>
+                  <div className="form-group">
+                    <label className="form-label">Product Name (English)</label>
+                    <input type="text" name="name" className="form-input" value={form.name} onChange={handleChange} required />
+                  </div>
+
+                  <div className="form-row">
+                    <div className="form-group">
+                      <label className="form-label">Category</label>
+                      <select name="category" className="form-select" value={form.category} onChange={handleChange}>
+                        {categories.map(c => <option key={c.value} value={c.value}>{c.label}</option>)}
+                      </select>
+                    </div>
+                    <div className="form-group">
+                      <label className="form-label">Status</label>
+                      <select name="availability_status" className="form-select" value={form.availability_status} onChange={handleChange}>
+                        {statusOptions.map(s => <option key={s.value} value={s.value}>{s.label}</option>)}
+                      </select>
+                    </div>
+                  </div>
+
+                  <div className="form-group mt-lg">
+                    <label className="form-label">Flavor Profile (English)</label>
+                    <textarea
+                      name="flavor_profile"
+                      className="form-textarea"
+                      value={form.flavor_profile}
+                      onChange={handleChange}
+                      placeholder="e.g. Sweet pea flavor with fresh crunchy texture..."
+                    />
+                  </div>
+
+                  <div className="form-group">
+                    <label className="form-label">Chef Description (English)</label>
+                    <textarea
+                      name="description_chef"
+                      className="form-textarea"
+                      value={form.description_chef}
+                      onChange={handleChange}
+                      style={{ minHeight: '120px' }}
+                      placeholder="Detailed description for the chef catalog..."
+                    />
+                  </div>
+
+                  <div className="form-group">
+                    <label className="form-label">Service Fit (English)</label>
+                    <textarea name="service_fit" className="form-textarea" value={form.service_fit} onChange={handleChange} rows={2} />
+                  </div>
+                </>
+              ) : (
+                <>
+                  <div className="form-group">
+                    <label className="form-label">Produktname (Deutsch)</label>
+                    <input
+                      type="text"
+                      name="name_de"
+                      className="form-input"
+                      value={form.name_de}
+                      onChange={handleChange}
+                      placeholder={form.name ? `Translate: ${form.name}` : ''}
+                    />
+                  </div>
+
+                  <div style={{ padding: '12px', background: 'var(--color-light)', borderRadius: '8px', marginBottom: '16px' }}>
+                    <p style={{ margin: 0, fontSize: '13px', color: 'var(--color-gray-text)' }}>
+                      Category & Status are shared between languages
+                    </p>
+                  </div>
+
+                  <div className="form-group">
+                    <label className="form-label">Geschmacksprofil (Deutsch)</label>
+                    <textarea
+                      name="flavor_profile_de"
+                      className="form-textarea"
+                      value={form.flavor_profile_de}
+                      onChange={handleChange}
+                      placeholder={form.flavor_profile ? `Translate: ${form.flavor_profile}` : 'z.B. Süßer Erbsengeschmack mit frischer knuspriger Textur...'}
+                    />
+                  </div>
+
+                  <div className="form-group">
+                    <label className="form-label">Beschreibung für Köche (Deutsch)</label>
+                    <textarea
+                      name="description_chef_de"
+                      className="form-textarea"
+                      value={form.description_chef_de}
+                      onChange={handleChange}
+                      style={{ minHeight: '120px' }}
+                      placeholder={form.description_chef ? `Translate: ${form.description_chef}` : 'Detaillierte Beschreibung für den Kochkatalog...'}
+                    />
+                  </div>
+
+                  <div className="form-group">
+                    <label className="form-label">Passend zu (Deutsch)</label>
+                    <textarea
+                      name="service_fit_de"
+                      className="form-textarea"
+                      value={form.service_fit_de}
+                      onChange={handleChange}
+                      rows={2}
+                      placeholder={form.service_fit ? `Translate: ${form.service_fit}` : ''}
+                    />
+                  </div>
+                </>
+              )}
             </div>
 
-            {activeTab === 'en' ? (
-              <>
-                <div className="form-group">
-                  <label className="form-label">Product Name (English)</label>
-                  <input type="text" name="name" className="form-input" value={form.name} onChange={handleChange} required />
-                </div>
+            {/* Tags */}
+            <div className="card">
+              <h2>Tags</h2>
+              <p style={{ fontSize: '13px', color: 'var(--color-gray-text)', marginBottom: '12px' }}>
+                Add tags for filtering on the website (e.g., Brassica, Asian, Spicy)
+              </p>
+              <div style={{ display: 'flex', gap: '8px', marginBottom: '12px' }}>
+                <input
+                  type="text"
+                  className="form-input"
+                  value={newTag}
+                  onChange={(e) => setNewTag(e.target.value)}
+                  onKeyDown={(e) => e.key === 'Enter' && (e.preventDefault(), addTag())}
+                  placeholder="Add a tag..."
+                  style={{ flex: 1 }}
+                />
+                <button type="button" className="btn btn-secondary" onClick={addTag}>
+                  Add
+                </button>
+              </div>
+              <div style={{ display: 'flex', flexWrap: 'wrap', gap: '8px' }}>
+                {form.tags.map(tag => (
+                  <span
+                    key={tag}
+                    style={{
+                      display: 'inline-flex',
+                      alignItems: 'center',
+                      gap: '6px',
+                      padding: '4px 10px',
+                      background: '#2563eb',
+                      color: '#ffffff',
+                      borderRadius: '16px',
+                      fontSize: '13px'
+                    }}
+                  >
+                    {tag}
+                    <button
+                      type="button"
+                      onClick={() => removeTag(tag)}
+                      style={{
+                        background: 'none',
+                        border: 'none',
+                        color: '#ffffff',
+                        cursor: 'pointer',
+                        padding: '0',
+                        fontSize: '16px',
+                        lineHeight: 1
+                      }}
+                    >
+                      ×
+                    </button>
+                  </span>
+                ))}
+                {form.tags.length === 0 && (
+                  <span style={{ fontSize: '13px', color: 'var(--color-gray-text)', fontStyle: 'italic' }}>
+                    No tags added
+                  </span>
+                )}
+              </div>
 
-                <div className="form-row">
-                  <div className="form-group">
-                    <label className="form-label">Category</label>
-                    <select name="category" className="form-select" value={form.category} onChange={handleChange}>
-                      {categories.map(c => <option key={c.value} value={c.value}>{c.label}</option>)}
-                    </select>
-                  </div>
-                  <div className="form-group">
-                    <label className="form-label">Status</label>
-                    <select name="availability_status" className="form-select" value={form.availability_status} onChange={handleChange}>
-                      {statusOptions.map(s => <option key={s.value} value={s.value}>{s.label}</option>)}
-                    </select>
-                  </div>
-                </div>
-
-                <div className="form-group mt-lg">
-                  <label className="form-label">Flavor Profile (English)</label>
-                  <textarea
-                    name="flavor_profile"
-                    className="form-textarea"
-                    value={form.flavor_profile}
-                    onChange={handleChange}
-                    placeholder="e.g. Sweet pea flavor with fresh crunchy texture..."
-                  />
-                </div>
-
-                <div className="form-group">
-                  <label className="form-label">Chef Description (English)</label>
-                  <textarea
-                    name="description_chef"
-                    className="form-textarea"
-                    value={form.description_chef}
-                    onChange={handleChange}
-                    style={{ minHeight: '120px' }}
-                    placeholder="Detailed description for the chef catalog..."
-                  />
-                </div>
-
-                <div className="form-group">
-                  <label className="form-label">Service Fit (English)</label>
-                  <textarea name="service_fit" className="form-textarea" value={form.service_fit} onChange={handleChange} rows={2} />
-                </div>
-              </>
-            ) : (
-              <>
-                <div className="form-group">
-                  <label className="form-label">Produktname (Deutsch)</label>
-                  <input
-                    type="text"
-                    name="name_de"
-                    className="form-input"
-                    value={form.name_de}
-                    onChange={handleChange}
-                    placeholder={form.name ? `Translate: ${form.name}` : ''}
-                  />
-                </div>
-
-                <div style={{ padding: '12px', background: 'var(--color-light)', borderRadius: '8px', marginBottom: '16px' }}>
-                  <p style={{ margin: 0, fontSize: '13px', color: 'var(--color-gray-text)' }}>
-                    Category & Status are shared between languages
+              {/* Existing tags suggestions */}
+              {allTags.filter(tag => !form.tags.includes(tag)).length > 0 && (
+                <div style={{ marginTop: '16px', paddingTop: '16px', borderTop: '1px solid var(--color-light)' }}>
+                  <p style={{ fontSize: '12px', color: 'var(--color-gray-text)', marginBottom: '8px' }}>
+                    Existing tags (click to add):
                   </p>
+                  <div style={{ display: 'flex', flexWrap: 'wrap', gap: '6px' }}>
+                    {allTags.filter(tag => !form.tags.includes(tag)).map(tag => (
+                      <button
+                        key={tag}
+                        type="button"
+                        onClick={() => setForm(prev => ({ ...prev, tags: [...prev.tags, tag] }))}
+                        style={{
+                          padding: '4px 10px',
+                          background: '#f3f4f6',
+                          color: '#1f2937',
+                          border: '1px solid #d1d5db',
+                          borderRadius: '16px',
+                          fontSize: '12px',
+                          cursor: 'pointer',
+                          transition: 'all 0.2s ease'
+                        }}
+                        onMouseOver={(e) => {
+                          e.target.style.background = '#2563eb'
+                          e.target.style.color = '#ffffff'
+                          e.target.style.borderColor = '#2563eb'
+                        }}
+                        onMouseOut={(e) => {
+                          e.target.style.background = '#f3f4f6'
+                          e.target.style.color = '#1f2937'
+                          e.target.style.borderColor = '#d1d5db'
+                        }}
+                      >
+                        + {tag}
+                      </button>
+                    ))}
+                  </div>
                 </div>
+              )}
+            </div>
 
-                <div className="form-group">
-                  <label className="form-label">Geschmacksprofil (Deutsch)</label>
-                  <textarea
-                    name="flavor_profile_de"
-                    className="form-textarea"
-                    value={form.flavor_profile_de}
-                    onChange={handleChange}
-                    placeholder={form.flavor_profile ? `Translate: ${form.flavor_profile}` : 'z.B. Süßer Erbsengeschmack mit frischer knuspriger Textur...'}
-                  />
-                </div>
+            {/* Sizes & Pricing */}
+            <div className="card">
+              <h2>Sizes & Pricing</h2>
+              <p style={{ fontSize: '13px', color: 'var(--color-gray-text)', marginBottom: '12px' }}>
+                Select available sizes and set prices for this crop
+              </p>
+              {availableSizes.map(size => {
+                const isChecked = form.available_sizes.includes(size.value)
+                return (
+                  <div key={size.value}>
+                    <div style={{ display: 'flex', alignItems: 'center', gap: '12px', marginBottom: size.value === 'container' && isChecked ? '8px' : '12px' }}>
+                      <label style={{ display: 'flex', alignItems: 'center', gap: '8px', cursor: 'pointer', minWidth: '120px' }}>
+                        <input
+                          type="checkbox"
+                          checked={isChecked}
+                          onChange={(e) => {
+                            if (e.target.checked) {
+                              setForm(prev => ({ ...prev, available_sizes: [...prev.available_sizes, size.value] }))
+                            } else {
+                              setForm(prev => ({
+                                ...prev,
+                                available_sizes: prev.available_sizes.filter(s => s !== size.value),
+                                prices: Object.fromEntries(Object.entries(prev.prices).filter(([k]) => k !== size.value)),
+                                ...(size.value === 'container' ? { container_box_size: '' } : {})
+                              }))
+                            }
+                          }}
+                          style={{ width: '18px', height: '18px' }}
+                        />
+                        <span style={{ fontWeight: 500 }}>{size.label}</span>
+                      </label>
+                      {isChecked && (
+                        <div style={{ display: 'flex', alignItems: 'center', gap: '4px' }}>
+                          <span style={{ fontSize: '13px', color: 'var(--color-gray-text)' }}>&euro;</span>
+                          <input
+                            type="number"
+                            step="0.01"
+                            min="0"
+                            value={form.prices[size.value] || ''}
+                            onChange={(e) => {
+                              const val = e.target.value
+                              setForm(prev => ({
+                                ...prev,
+                                prices: { ...prev.prices, [size.value]: val === '' ? '' : parseFloat(val) }
+                              }))
+                            }}
+                            className="form-input"
+                            style={{ width: '100px' }}
+                            placeholder="0.00"
+                          />
+                        </div>
+                      )}
+                    </div>
+                    {size.value === 'container' && isChecked && (
+                      <div style={{ marginLeft: '38px', marginBottom: '12px', display: 'flex', alignItems: 'center', gap: '8px' }}>
+                        <span style={{ fontSize: '13px', color: 'var(--color-gray-text)' }}>Box size:</span>
+                        <select
+                          className="form-select"
+                          value={form.container_box_size}
+                          onChange={(e) => setForm(prev => ({ ...prev, container_box_size: e.target.value }))}
+                          style={{ width: '120px' }}
+                        >
+                          <option value="">Select</option>
+                          <option value="40g">40g</option>
+                          <option value="50g">50g</option>
+                          <option value="60g">60g</option>
+                        </select>
+                      </div>
+                    )}
+                  </div>
+                )
+              })}
+              {form.available_sizes.length === 0 && (
+                <span style={{ fontSize: '13px', color: 'var(--color-gray-text)', fontStyle: 'italic' }}>
+                  No sizes selected
+                </span>
+              )}
+            </div>
 
-                <div className="form-group">
-                  <label className="form-label">Beschreibung für Köche (Deutsch)</label>
-                  <textarea
-                    name="description_chef_de"
-                    className="form-textarea"
-                    value={form.description_chef_de}
-                    onChange={handleChange}
-                    style={{ minHeight: '120px' }}
-                    placeholder={form.description_chef ? `Translate: ${form.description_chef}` : 'Detaillierte Beschreibung für den Kochkatalog...'}
-                  />
-                </div>
-
-                <div className="form-group">
-                  <label className="form-label">Passend zu (Deutsch)</label>
-                  <textarea
-                    name="service_fit_de"
-                    className="form-textarea"
-                    value={form.service_fit_de}
-                    onChange={handleChange}
-                    rows={2}
-                    placeholder={form.service_fit ? `Translate: ${form.service_fit}` : ''}
-                  />
-                </div>
-              </>
-            )}
           </div>
 
-          {/* Right Column: Media & Specs */}
+          {/* Right Column: Media & Operations */}
           <div style={{ display: 'flex', flexDirection: 'column', gap: '24px' }}>
             {/* Featured on Homepage */}
             <div className="card" style={{ background: form.featured_homepage ? '#e8f5e9' : 'white' }}>
@@ -465,103 +665,113 @@ export default function ProductEdit() {
             </div>
 
             <div className="card">
-              <h2>Tags</h2>
+              <h2>Growing Stages</h2>
               <p style={{ fontSize: '13px', color: 'var(--color-gray-text)', marginBottom: '12px' }}>
-                Add tags for filtering on the website (e.g., Brassica, Asian, Spicy)
+                Define the growth sequence and duration for this crop
               </p>
-              <div style={{ display: 'flex', gap: '8px', marginBottom: '12px' }}>
-                <input
-                  type="text"
-                  className="form-input"
-                  value={newTag}
-                  onChange={(e) => setNewTag(e.target.value)}
-                  onKeyDown={(e) => e.key === 'Enter' && (e.preventDefault(), addTag())}
-                  placeholder="Add a tag..."
-                  style={{ flex: 1 }}
-                />
-                <button type="button" className="btn btn-secondary" onClick={addTag}>
-                  Add
-                </button>
-              </div>
-              <div style={{ display: 'flex', flexWrap: 'wrap', gap: '8px' }}>
-                {form.tags.map(tag => (
-                  <span
-                    key={tag}
+              {form.growing_stages.map((gs, index) => (
+                <div key={index} style={{ display: 'flex', alignItems: 'center', gap: '8px', marginBottom: '8px' }}>
+                  <span style={{ fontSize: '13px', color: 'var(--color-gray-text)', minWidth: '20px' }}>{index + 1}.</span>
+                  <select
+                    className="form-select"
+                    value={gs.stage}
+                    onChange={(e) => {
+                      const updated = [...form.growing_stages]
+                      updated[index] = { ...updated[index], stage: e.target.value }
+                      setForm(prev => ({ ...prev, growing_stages: updated }))
+                    }}
+                    style={{ flex: 1 }}
+                  >
+                    <option value="">Select stage</option>
+                    {growingStageOptions.map(opt => (
+                      <option key={opt.value} value={opt.value}>{opt.label}</option>
+                    ))}
+                  </select>
+                  <input
+                    type="number"
+                    min="0"
+                    value={gs.duration}
+                    onChange={(e) => {
+                      const updated = [...form.growing_stages]
+                      updated[index] = { ...updated[index], duration: e.target.value === '' ? '' : parseInt(e.target.value) }
+                      setForm(prev => ({ ...prev, growing_stages: updated }))
+                    }}
+                    className="form-input"
+                    style={{ width: '70px' }}
+                    placeholder="0"
+                  />
+                  <select
+                    className="form-select"
+                    value={gs.unit}
+                    onChange={(e) => {
+                      const updated = [...form.growing_stages]
+                      updated[index] = { ...updated[index], unit: e.target.value }
+                      setForm(prev => ({ ...prev, growing_stages: updated }))
+                    }}
+                    style={{ width: '80px' }}
+                  >
+                    <option value="hours">Hours</option>
+                    <option value="days">Days</option>
+                  </select>
+                  <button
+                    type="button"
+                    onClick={() => {
+                      setForm(prev => ({
+                        ...prev,
+                        growing_stages: prev.growing_stages.filter((_, i) => i !== index)
+                      }))
+                    }}
                     style={{
-                      display: 'inline-flex',
-                      alignItems: 'center',
-                      gap: '6px',
-                      padding: '4px 10px',
-                      background: '#2563eb',
-                      color: '#ffffff',
-                      borderRadius: '16px',
-                      fontSize: '13px'
+                      background: 'none',
+                      border: 'none',
+                      color: '#ef476f',
+                      cursor: 'pointer',
+                      padding: '4px',
+                      fontSize: '18px',
+                      lineHeight: 1
                     }}
                   >
-                    {tag}
-                    <button
-                      type="button"
-                      onClick={() => removeTag(tag)}
-                      style={{
-                        background: 'none',
-                        border: 'none',
-                        color: '#ffffff',
-                        cursor: 'pointer',
-                        padding: '0',
-                        fontSize: '16px',
-                        lineHeight: 1
-                      }}
-                    >
-                      ×
-                    </button>
-                  </span>
-                ))}
-                {form.tags.length === 0 && (
+                    &times;
+                  </button>
+                </div>
+              ))}
+              <button
+                type="button"
+                className="btn btn-secondary btn-small"
+                onClick={() => {
+                  setForm(prev => ({
+                    ...prev,
+                    growing_stages: [...prev.growing_stages, { stage: '', duration: '', unit: 'days' }]
+                  }))
+                }}
+                style={{ marginTop: '8px' }}
+              >
+                + Add Stage
+              </button>
+              {form.growing_stages.length === 0 && (
+                <div style={{ marginTop: '8px' }}>
                   <span style={{ fontSize: '13px', color: 'var(--color-gray-text)', fontStyle: 'italic' }}>
-                    No tags added
+                    No growing stages defined
                   </span>
-                )}
-              </div>
-
-              {/* Existing tags suggestions */}
-              {allTags.filter(tag => !form.tags.includes(tag)).length > 0 && (
-                <div style={{ marginTop: '16px', paddingTop: '16px', borderTop: '1px solid var(--color-light)' }}>
-                  <p style={{ fontSize: '12px', color: 'var(--color-gray-text)', marginBottom: '8px' }}>
-                    Existing tags (click to add):
-                  </p>
-                  <div style={{ display: 'flex', flexWrap: 'wrap', gap: '6px' }}>
-                    {allTags.filter(tag => !form.tags.includes(tag)).map(tag => (
-                      <button
-                        key={tag}
-                        type="button"
-                        onClick={() => setForm(prev => ({ ...prev, tags: [...prev.tags, tag] }))}
-                        style={{
-                          padding: '4px 10px',
-                          background: '#f3f4f6',
-                          color: '#1f2937',
-                          border: '1px solid #d1d5db',
-                          borderRadius: '16px',
-                          fontSize: '12px',
-                          cursor: 'pointer',
-                          transition: 'all 0.2s ease'
-                        }}
-                        onMouseOver={(e) => {
-                          e.target.style.background = '#2563eb'
-                          e.target.style.color = '#ffffff'
-                          e.target.style.borderColor = '#2563eb'
-                        }}
-                        onMouseOut={(e) => {
-                          e.target.style.background = '#f3f4f6'
-                          e.target.style.color = '#1f2937'
-                          e.target.style.borderColor = '#d1d5db'
-                        }}
-                      >
-                        + {tag}
-                      </button>
-                    ))}
-                  </div>
                 </div>
               )}
+            </div>
+
+            <div className="card">
+              <h2>Yield</h2>
+              <p style={{ fontSize: '13px', color: 'var(--color-gray-text)', marginBottom: '12px' }}>
+                Expected yield from one growing tray
+              </p>
+              <div className="form-group" style={{ marginBottom: 0 }}>
+                <input
+                  type="text"
+                  name="yield_per_tray"
+                  className="form-input"
+                  value={form.yield_per_tray}
+                  onChange={handleChange}
+                  placeholder="e.g. ~225g per tray"
+                />
+              </div>
             </div>
           </div>
 

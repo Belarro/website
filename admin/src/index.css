@@ -490,3 +490,149 @@ a {
 @keyframes spin {
   to { transform: rotate(360deg); }
 }
+
+/* --- Order Status Badges --- */
+.status-active {
+  background: var(--color-green-light);
+  color: var(--color-green);
+}
+
+.status-pending {
+  background: #fff3cd;
+  color: #856404;
+}
+
+.status-growing {
+  background: #d1ecf1;
+  color: #0c5460;
+}
+
+.status-ready {
+  background: var(--color-green-light);
+  color: var(--color-green);
+}
+
+.status-delivered {
+  background: #f0f0f0;
+  color: #666;
+}
+
+.status-seasonal {
+  background: #fff3cd;
+  color: #856404;
+}
+
+/* --- Growing Stage Timeline --- */
+.stage-timeline {
+  display: flex;
+  align-items: center;
+  gap: 2px;
+  width: 100%;
+}
+
+.stage-segment {
+  flex: 1;
+  height: 8px;
+  background: var(--color-gray-border);
+  border-radius: 4px;
+  position: relative;
+  transition: background 0.3s ease;
+}
+
+.stage-segment:first-child {
+  border-radius: 4px 0 0 4px;
+}
+
+.stage-segment:last-child {
+  border-radius: 0 4px 4px 0;
+}
+
+.stage-segment.completed {
+  background: var(--color-green);
+}
+
+.stage-segment.active {
+  background: #2563eb;
+}
+
+.stage-label {
+  font-size: 11px;
+  color: var(--color-gray-text);
+  text-align: center;
+  margin-top: 4px;
+}
+
+.stage-label.active {
+  color: #2563eb;
+  font-weight: 600;
+}
+
+/* --- Product Data Table (Dense Multi-Row) --- */
+.product-data-table td {
+  border-bottom: 1px solid var(--color-gray-border);
+}
+
+.product-row-indicator {
+  position: relative;
+}
+
+.completeness-bar {
+  position: absolute;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  width: 3px;
+  border-radius: 3px 0 0 3px;
+}
+
+.completeness-complete {
+  background: #22c55e;
+}
+
+.completeness-partial {
+  background: #f59e0b;
+}
+
+.completeness-empty {
+  background: #ef476f;
+}
+
+.product-subrow {
+  font-size: 12.5px;
+  color: var(--color-gray-text);
+  margin-top: 4px;
+  line-height: 1.5;
+}
+
+.product-stages {
+  color: var(--color-gray-text);
+}
+
+.product-total-time {
+  font-weight: 600;
+  color: var(--color-dark);
+  margin-left: 6px;
+}
+
+.product-subrow-divider {
+  margin: 0 8px;
+  color: var(--color-gray-border);
+}
+
+.product-yield {
+  color: var(--color-gray-text);
+}
+
+.product-prices {
+  font-size: 13px;
+  color: var(--color-dark);
+  font-weight: 500;
+  line-height: 1.6;
+}
+
+.product-missing {
+  font-size: 12px;
+  color: #ef476f;
+  font-style: italic;
+  opacity: 0.8;
+}

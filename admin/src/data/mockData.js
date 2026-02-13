@@ -16,6 +16,14 @@ export const mockProducts = [
     description_chef: 'Classic shoots grown in soil for clean sweetness and real texture. Reliable crunch with a clear pea finish.',
     photo: 'https://images.unsplash.com/photo-1599307409240-cf178b30d885?auto=format&fit=crop&q=80&w=800',
     photo_flip: 'none',
+    available_sizes: ['225g', '450g'],
+    prices: { '225g': 9.00, '450g': 16.00 },
+    growing_stages: [
+      { stage: 'soaking', duration: 8, unit: 'hours' },
+      { stage: 'stacking', duration: 3, unit: 'days' },
+      { stage: 'under_light', duration: 10, unit: 'days' }
+    ],
+    yield_per_tray: '~300g',
     created_at: '2025-01-01T00:00:00Z',
     updated_at: '2025-01-01T00:00:00Z'
   },
@@ -31,6 +39,14 @@ export const mockProducts = [
     flavor_profile: 'Sweet, leafy, crisp.',
     description_chef: 'Grown longer for developed leaves and deeper pea flavor. More body than shoots, still clean and fresh.',
     photo: 'https://images.unsplash.com/photo-1540560799653-b09e075cd550?auto=format&fit=crop&q=80&w=800',
+    available_sizes: ['225g', '450g'],
+    prices: { '225g': 9.00, '450g': 16.00 },
+    growing_stages: [
+      { stage: 'soaking', duration: 24, unit: 'hours' },
+      { stage: 'stacking', duration: 4, unit: 'days' },
+      { stage: 'under_light', duration: 10, unit: 'days' }
+    ],
+    yield_per_tray: '~350g',
     created_at: '2025-01-01T00:00:00Z',
     updated_at: '2025-01-01T00:00:00Z'
   },
@@ -46,6 +62,14 @@ export const mockProducts = [
     flavor_profile: 'Rich, nutty, crunchy.',
     description_chef: 'Thick stems with real bite and raw sunflower flavor. Adds weight and structure to the plate.',
     photo: 'https://images.unsplash.com/photo-1695431327855-5c1264251173?auto=format&fit=crop&q=80&w=800',
+    available_sizes: ['113g', '225g', '450g'],
+    prices: { '113g': 5.50, '225g': 9.00, '450g': 16.00 },
+    growing_stages: [
+      { stage: 'soaking', duration: 12, unit: 'hours' },
+      { stage: 'stacking', duration: 3, unit: 'days' },
+      { stage: 'under_light', duration: 7, unit: 'days' }
+    ],
+    yield_per_tray: '~250g',
     created_at: '2025-01-01T00:00:00Z',
     updated_at: '2025-01-01T00:00:00Z'
   },
@@ -61,6 +85,15 @@ export const mockProducts = [
     flavor_profile: 'Sweet, juicy, crisp.',
     description_chef: 'Young corn shoots with a clean sweetness and fresh crunch. Works raw where brightness matters.',
     photo: 'https://plus.unsplash.com/premium_photo-1664188611801-b26a629b3ae3?auto=format&fit=crop&q=80&w=800',
+    available_sizes: ['container'],
+    prices: { 'container': 12.00 },
+    container_box_size: '50g',
+    growing_stages: [
+      { stage: 'soaking', duration: 12, unit: 'hours' },
+      { stage: 'stacking', duration: 3, unit: 'days' },
+      { stage: 'blackout', duration: 5, unit: 'days' }
+    ],
+    yield_per_tray: '~200g',
     created_at: '2025-01-01T00:00:00Z',
     updated_at: '2025-01-01T00:00:00Z'
   },
@@ -76,6 +109,14 @@ export const mockProducts = [
     flavor_profile: 'Green, clean, sharp.',
     description_chef: 'Straight, grassy flavor with tight structure. Used sparingly for freshness and contrast.',
     photo: 'https://images.unsplash.com/photo-1594459466380-0a2a466a9359?auto=format&fit=crop&q=80&w=800',
+    available_sizes: ['container'],
+    prices: { 'container': 8.00 },
+    growing_stages: [
+      { stage: 'soaking', duration: 8, unit: 'hours' },
+      { stage: 'seeding', duration: 1, unit: 'days' },
+      { stage: 'under_light', duration: 9, unit: 'days' }
+    ],
+    yield_per_tray: '~400g',
     created_at: '2025-01-01T00:00:00Z',
     updated_at: '2025-01-01T00:00:00Z'
   },
@@ -93,6 +134,14 @@ export const mockProducts = [
     flavor_profile: 'Mild, green, crisp.',
     description_chef: 'Clean brassica flavor with light crunch. Neutral enough to support, fresh enough to stand alone.',
     photo: 'https://images.unsplash.com/photo-1628795908298-63a232f05786?auto=format&fit=crop&q=80&w=800',
+    available_sizes: ['113g', '225g'],
+    prices: { '113g': 5.00, '225g': 8.50 },
+    growing_stages: [
+      { stage: 'seeding', duration: 1, unit: 'days' },
+      { stage: 'blackout', duration: 3, unit: 'days' },
+      { stage: 'under_light', duration: 6, unit: 'days' }
+    ],
+    yield_per_tray: '~200g',
     created_at: '2025-01-01T00:00:00Z',
     updated_at: '2025-01-01T00:00:00Z'
   },
@@ -108,6 +157,14 @@ export const mockProducts = [
     flavor_profile: 'Hot, clean, sharp.',
     description_chef: 'Fast heat with a fresh radish bite. Cuts richness and wakes up the plate.',
     photo: 'https://images.unsplash.com/photo-1636149451954-46c592317be9?auto=format&fit=crop&q=80&w=800',
+    available_sizes: ['113g', '225g', '450g'],
+    prices: { '113g': 4.50, '225g': 7.50, '450g': 13.00 },
+    growing_stages: [
+      { stage: 'seeding', duration: 1, unit: 'days' },
+      { stage: 'blackout', duration: 2, unit: 'days' },
+      { stage: 'under_light', duration: 4, unit: 'days' }
+    ],
+    yield_per_tray: '~280g',
     created_at: '2025-01-01T00:00:00Z',
     updated_at: '2025-01-01T00:00:00Z'
   },
@@ -123,6 +180,14 @@ export const mockProducts = [
     flavor_profile: 'Hot, fresh, balanced.',
     description_chef: 'A mix of radishes with layered heat and texture. Flexible and easy to place.',
     photo: 'https://images.unsplash.com/photo-1534068590799-09895a701e3e?auto=format&fit=crop&q=80&w=800',
+    available_sizes: ['113g', '225g'],
+    prices: { '113g': 5.00, '225g': 8.50 },
+    growing_stages: [
+      { stage: 'seeding', duration: 1, unit: 'days' },
+      { stage: 'blackout', duration: 2, unit: 'days' },
+      { stage: 'under_light', duration: 4, unit: 'days' }
+    ],
+    yield_per_tray: '~250g',
     created_at: '2025-01-01T00:00:00Z',
     updated_at: '2025-01-01T00:00:00Z'
   },
@@ -138,6 +203,14 @@ export const mockProducts = [
     flavor_profile: 'Hot, vivid, punchy.',
     description_chef: 'Intense radish heat with strong color. Small amount, clear impact.',
     photo: 'https://images.unsplash.com/photo-1636149451954-46c592317be9?auto=format&fit=crop&q=80&w=800',
+    available_sizes: ['113g', '225g'],
+    prices: { '113g': 5.50, '225g': 9.00 },
+    growing_stages: [
+      { stage: 'seeding', duration: 1, unit: 'days' },
+      { stage: 'blackout', duration: 2, unit: 'days' },
+      { stage: 'under_light', duration: 4, unit: 'days' }
+    ],
+    yield_per_tray: '~220g',
     created_at: '2025-01-01T00:00:00Z',
     updated_at: '2025-01-01T00:00:00Z'
   },
@@ -153,6 +226,14 @@ export const mockProducts = [
     flavor_profile: 'Mild, tender, earthy.',
     description_chef: 'Soft leaves with gentle bitterness and fine texture. Adds color without overpowering the dish.',
     photo: 'https://images.unsplash.com/photo-1706692873105-06d9595822f7?auto=format&fit=crop&q=80&w=800',
+    available_sizes: ['113g'],
+    prices: { '113g': 6.00 },
+    growing_stages: [
+      { stage: 'seeding', duration: 1, unit: 'days' },
+      { stage: 'blackout', duration: 4, unit: 'days' },
+      { stage: 'under_light', duration: 10, unit: 'days' }
+    ],
+    yield_per_tray: '~150g',
     created_at: '2025-01-01T00:00:00Z',
     updated_at: '2025-01-01T00:00:00Z'
   },
@@ -168,6 +249,15 @@ export const mockProducts = [
     flavor_profile: 'Earthy, sweet, bold.',
     description_chef: 'Strong beet flavor with deep color and solid stems. Holds well and delivers intensity.',
     photo: 'https://plus.unsplash.com/premium_photo-1669677353995-1f630560a9f5?auto=format&fit=crop&q=80&w=800',
+    available_sizes: ['113g', '225g'],
+    prices: { '113g': 5.50, '225g': 9.50 },
+    growing_stages: [
+      { stage: 'soaking', duration: 12, unit: 'hours' },
+      { stage: 'seeding', duration: 1, unit: 'days' },
+      { stage: 'blackout', duration: 4, unit: 'days' },
+      { stage: 'under_light', duration: 8, unit: 'days' }
+    ],
+    yield_per_tray: '~180g',
     created_at: '2025-01-01T00:00:00Z',
     updated_at: '2025-01-01T00:00:00Z'
   },
@@ -183,6 +273,15 @@ export const mockProducts = [
     flavor_profile: 'Sweet, earthy, gentle.',
     description_chef: 'Milder than red beet, with clear sweetness. Brings color without dominance.',
     photo: 'https://images.unsplash.com/photo-1515471209610-dae972acb12c?auto=format&fit=crop&q=80&w=800',
+    available_sizes: ['113g', '225g'],
+    prices: { '113g': 5.50, '225g': 9.50 },
+    growing_stages: [
+      { stage: 'soaking', duration: 12, unit: 'hours' },
+      { stage: 'seeding', duration: 1, unit: 'days' },
+      { stage: 'blackout', duration: 4, unit: 'days' },
+      { stage: 'under_light', duration: 8, unit: 'days' }
+    ],
+    yield_per_tray: '~180g',
     created_at: '2025-01-01T00:00:00Z',
     updated_at: '2025-01-01T00:00:00Z'
   },
@@ -198,6 +297,14 @@ export const mockProducts = [
     flavor_profile: 'Clean, juicy, crisp.',
     description_chef: 'Juicy stems with a mild kohlrabi sweetness. Adds freshness without heat.',
     photo: 'https://images.unsplash.com/photo-1550953686-21aa542ce7bc?auto=format&fit=crop&q=80&w=800',
+    available_sizes: ['113g', '225g'],
+    prices: { '113g': 5.00, '225g': 8.50 },
+    growing_stages: [
+      { stage: 'seeding', duration: 1, unit: 'days' },
+      { stage: 'blackout', duration: 3, unit: 'days' },
+      { stage: 'under_light', duration: 6, unit: 'days' }
+    ],
+    yield_per_tray: '~220g',
     created_at: '2025-01-01T00:00:00Z',
     updated_at: '2025-01-01T00:00:00Z'
   },
@@ -213,6 +320,14 @@ export const mockProducts = [
     flavor_profile: 'Fresh, mild, crunchy.',
     description_chef: 'Light cabbage flavor with bright purple color. Reliable crunch for finishing.',
     photo: 'https://images.unsplash.com/photo-1628795908298-63a232f05786?auto=format&fit=crop&q=80&w=800',
+    available_sizes: ['113g', '225g'],
+    prices: { '113g': 5.00, '225g': 8.50 },
+    growing_stages: [
+      { stage: 'seeding', duration: 1, unit: 'days' },
+      { stage: 'blackout', duration: 3, unit: 'days' },
+      { stage: 'under_light', duration: 6, unit: 'days' }
+    ],
+    yield_per_tray: '~220g',
     created_at: '2025-01-01T00:00:00Z',
     updated_at: '2025-01-01T00:00:00Z'
   },
@@ -228,6 +343,14 @@ export const mockProducts = [
     flavor_profile: 'Earthy, robust, green.',
     description_chef: 'Sturdy leaves with deep vegetal flavor. Holds texture under pressure.',
     photo: 'https://images.unsplash.com/photo-1524179091875-bf99a9a6af57?auto=format&fit=crop&q=80&w=800',
+    available_sizes: ['113g', '225g'],
+    prices: { '113g': 5.00, '225g': 8.50 },
+    growing_stages: [
+      { stage: 'seeding', duration: 1, unit: 'days' },
+      { stage: 'blackout', duration: 3, unit: 'days' },
+      { stage: 'under_light', duration: 6, unit: 'days' }
+    ],
+    yield_per_tray: '~200g',
     created_at: '2025-01-01T00:00:00Z',
     updated_at: '2025-01-01T00:00:00Z'
   },
@@ -243,6 +366,14 @@ export const mockProducts = [
     flavor_profile: 'Mild, juicy, clean.',
     description_chef: 'Soft leaves with gentle brassica flavor. Works raw or lightly finished.',
     photo: 'https://images.unsplash.com/photo-1628795908298-63a232f05786?auto=format&fit=crop&q=80&w=800',
+    available_sizes: ['113g', '225g'],
+    prices: { '113g': 5.00, '225g': 8.50 },
+    growing_stages: [
+      { stage: 'seeding', duration: 1, unit: 'days' },
+      { stage: 'blackout', duration: 3, unit: 'days' },
+      { stage: 'under_light', duration: 5, unit: 'days' }
+    ],
+    yield_per_tray: '~230g',
     created_at: '2025-01-01T00:00:00Z',
     updated_at: '2025-01-01T00:00:00Z'
   },
@@ -258,6 +389,14 @@ export const mockProducts = [
     flavor_profile: 'Hot, sharp, aromatic.',
     description_chef: 'Immediate mustard heat with a clean finish. Use where tension is needed.',
     photo: 'https://images.unsplash.com/photo-1596627685650-6a7516d2fa27?auto=format&fit=crop&q=80&w=800',
+    available_sizes: ['113g', '225g'],
+    prices: { '113g': 4.50, '225g': 7.50 },
+    growing_stages: [
+      { stage: 'seeding', duration: 1, unit: 'days' },
+      { stage: 'blackout', duration: 2, unit: 'days' },
+      { stage: 'under_light', duration: 4, unit: 'days' }
+    ],
+    yield_per_tray: '~260g',
     created_at: '2025-01-01T00:00:00Z',
     updated_at: '2025-01-01T00:00:00Z'
   },
@@ -273,6 +412,15 @@ export const mockProducts = [
     flavor_profile: 'Soft, green, clean.',
     description_chef: 'Tender leaves with a neutral spinach profile. Easy to pair, easy to use.',
     photo: 'https://images.unsplash.com/photo-1576045057995-568f588f82fb?auto=format&fit=crop&q=80&w=800',
+    available_sizes: ['225g', '450g'],
+    prices: { '225g': 8.00, '450g': 14.00 },
+    growing_stages: [
+      { stage: 'soaking', duration: 8, unit: 'hours' },
+      { stage: 'seeding', duration: 1, unit: 'days' },
+      { stage: 'blackout', duration: 4, unit: 'days' },
+      { stage: 'under_light', duration: 8, unit: 'days' }
+    ],
+    yield_per_tray: '~200g',
     created_at: '2025-01-01T00:00:00Z',
     updated_at: '2025-01-01T00:00:00Z'
   },
@@ -290,6 +438,15 @@ export const mockProducts = [
     flavor_profile: 'Sweet Genovese basil.',
     description_chef: 'Genovese basil grown to petite size. Intense aroma.',
     photo: 'https://images.unsplash.com/photo-1618331835717-801e976710b2?auto=format&fit=crop&q=80&w=800',
+    available_sizes: ['container'],
+    prices: { 'container': 10.00 },
+    growing_stages: [
+      { stage: 'soaking', duration: 4, unit: 'hours' },
+      { stage: 'seeding', duration: 1, unit: 'days' },
+      { stage: 'blackout', duration: 3, unit: 'days' },
+      { stage: 'under_light', duration: 16, unit: 'days' }
+    ],
+    yield_per_tray: '~120g',
     created_at: '2025-01-01T00:00:00Z',
     updated_at: '2025-01-01T00:00:00Z'
   },
@@ -305,6 +462,15 @@ export const mockProducts = [
     flavor_profile: 'Fresh, citrus, green.',
     description_chef: 'Classic coriander aroma with clean stems. Use where clarity matters.',
     photo: 'https://images.unsplash.com/photo-1588879463760-466d338f0c2a?auto=format&fit=crop&q=80&w=800',
+    available_sizes: ['container'],
+    prices: { 'container': 10.00 },
+    growing_stages: [
+      { stage: 'soaking', duration: 12, unit: 'hours' },
+      { stage: 'seeding', duration: 1, unit: 'days' },
+      { stage: 'blackout', duration: 4, unit: 'days' },
+      { stage: 'under_light', duration: 14, unit: 'days' }
+    ],
+    yield_per_tray: '~130g',
     created_at: '2025-01-01T00:00:00Z',
     updated_at: '2025-01-01T00:00:00Z'
   },
@@ -320,6 +486,15 @@ export const mockProducts = [
     flavor_profile: 'Fresh, aromatic, soft.',
     description_chef: 'Fine leaves with clean dill aroma. Works best raw and last-minute.',
     photo: 'https://images.unsplash.com/photo-1509358271058-acd22cc93898?auto=format&fit=crop&q=80&w=800',
+    available_sizes: ['container'],
+    prices: { 'container': 9.00 },
+    growing_stages: [
+      { stage: 'soaking', duration: 8, unit: 'hours' },
+      { stage: 'seeding', duration: 1, unit: 'days' },
+      { stage: 'blackout', duration: 3, unit: 'days' },
+      { stage: 'under_light', duration: 13, unit: 'days' }
+    ],
+    yield_per_tray: '~100g',
     created_at: '2025-01-01T00:00:00Z',
     updated_at: '2025-01-01T00:00:00Z'
   },
@@ -335,6 +510,15 @@ export const mockProducts = [
     flavor_profile: 'Mild, savory, green.',
     description_chef: 'Gentle onion character without aggression. Adds depth, not heat.',
     photo: 'https://images.unsplash.com/photo-1615485500704-8e99099928b3?auto=format&fit=crop&q=80&w=800',
+    available_sizes: ['container'],
+    prices: { 'container': 9.00 },
+    growing_stages: [
+      { stage: 'soaking', duration: 8, unit: 'hours' },
+      { stage: 'seeding', duration: 1, unit: 'days' },
+      { stage: 'blackout', duration: 4, unit: 'days' },
+      { stage: 'under_light', duration: 10, unit: 'days' }
+    ],
+    yield_per_tray: '~110g',
     created_at: '2025-01-01T00:00:00Z',
     updated_at: '2025-01-01T00:00:00Z'
   },
@@ -350,6 +534,15 @@ export const mockProducts = [
     flavor_profile: 'Sharp, intense, direct.',
     description_chef: 'Pure garlic punch in micro form. Use carefully, it does not hide.',
     photo: 'https://images.unsplash.com/photo-1629856553856-42d4cfdd2813?auto=format&fit=crop&q=80&w=800',
+    available_sizes: ['container'],
+    prices: { 'container': 9.00 },
+    growing_stages: [
+      { stage: 'soaking', duration: 12, unit: 'hours' },
+      { stage: 'seeding', duration: 1, unit: 'days' },
+      { stage: 'blackout', duration: 4, unit: 'days' },
+      { stage: 'under_light', duration: 10, unit: 'days' }
+    ],
+    yield_per_tray: '~110g',
     created_at: '2025-01-01T00:00:00Z',
     updated_at: '2025-01-01T00:00:00Z'
   },
@@ -365,6 +558,15 @@ export const mockProducts = [
     flavor_profile: 'Fresh, anise, clean.',
     description_chef: 'Clear fennel aroma with crisp texture. Lifts and opens the dish.',
     photo: 'https://images.unsplash.com/photo-1596386461350-326e97552906?auto=format&fit=crop&q=80&w=800',
+    available_sizes: ['container'],
+    prices: { 'container': 9.00 },
+    growing_stages: [
+      { stage: 'soaking', duration: 8, unit: 'hours' },
+      { stage: 'seeding', duration: 1, unit: 'days' },
+      { stage: 'blackout', duration: 3, unit: 'days' },
+      { stage: 'under_light', duration: 13, unit: 'days' }
+    ],
+    yield_per_tray: '~100g',
     created_at: '2025-01-01T00:00:00Z',
     updated_at: '2025-01-01T00:00:00Z'
   },
@@ -380,6 +582,14 @@ export const mockProducts = [
     flavor_profile: 'Peppery, sharp, dry.',
     description_chef: 'Fast bitterness with a dry finish. Cuts through rich components.',
     photo: 'https://images.unsplash.com/photo-1599307409240-cf178b30d885?auto=format&fit=crop&q=80&w=800',
+    available_sizes: ['113g', '225g'],
+    prices: { '113g': 4.50, '225g': 7.50 },
+    growing_stages: [
+      { stage: 'seeding', duration: 1, unit: 'days' },
+      { stage: 'blackout', duration: 3, unit: 'days' },
+      { stage: 'under_light', duration: 6, unit: 'days' }
+    ],
+    yield_per_tray: '~200g',
     created_at: '2025-01-01T00:00:00Z',
     updated_at: '2025-01-01T00:00:00Z'
   },
@@ -395,6 +605,15 @@ export const mockProducts = [
     flavor_profile: 'Peppery, bright, bold.',
     description_chef: 'Sharp heat with strong leaf character. Small leaves, big statement.',
     photo: 'https://plus.unsplash.com/premium_photo-1675844878438-d621b1b0fe2e?auto=format&fit=crop&q=80&w=800',
+    available_sizes: ['container'],
+    prices: { 'container': 11.00 },
+    growing_stages: [
+      { stage: 'soaking', duration: 12, unit: 'hours' },
+      { stage: 'seeding', duration: 1, unit: 'days' },
+      { stage: 'blackout', duration: 4, unit: 'days' },
+      { stage: 'under_light', duration: 12, unit: 'days' }
+    ],
+    yield_per_tray: '~90g',
     created_at: '2025-01-01T00:00:00Z',
     updated_at: '2025-01-01T00:00:00Z'
   },
@@ -410,6 +629,15 @@ export const mockProducts = [
     flavor_profile: 'Lemon, mint.',
     description_chef: 'Lemon balm leaves.',
     photo: 'https://images.unsplash.com/photo-1515543237350-b3aea48d5276?auto=format&fit=crop&q=80&w=800',
+    available_sizes: ['container'],
+    prices: { 'container': 10.00 },
+    growing_stages: [
+      { stage: 'soaking', duration: 4, unit: 'hours' },
+      { stage: 'seeding', duration: 1, unit: 'days' },
+      { stage: 'blackout', duration: 5, unit: 'days' },
+      { stage: 'under_light', duration: 18, unit: 'days' }
+    ],
+    yield_per_tray: '~80g',
     created_at: '2025-01-01T00:00:00Z',
     updated_at: '2025-01-01T00:00:00Z'
   },
@@ -425,6 +653,15 @@ export const mockProducts = [
     flavor_profile: 'Green, clean, balanced.',
     description_chef: 'Straight herbal flavor without noise. Finishes the plate quietly.',
     photo: 'https://images.unsplash.com/photo-1606509927771-332eb3b604a8?auto=format&fit=crop&q=80&w=800',
+    available_sizes: ['container'],
+    prices: { 'container': 9.00 },
+    growing_stages: [
+      { stage: 'soaking', duration: 8, unit: 'hours' },
+      { stage: 'seeding', duration: 1, unit: 'days' },
+      { stage: 'blackout', duration: 5, unit: 'days' },
+      { stage: 'under_light', duration: 18, unit: 'days' }
+    ],
+    yield_per_tray: '~100g',
     created_at: '2025-01-01T00:00:00Z',
     updated_at: '2025-01-01T00:00:00Z'
   }
@@ -444,7 +681,7 @@ export const mockKitchens = [
   },
   {
     id: '2',
-    kitchen_name: 'Café Mitte',
+    kitchen_name: 'Caf\u00e9 Mitte',
     delivery_day: 'wednesday',
     status: 'active',
     contacts: [
@@ -459,7 +696,7 @@ export const mockKitchens = [
     delivery_day: 'friday',
     status: 'paused',
     contacts: [
-      { name: 'Max Müller', email: 'max@bistro-p.de', phone: '+49 30 9876543' }
+      { name: 'Max M\u00fcller', email: 'max@bistro-p.de', phone: '+49 30 9876543' }
     ],
     created_at: '2025-01-01T00:00:00Z',
     updated_at: '2025-01-01T00:00:00Z'
@@ -501,6 +738,94 @@ export const mockUsers = [
   }
 ];
 
+export const mockStandingOrders = [
+  {
+    id: 'so-1',
+    kitchen_id: '1',
+    items: [
+      { product_id: '1', size: '225g', quantity: 3 },
+      { product_id: '11', size: '113g', quantity: 2 },
+      { product_id: '5', size: 'container', quantity: 1 },
+      { product_id: '12', size: '225g', quantity: 2 }
+    ],
+    updated_at: '2025-06-01T00:00:00Z'
+  },
+  {
+    id: 'so-2',
+    kitchen_id: '2',
+    items: [
+      { product_id: '3', size: '450g', quantity: 1 },
+      { product_id: '12', size: '113g', quantity: 2 },
+      { product_id: '8', size: 'container', quantity: 1 }
+    ],
+    updated_at: '2025-05-28T00:00:00Z'
+  }
+];
+
+export const mockOrderHistory = [
+  {
+    id: 'oh-1',
+    kitchen_id: '1',
+    delivery_date: '2025-05-27',
+    items: [
+      { product_id: '1', product_name: 'Pea Shoots', size: '225g', quantity: 3, unit_price: 9.00 },
+      { product_id: '11', product_name: 'Broccoli', size: '113g', quantity: 2, unit_price: 5.00 },
+      { product_id: '5', product_name: 'Green Basil', size: 'container', quantity: 1, unit_price: 10.00 }
+    ],
+    status: 'delivered',
+    total: 47.00,
+    created_at: '2025-05-20T00:00:00Z'
+  },
+  {
+    id: 'oh-2',
+    kitchen_id: '1',
+    delivery_date: '2025-05-20',
+    items: [
+      { product_id: '1', product_name: 'Pea Shoots', size: '225g', quantity: 2, unit_price: 9.00 },
+      { product_id: '12', product_name: 'Radish Daikon', size: '225g', quantity: 2, unit_price: 7.50 }
+    ],
+    status: 'delivered',
+    total: 33.00,
+    created_at: '2025-05-13T00:00:00Z'
+  },
+  {
+    id: 'oh-3',
+    kitchen_id: '1',
+    delivery_date: '2025-05-13',
+    items: [
+      { product_id: '1', product_name: 'Pea Shoots', size: '225g', quantity: 3, unit_price: 9.00 },
+      { product_id: '5', product_name: 'Green Basil', size: 'container', quantity: 1, unit_price: 10.00 }
+    ],
+    status: 'delivered',
+    total: 37.00,
+    created_at: '2025-05-06T00:00:00Z'
+  },
+  {
+    id: 'oh-4',
+    kitchen_id: '2',
+    delivery_date: '2025-05-27',
+    items: [
+      { product_id: '3', product_name: 'Sunflower', size: '450g', quantity: 1, unit_price: 16.00 },
+      { product_id: '12', product_name: 'Radish Daikon', size: '113g', quantity: 2, unit_price: 4.50 }
+    ],
+    status: 'delivered',
+    total: 25.00,
+    created_at: '2025-05-20T00:00:00Z'
+  },
+  {
+    id: 'oh-5',
+    kitchen_id: '2',
+    delivery_date: '2025-05-20',
+    items: [
+      { product_id: '3', product_name: 'Sunflower', size: '450g', quantity: 1, unit_price: 16.00 },
+      { product_id: '8', product_name: 'Coriander', size: 'container', quantity: 1, unit_price: 10.00 }
+    ],
+    status: 'delivered',
+    total: 26.00,
+    created_at: '2025-05-13T00:00:00Z'
+  }
+];
+
 export const categories = [
   { value: 'shoot', label: 'Shoot' },
   { value: 'microgreen', label: 'Microgreen' },
@@ -521,4 +846,27 @@ export const deliveryDays = [
   { value: 'wednesday', label: 'Wednesday' },
   { value: 'thursday', label: 'Thursday' },
   { value: 'friday', label: 'Friday' }
+];
+
+export const availableSizes = [
+  { value: '113g', label: '113g' },
+  { value: '225g', label: '225g' },
+  { value: '450g', label: '450g' },
+  { value: 'container', label: 'Container' }
+];
+
+export const growingStageOptions = [
+  { value: 'soaking', label: 'Soaking' },
+  { value: 'seeding', label: 'Seeding' },
+  { value: 'stacking', label: 'Stacking' },
+  { value: 'dome', label: 'Dome' },
+  { value: 'blackout', label: 'Blackout' },
+  { value: 'under_light', label: 'Under Light' }
+];
+
+export const orderStatuses = [
+  { value: 'pending', label: 'Pending' },
+  { value: 'growing', label: 'Growing' },
+  { value: 'ready', label: 'Ready' },
+  { value: 'delivered', label: 'Delivered' }
 ];

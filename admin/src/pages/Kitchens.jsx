@@ -100,7 +100,7 @@ export default function Kitchens() {
                   <th>Delivery Day</th>
                   <th>Contact</th>
                   <th>Status</th>
-                  <th className="text-right">Actions</th>
+                  <th style={{ textAlign: 'center' }}>Actions</th>
                 </tr>
               </thead>
               <tbody>
@@ -127,7 +127,7 @@ export default function Kitchens() {
                         {kitchen.status}
                       </span>
                     </td>
-                    <td className="text-right">
+                    <td style={{ textAlign: 'center' }}>
                       <Link to={`/kitchens/${kitchen.id}`} className="btn btn-small btn-secondary">
                         Edit
                       </Link>

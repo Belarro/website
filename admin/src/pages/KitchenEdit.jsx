@@ -12,6 +12,7 @@ export default function KitchenEdit() {
     kitchen_name: '',
     delivery_day: 'tuesday',
     status: 'active',
+    one_time_order: false,
     contact_name: '',
     contact_email: '',
     contact_phone: '',
@@ -38,6 +39,7 @@ export default function KitchenEdit() {
           kitchen_name: kitchen.kitchen_name || '',
           delivery_day: kitchen.delivery_day || 'tuesday',
           status: kitchen.status || 'active',
+          one_time_order: kitchen.one_time_order || false,
           contact_name: kitchen.contact_name || '',
           contact_email: kitchen.contact_email || '',
           contact_phone: kitchen.contact_phone || '',
@@ -53,10 +55,10 @@ export default function KitchenEdit() {
   }
 
   const handleChange = (e) => {
-    const { name, value } = e.target
+    const { name, value, type, checked } = e.target
     setForm(prev => ({
       ...prev,
-      [name]: value
+      [name]: type === 'checkbox' ? checked : value
     }))
   }
 
@@ -70,6 +72,7 @@ export default function KitchenEdit() {
         kitchen_name: form.kitchen_name,
         delivery_day: form.delivery_day,
         status: form.status,
+        one_time_order: form.one_time_order,
         contact_name: form.contact_name || null,
         contact_email: form.contact_email || null,
         contact_phone: form.contact_phone || null,
@@ -185,6 +188,22 @@ export default function KitchenEdit() {
                   <option value="active">Active</option>
                   <option value="paused">Paused</option>
                 </select>
+              </div>
+            </div>
+
+            <div className="form-group">
+              <label style={{ display: 'flex', alignItems: 'center', gap: '10px', cursor: 'pointer', fontSize: '14px' }}>
+                <input
+                  type="checkbox"
+                  name="one_time_order"
+                  checked={form.one_time_order}
+                  onChange={handleChange}
+                  style={{ width: '18px', height: '18px', cursor: 'pointer' }}
+                />
+                One-time order
+              </label>
+              <div style={{ fontSize: '12px', color: 'var(--color-gray-text)', marginTop: '4px', marginLeft: '28px' }}>
+                Check this if the kitchen is placing a one-time order instead of a recurring standing order
               </div>
             </div>
 

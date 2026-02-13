@@ -440,7 +440,7 @@ footer {
 
 /* Varieties hero - lighter overlay to preserve vibrant product colors */
 .hero.hero-varieties .hero-bg img {
-    object-position: center center;
+    object-position: 70% 70%;
 }
 
 .hero.hero-varieties .hero-bg::after {

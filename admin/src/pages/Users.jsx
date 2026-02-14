@@ -99,20 +99,20 @@ export default function Users() {
             <table className="table">
               <thead>
                 <tr>
-                  <th>Email</th>
-                  <th>Role</th>
-                  <th>Kitchen</th>
-                  <th>Status</th>
-                  <th className="text-right">Actions</th>
+                  <th style={{ textAlign: 'center' }}>Email</th>
+                  <th style={{ textAlign: 'center' }}>Role</th>
+                  <th style={{ textAlign: 'center' }}>Kitchen</th>
+                  <th style={{ textAlign: 'center' }}>Status</th>
+                  <th style={{ textAlign: 'center' }}>Actions</th>
                 </tr>
               </thead>
               <tbody>
                 {filteredUsers.map(user => (
                   <tr key={user.id}>
-                    <td>
+                    <td style={{ textAlign: 'center' }}>
                       <strong>{user.email}</strong>
                     </td>
-                    <td>
+                    <td style={{ textAlign: 'center' }}>
                       <span style={{
                         fontSize: '13px',
                         padding: '4px 10px',
@@ -125,13 +125,13 @@ export default function Users() {
                         {user.role}
                       </span>
                     </td>
-                    <td>{getKitchenName(user.kitchen_id)}</td>
-                    <td>
+                    <td style={{ textAlign: 'center' }}>{getKitchenName(user.kitchen_id)}</td>
+                    <td style={{ textAlign: 'center' }}>
                       <span className={`status status-${user.status === 'active' ? 'available' : 'paused'}`}>
                         {user.status}
                       </span>
                     </td>
-                    <td className="text-right">
+                    <td style={{ textAlign: 'center' }}>
                       <Link to={`/users/${user.id}`} className="btn btn-small btn-secondary">
                         Edit
                       </Link>

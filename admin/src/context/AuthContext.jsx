@@ -42,14 +42,19 @@ export function AuthProvider({ children }) {
 
   const handleGoogleResponse = (response) => {
     setError(null)
-    // Decode JWT token
-    const payload = JSON.parse(atob(response.credential.split('.')[1]))
+    // Decode JWT token safely
+    let payload
+    try {
+      payload = JSON.parse(atob(response.credential.split('.')[1]))
+    } catch (e) {
+      setError('Authentication failed: invalid token')
+      return
+    }
 
     const userData = {
       email: payload.email,
       name: payload.name,
       picture: payload.picture,
-      token: response.credential,
     }
 
     // Check if email is allowed

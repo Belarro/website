@@ -1,8 +1,8 @@
 import { Navigate } from 'react-router-dom'
 import { useAuth } from '../context/AuthContext'
 
-// DEV_BYPASS: set to true to skip login during development
-const DEV_BYPASS = true
+// DEV_BYPASS: only enabled in local development (npm run dev)
+const DEV_BYPASS = import.meta.env.DEV
 
 export default function ProtectedRoute({ children }) {
   const { user, loading } = useAuth()

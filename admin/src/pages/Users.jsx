@@ -63,18 +63,16 @@ export default function Users() {
       <div className="page-header">
         <div>
           <h1>Users</h1>
-          <div style={{ fontSize: '14px', color: 'var(--color-gray-text)' }}>
-            Manage user accounts ({filteredUsers.length} users)
+          <div className="page-subtitle">
+            Manage user accounts ({filteredUsers.length} user{filteredUsers.length !== 1 ? 's' : ''})
           </div>
         </div>
         <Link to="/users/new" className="btn btn-primary">+ Add User</Link>
       </div>
 
-      <div className="card" style={{ padding: '24px' }}>
+      <div className="card-static" style={{ padding: '24px' }}>
         <div className="filters">
-          <div style={{ flex: 1, fontWeight: 600, fontSize: '13px', textTransform: 'uppercase', letterSpacing: '0.05em', alignSelf: 'center' }}>
-            Filter:
-          </div>
+          <span className="filter-label">Filter:</span>
           <select
             className="form-select"
             value={roleFilter}
